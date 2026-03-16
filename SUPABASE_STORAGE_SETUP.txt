@@ -1,0 +1,9 @@
+Bucket Name: product-images
+Visibility: Public
+
+Instructions:
+1. Go to Supabase Dashboard -> Storage.
+2. Click "New Bucket".
+3. Name it "product-images".
+4. Toggle "Public bucket" to ON.
+5. Click "Create bucket".

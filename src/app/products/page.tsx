@@ -1,18 +1,10 @@
-import { supabase } from "@/lib/supabase";
+import Link from "next/link";
+import { getProducts } from "@/services/products";
+
+export const dynamic = "force-dynamic";
 
 export default async function ProductsPage() {
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("id, name, description, price, image, symbol, material, intention");
-
-  if (error) {
-    console.error("Error fetching products:", error);
-    return (
-      <div className="p-8 text-center text-red-500">
-        Error loading products. Please try again later.
-      </div>
-    );
-  }
+  const products = await getProducts();
 
   if (!products || products.length === 0) {
     return (
@@ -24,57 +16,38 @@ export default async function ProductsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-3xl font-bold text-gray-900">Our Collection</h1>
+      <h1 className="mb-8 text-3xl font-bold text-gray-900">Spiritual Collection</h1>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-md"
-          >
-            {product.image && (
+        {products.map((product) => {
+          const mainImage = product.product_images?.[0]?.url || "/placeholder.jpg";
+          return (
+            <Link 
+              href={`/products/${product.slug}`} 
+              key={product.id}
+              className="group flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-all hover:shadow-md"
+            >
               <div className="relative h-64 w-full overflow-hidden">
                 <img
-                  src={product.image}
+                  src={mainImage}
                   alt={product.name}
-                  className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-            )}
-            <div className="flex flex-1 flex-col p-6">
-              <div className="mb-2 flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">{product.name}</h2>
-                <span className="text-lg font-semibold text-emerald-600">
-                  ${product.price}
-                </span>
+              <div className="flex flex-1 flex-col p-6">
+                <h2 className="text-xl font-bold text-gray-900 mb-1">{product.name}</h2>
+                <p className="text-sm text-gray-500 mb-4">{product.category}</p>
+                <div className="mt-auto flex items-center justify-between">
+                  <span className="text-lg font-semibold text-emerald-600">
+                    {product.price} {product.currency}
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    {product.stock > 0 ? "In Stock" : "Out of Stock"}
+                  </span>
+                </div>
               </div>
-              
-              <p className="mb-4 text-sm text-gray-600 line-clamp-2">
-                {product.description}
-              </p>
-
-              <div className="mt-auto space-y-2 border-t border-gray-50 pt-4 text-xs font-medium text-gray-500">
-                {product.symbol && (
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-400">Symbol:</span>
-                    <span className="text-gray-800">{product.symbol}</span>
-                  </div>
-                )}
-                {product.material && (
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-400">Material:</span>
-                    <span className="text-gray-800">{product.material}</span>
-                  </div>
-                )}
-                {product.intention && (
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-400">Intention:</span>
-                    <span className="text-gray-800 italic text-emerald-700">"{product.intention}"</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
