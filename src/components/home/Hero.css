@@ -1,0 +1,324 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 8% 0 8%;
+  overflow: visible;
+  color: var(--ivory);
+  font-family: var(--font-cinzel), serif;
+  background: transparent !important;
+}
+
+/* --- HERO ATMOSPHERE --- */
+.hero-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.smoke-element {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, transparent 60%);
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.smoke-element.left { left: -30%; top: -10%; }
+.smoke-element.right { right: -30%; bottom: -10%; }
+
+/* --- GRID LAYOUT --- */
+.hero-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 100px;
+  position: relative;
+  z-index: 5;
+}
+
+/* --- LEFT CONTENT: TEXT --- */
+.left-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  position: relative; /* Anchor for highlight */
+}
+
+/* Subtle gold highlight behind text */
+.text-highlight-glow {
+  position: absolute;
+  width: 150%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(229, 193, 88, 0.05) 0%, transparent 60%);
+  filter: blur(50px);
+  z-index: -1;
+  top: 50%;
+  left: -20%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  color: var(--turquoise);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  display: block;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.hero-title {
+  font-family: var(--font-cinzel), serif;
+  font-size: 5rem;
+  letter-spacing: 0.25em; /* Wider for imperial elegance */
+  font-weight: 500; /* Lighter than 700 to feel more majestic */
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 50px rgba(229, 193, 88, 0.15); /* Subtle gold backglow */
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: var(--ivory);
+  opacity: 0.9;
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+  border-left: 3px solid var(--turquoise);
+  padding-left: 1.5rem;
+}
+
+.hero-description {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.25rem;
+  line-height: 1.9;
+  max-width: 550px;
+  opacity: 0.75;
+  letter-spacing: 0.05em;
+}
+
+.hero-action-hint {
+   margin-top: 4rem;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   opacity: 0.6;
+}
+
+.scroll-indicator {
+   font-size: 0.7rem;
+   letter-spacing: 0.4em;
+   text-transform: uppercase;
+   margin-bottom: 1rem;
+}
+
+.scroll-line {
+   width: 1px;
+   height: 60px;
+   background: var(--ivory);
+   transform-origin: top;
+   animation: scrollLineGrow 3s infinite;
+}
+
+@keyframes scrollLineGrow {
+   0% { transform: scaleY(0); opacity: 0; }
+   50% { transform: scaleY(1); opacity: 1; }
+   100% { transform: scaleY(1); opacity: 0; transform: translateY(20px); }
+}
+
+/* --- RIGHT VISUAL: ALIVE TALISMAN --- */
+.right-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.talisman-presentation-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-talisman-container {
+  position: relative;
+  z-index: 10;
+  perspective: 1000px;
+}
+
+.hero-talisman {
+  max-width: 100%;
+  max-height: 65vh;
+  width: auto;
+  height: auto;
+  filter: drop-shadow(0 20px 80px rgba(0, 0, 0, 0.9));
+  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.animated-talisman {
+  animation: levitate 10s infinite ease-in-out;
+  transform-style: preserve-3d;
+}
+
+@keyframes levitate {
+  0% { transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1); }
+  33% { transform: translateY(-25px) rotateX(4deg) rotateY(-6deg) scale(1.02); }
+  66% { transform: translateY(15px) rotateX(-3deg) rotateY(4deg) scale(0.98); }
+  100% { transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1); }
+}
+
+/* Mystical Energy Effects around Talisman */
+.turquoise-ambient-pulse {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, var(--turquoise) 0%, transparent 60%);
+  opacity: 0.08; /* Much more subtle */
+  filter: blur(80px);
+  animation: auraPulse 6s infinite alternate ease-in-out;
+  z-index: 5;
+}
+
+.talisman-aura {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(64, 224, 208, 0.05) 0%, transparent 70%);
+  opacity: 0.8;
+  filter: blur(120px);
+  z-index: 4;
+}
+
+.talisman-glow-core {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: var(--turquoise);
+  opacity: 0.05;
+  filter: blur(50px);
+  z-index: 6;
+}
+
+.gold-talisman-highlight {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(229, 193, 88, 0.05) 0%, transparent 65%);
+  filter: blur(90px);
+  z-index: 3;
+}
+
+.talisman-dust-particles {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background-image: radial-gradient(circle, rgba(253, 250, 241, 0.3) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.15;
+  mask-image: radial-gradient(circle, black 20%, transparent 60%);
+  -webkit-mask-image: radial-gradient(circle, black 20%, transparent 60%);
+  z-index: 8;
+  pointer-events: none;
+  animation: driftDust 25s linear infinite;
+}
+
+@keyframes driftDust {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-50px) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes auraPulse {
+  0% { transform: scale(1); opacity: 0.04; }
+  100% { transform: scale(1.2); opacity: 0.1; }
+}
+
+.talisman-shadow-base {
+  position: absolute;
+  bottom: -60px;
+  width: 250px;
+  height: 30px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 80%);
+  filter: blur(20px);
+  z-index: 2;
+  transition: transform 0.8s ease;
+  animation: floatShadow 10s infinite ease-in-out;
+}
+
+@keyframes floatShadow {
+  0% { transform: scale(1); opacity: 0.6; }
+  33% { transform: scale(0.85); opacity: 0.3; }
+  66% { transform: scale(1.1); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    padding: 150px 20px 80px 20px;
+    flex-direction: column;
+  }
+
+  .hero-grid-container {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .left-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    letter-spacing: 0.2em;
+  }
+
+  .hero-subtitle {
+     font-size: 1.2rem;
+     border-left: none;
+     padding-left: 0;
+  }
+  
+  .hero-description {
+     font-size: 1.1rem;
+     line-height: 1.7;
+  }
+  
+  .hero-talisman {
+     max-height: 50vh;
+  }
+  
+  .hero-action-hint {
+     align-items: center;
+     margin-top: 2rem;
+  }
+}

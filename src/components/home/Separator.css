@@ -1,0 +1,20 @@
+.separator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+  width: 100%;
+}
+
+.separator-img {
+  width: auto;
+  height: 40px;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+}
+
+@media (max-width: 768px) {
+  .separator-img {
+    height: 30px;
+  }
+}
