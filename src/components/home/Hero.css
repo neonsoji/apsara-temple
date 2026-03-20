@@ -130,22 +130,22 @@
 
 .hero-title {
   font-family: var(--font-cinzel), serif;
-  font-size: clamp(2.8rem, 5vw, 4.5rem); /* Taille élastique adaptative : grand écran 4.5rem, sinon se réduit ! */
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
   font-weight: 700;
   letter-spacing: 0.25em;
   margin-bottom: 2rem;
-  white-space: nowrap; /* VERROUILLAGE ABSOLU : interdiction formelle de passer à la ligne ! */
+  text-transform: uppercase;
   
-  /* L'authentique Patine Vivante (Idée UX du client !) */
+  /* NOUVELLE PATINE SACRÉE ULTRA-LUMINEUSE (RELIQUE D'ARGENT) */
   background: linear-gradient(
     110deg,
-    #11100f 0%,
-    #423d37 20%,
-    #b8b1a9 40%,
-    #ffffff 50%,    /* Le point d'éclat lumineux */
-    #b8b1a9 60%,
-    #423d37 80%,
-    #11100f 100%
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.45) 30%,
+    #ffffff 45%,
+    rgba(255, 255, 255, 0.95) 50%, /* Le flash de lumière pur */
+    #ffffff 55%,
+    rgba(255, 255, 255, 0.45) 70%,
+    #ffffff 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -153,12 +153,14 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
   
-  /* Mouvement d'ombre et lumière extrêmement lent et majestueux */
-  animation: shinePatina 35s ease-in-out infinite alternate;
+  /* FLUX RESPIRANT ACCÉLÉRÉ (ZEN & VIBRANT) */
+  animation: shinePatina 18s ease-in-out infinite alternate;
   
-  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
-  line-height: 1.1;
+  /* RELIEF SUR FOND ROUGE */
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95));
+  line-height: 1.25;
 }
+
 
 @keyframes shinePatina {
   0% { background-position: 150% center; }

@@ -23,16 +23,16 @@ export default function Footer({ dict }: FooterProps) {
           <div className="footer-nav">
             <div className="footer-col">
               <h4 className="footer-h4">{dict.col1}</h4>
-              <Link href="/about" className="footer-link">{dict.links.rituals}</Link>
-              <Link href="/rituals" className="footer-link">{dict.links.shrines}</Link>
-              <Link href="/locations" className="footer-link">{dict.links.journal}</Link>
+              <Link href="#" className="footer-link">{dict.links.rituals}</Link>
+              <Link href="#" className="footer-link">{dict.links.shrines}</Link>
+              <Link href="/fr/journal" className="footer-link">{dict.links.journal}</Link>
             </div>
             
             <div className="footer-col">
               <h4 className="footer-h4">{dict.col2}</h4>
-              <Link href="/talismans" className="footer-link">Talismans</Link>
-              <Link href="/bracelets" className="footer-link">Bracelets</Link>
-              <Link href="/journal" className="footer-link">Journal</Link>
+              <Link href="#talismans" className="footer-link">Talismans</Link>
+              <Link href="#bracelets" className="footer-link">Bracelets</Link>
+              <Link href="/fr/journal" className="footer-link">Journal</Link>
             </div>
           </div>
         </div>

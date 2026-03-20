@@ -6,8 +6,8 @@ import type { Locale } from '@/i18n/locales';
 import './ProductDetail.css';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params;
   const dict = await getDictionary(locale);
   
   return {
@@ -19,9 +19,9 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 export default async function ShunyataProductPage({
   params,
 }: {
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }) {
-  const { locale } = params;
+  const { locale } = await params;
   const dict = await getDictionary(locale);
 
   const jsonLd = {

@@ -29,7 +29,7 @@
   pointer-events: none;
 }
 
-.product-hero-content {
+.product-hero-layout {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 80px;
@@ -87,9 +87,17 @@
   opacity: 0.6;
   text-transform: uppercase;
   margin-bottom: 2rem;
-  display: flex;
+  display: flex; /* Flex permet au point de s'aligner */
   align-items: center;
   gap: 10px;
+}
+
+/* Sur mobile on le centre de force par rapport à l'écran */
+@media (max-width: 1100px) {
+  .product-badge {
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 .product-badge::before {
@@ -102,13 +110,48 @@
 }
 
 .product-title-lux {
+  font-family: var(--font-cinzel), serif;
   font-size: 4.5rem;
   line-height: 0.9;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ivory);
+  
+  /* Patine Argentée Lumineuse (Idée UX : Métal noble sans noirs) */
+  background: linear-gradient(
+    110deg,
+    #7a7a7a 0%,
+    #b8b1a9 20%,
+    #ffffff 45%,
+    #ffffff 55%,
+    #b8b1a9 80%,
+    #7a7a7a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  
+  animation: shinePatina 45s ease-in-out infinite alternate;
   text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+@keyframes shinePatina {
+  0% { background-position: 150% center; }
+  100% { background-position: -150% center; }
+}
+
+.product-intro p {
+
+  font-family: var(--font-playfair), serif;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--ivory);
+  opacity: 0.7;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+  font-weight: 300;
 }
 
 /* --- VISUAL PANE (CHIAROSCURO) --- */
@@ -176,39 +219,72 @@
 /* --- PRICE & CTA --- */
 .price-tag {
   font-family: var(--font-cinzel), serif;
-  font-size: 3rem;
-  margin-bottom: 3.5rem;
-  color: var(--ivory);
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: var(--turquoise);
   opacity: 0.9;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 20px rgba(64, 224, 208, 0.2);
 }
 
-.cta-button-gold {
+.btn-add-to-relics {
   position: relative;
-  width: fit-content;
-  padding: 1.4rem 5rem;
-  background: linear-gradient(135deg, #dfc37f 0%, #a27e36 100%);
-  border: none;
-  color: #1a0101;
+  width: 100%;
+  max-width: 440px;
+  min-height: 85px;
+  background: rgba(15, 8, 8, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(175, 155, 125, 0.3);
+  border-radius: 6px;
+  
+  /* Noblesse restaurée : Texte Ivoire lisible et puissant */
+  color: var(--ivory);
   font-family: var(--font-cinzel), serif;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.4em;
-  font-size: 0.8rem;
+  letter-spacing: 0.45em;
+  font-size: 0.95rem;
+  
   cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  z-index: 1;
+  overflow: hidden;
+  /* Ombre portée pour détacher le texte du motif chargé */
+  text-shadow: 0 4px 15px rgba(0,0,0,1);
 }
 
-.cta-button-gold:hover {
+.btn-add-to-relics::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  
+  background: url('/images/bouton01.webp') center/contain no-repeat;
+  filter: brightness(0) saturate(100%) invert(70%) sepia(80%) saturate(2000%) hue-rotate(130deg) brightness(1.2);
+  z-index: -1;
+  /* Transformation en texture subtile pour libérer la lecture */
+  opacity: 0.35;
+  transition: opacity 0.5s ease;
+}
+
+.btn-add-to-relics:hover {
   transform: translateY(-5px);
-  box-shadow: 
-    0 30px 60px rgba(0,0,0,0.6),
-    0 0 30px rgba(229, 193, 88, 0.3);
-  letter-spacing: 0.45em;
+  background: rgba(22, 12, 12, 0.85);
+}
+
+.btn-add-to-relics:hover::before {
+  opacity: 0.55; /* Le motif s'illumine doucement au survol */
 }
 
 .shipping-notice {
+
   margin-top: 1.5rem;
   font-size: 0.65rem;
   letter-spacing: 0.3em;
@@ -372,7 +448,7 @@
 
 /* --- RESPONSIVE --- */
 @media (max-width: 1100px) {
-  .product-hero-content {
+  .product-hero-layout {
     grid-template-columns: 1fr;
     gap: 60px;
   }
@@ -382,8 +458,13 @@
      align-items: center;
   }
   
-  .product-title {
-    font-size: 3rem;
+  .product-title-lux {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1;
+  }
+  
+  .quick-specs {
+    margin-top: 40px;
   }
 }
 
@@ -395,4 +476,9 @@
   .premium-bullets {
      grid-template-columns: 1fr;
   }
+  
+  .story-heading { font-size: 2rem; }
+  .story-body { font-size: 1.1rem; }
+  .product-hero { padding: 40px 20px; }
+  .price-tag { margin-bottom: 2rem; }
 }

@@ -1,20 +1,17 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { getDictionary } from "@/i18n/get-dictionary";
-import type { Locale } from "@/i18n/locales";
 
-export default async function PlaceholderProductPage({
-  params,
-}: {
-  params: Promise<{ locale: Locale, slug: string }>;
-}) {
-  const { locale, slug } = await params;
-  const dict = await getDictionary(locale);
+interface Props {
+  locale: string;
+  dictNav: any;
+  dictFooter: any;
+  title: string;
+}
 
-  // Fallback luxe pour masquer l'erreur 404 et la "laideur" du template e-commerce par défaut
+export default function UnderConstruction({ locale, dictNav, dictFooter, title }: Props) {
   return (
     <main style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "url('/images/apsara-hero-bg.webp') center/cover no-repeat" }}>
-      <Navbar locale={locale} dict={dict.navigation} />
+      <Navbar locale={locale} dict={dictNav} />
       
       <section style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "150px 20px" }}>
         
@@ -24,24 +21,24 @@ export default async function PlaceholderProductPage({
           </div>
           
           <h1 style={{ fontFamily: "var(--font-cinzel)", color: "var(--ivory)", fontSize: "2.5rem", letterSpacing: "0.2em", marginBottom: "30px", textTransform: "uppercase" }}>
-            {slug.replace(/-/g, ' ')}
+            {title}
           </h1>
           
           <p style={{ fontFamily: "var(--font-playfair)", color: "var(--ivory)", opacity: 0.8, fontSize: "1.2rem", lineHeight: 1.8, marginBottom: "40px", letterSpacing: "0.05em" }}>
             {locale === 'fr' 
-              ? "Les énergies de cette relique sont actuellement en cours d'alignement avec les archives de notre temple. Les rituels de présentation seront bientôt achevés pour vous révéler sa véritable aura."
-              : "The energies of this relic are currently being aligned within our temple archives. Presentation rituals will soon be completed to reveal its true aura to you."
+              ? "L'accès à ce sanctuaire est momentanément scellé. Les maîtres-artisans du Temple sont en train de restaurer ces espaces sacrés pour vous offrir une expérience d'une pureté absolue."
+              : "Access to this sanctuary is temporarily sealed. The Temple's master artisans are restoring these sacred spaces to offer you an experience of absolute purity."
             }
           </p>
           
           <div style={{ fontSize: "0.8rem", letterSpacing: "0.4em", color: "var(--turquoise)", textTransform: "uppercase" }}>
-            {locale === 'fr' ? "Purification en cours" : "Purification in progress"}
+            {locale === 'fr' ? "Restauration en cours" : "Restoration in progress"}
           </div>
         </div>
 
       </section>
 
-      <Footer dict={dict.footer} />
+      <Footer dict={dictFooter} />
     </main>
   );
 }

@@ -1,14 +1,34 @@
-/* ======================================================== */
-/* 🛠️ TABLEAU DE BORD : RÉGLAGES DE LA LOUPE 🛠️ */
-/* Change ces nombres pour modifier la disposition du cercle */
-/* ======================================================== */
 :root {
-  --loupe-zoom: 1.7;
-  /* Taille par défaut */
-  --loupe-zoom-hover: 2.3;
-  /* MEGA ZOOM au survol pour voir les détails ! */
-  --loupe-descente: 7px;
-  /* Descente du manche */
+  /* -------------------------------------------------------- */
+  /* 🛠️ TÉLÉCOMMANDE DE PRÉCISION (RÉGLAGES INDIVIDUELS) 🛠️ */
+  /* -------------------------------------------------------- */
+
+  /* 1. Structure Globale */
+  --nav-logo-height: 90px;      /* Taille du logo central */
+  --icon-circle-size: 62px;      /* Diamètre des cercles de verre */
+  --icon-brightness: 2.2;        /* Éclat d'Argent Blanc */
+
+  /* 2. Menu (Ganesh / Sigil Gauche) */
+  --menu-zoom: 1.4;
+  --menu-x: 0px;
+  --menu-y: 0px;
+
+  /* 3. Loupe (Recherche) */
+  --loupe-zoom: 2.0;
+  --loupe-x: 0px;
+  --loupe-y: 48%;
+
+  /* 4. Balance (Compte/Balance) */
+  --account-zoom: 1.4;
+  --account-x: 0px;
+  --account-y: 0px;
+
+  /* 5. Panier (Relique Droite) */
+  --cart-zoom: 1.4;
+  --cart-x: 0px;
+  --cart-y: 0px;
+
+  /* -------------------------------------------------------- */
 }
 
 /* -------------------------------------------------------- */
@@ -30,9 +50,11 @@
 
 .navbar.scrolled {
   height: 80px;
-  background: rgba(10, 1, 1, 0.95);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(64, 224, 208, 0.1);
+  background: rgba(12, 5, 5, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px); /* Compatibilité Safari Luxe */
+  border-bottom: 1px solid rgba(175, 155, 125, 0.12); /* Filet Or Antique Très Fin */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .navbar-container {
@@ -156,66 +178,206 @@
   color: var(--turquoise);
 }
 
-/* === ICÔNES SPÉCIFIQUES & LOGO === */
+:root {
+  --loupe-zoom: 2.3; /* Zoom massif permanent sur la tête */
+  --loupe-zoom-hover: 2.5;
+  --loupe-descente: 5px; /* Ajustement pour pas que le manche ne monte trop */
+}
+
+/* === CONSOLE DE MIXAGE INDIVIDUELLE (TRANSFORMS) === */
+
 .icon-btn {
-  background: none;
-  border: none;
+  /* ÉTANCHÉITÉ TOTALE (MODE OPAQUE) : Plus aucune fuite du fond rouge */
+  background-color: #1eb4aa; /* Fondation Turquoise MASSIVE et OPAQUE */
+  background-image: radial-gradient(
+    circle at center,
+    rgba(97, 12, 12, 1) 0%,     /* Rouge Œil de Bœuf : Sombre, Profond, Noble */
+    rgba(97, 12, 12, 0.95) 55%, 
+    transparent 80%              /* On laisse voir la fondation turquoise pure sur les bords */
+  );
+
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  
+  /* RELIEF DU SOCLE & ÉCHO DE GEMME (AURA DIFFUSE) */
+  border: 1.5px solid rgba(64, 224, 208, 0.6);
+  box-shadow: 
+    inset 0 0 15px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(64, 224, 208, 0.25), /* L'écho turquoise qui ancre le bijou */
+    0 4px 15px rgba(0, 0, 0, 0.4);      /* Ombre de poids */
+
+  
+  border-radius: 50%;
   cursor: pointer;
-  padding: 5px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  width: var(--icon-circle-size);
+  height: var(--icon-circle-size);
+  position: relative;
+  z-index: 1001; 
 }
+
+
+
+/* Gestion du Manche Loupe */
+.icon-btn[aria-label="Search"] { overflow: visible !important; }
+.icon-btn:not([aria-label="Search"]) { overflow: hidden; }
 
 .nav-icon-svg {
-  width: 44px;
-  height: 44px;
-  /* REHAUSSEMENT COULEUR/LUMINEUX: Beaucoup plus blanc et moins gris/triste ! */
-  filter: invert(1) brightness(1.35) drop-shadow(0 0 5px rgba(253, 250, 241, 0.3));
-  opacity: 0.95;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Animation très douce et "premium" */
+  width: 34px;
+  height: 34px;
+  /* PATINE ARGENT BLANC (FLUX CONTINU ALTERNÉ) */
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    #ffffff 45%,
+    rgba(255, 255, 255, 0.95) 50%,
+    #ffffff 55%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  animation: shinePatina 12s ease-in-out infinite alternate; /* Aller-retour sans saut */
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  /* MICRO-RELIEF CISELÉ (Z-DEPTH) : Combinaison Éclat + Ombre de relief */
+  filter: 
+    drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5)) /* Ombre de décollage de la pièce */
+    drop-shadow(0 0 5px rgba(255, 255, 255, 0.4)); /* Lueur de nacre */
+  
+  transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+  content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 }
 
-/* La loupe utilise les variables du tableau de bord tout en haut de fichier */
-/* On se base UNIQUEMENT sur son cercle avec un scale */
+
+/* 1. Menu (Ganesh / Sigil Gauche) */
+.navbar-left-mobile button:nth-child(1) .nav-icon-svg {
+  -webkit-mask-image: url('/images/menu.svg');
+  mask-image: url('/images/menu.svg');
+  background: linear-gradient(110deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
+  background-size: 200% auto;
+  transform: translate(var(--menu-x), var(--menu-y)) scale(var(--menu-zoom));
+  animation-duration: 13s;
+  animation-delay: -2s;
+}
+
+/* 2. Loupe (Recherche) */
 .nav-icon-svg.icon-loupe {
-  transform: scale(var(--loupe-zoom)) translateY(var(--loupe-descente));
-  transform-origin: center;
+  -webkit-mask-image: url('/images/loupe.svg');
+  mask-image: url('/images/loupe.svg');
+  background: linear-gradient(140deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
+  background-size: 200% auto;
+  transform: translate(var(--loupe-x), var(--loupe-y)) scale(var(--loupe-zoom));
+  animation-duration: 15s;
+  animation-delay: -5s;
 }
 
-/* 🔎 ZOOM généralisé au passage de la souris pour Révéler les Détails ! */
+/* 3. Balance (Compte) */
+.navbar-right-mobile button:nth-child(1) .nav-icon-svg {
+  -webkit-mask-image: url('/images/compte.svg');
+  mask-image: url('/images/compte.svg');
+  background: linear-gradient(210deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
+  background-size: 200% auto;
+  transform: translate(var(--account-x), var(--account-y)) scale(var(--account-zoom));
+  animation-duration: 17s;
+  animation-delay: -8s;
+}
+
+/* 4. Panier (Relique Droite) */
+.navbar-right-mobile button:nth-child(2) .nav-icon-svg {
+  -webkit-mask-image: url('/images/panier.svg');
+  mask-image: url('/images/panier.svg');
+  background: linear-gradient(250deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
+  background-size: 200% auto;
+  transform: translate(var(--cart-x), var(--cart-y)) scale(var(--cart-zoom));
+  animation-duration: 14s;
+  animation-delay: -3s;
+}
+
+/* --- INTERACTIONS PRÉCISES (L'ÉVEIL DES MÉDAILLONS) --- */
+
+.icon-btn:hover {
+  border-color: rgba(64, 224, 208, 0.95);
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(64, 224, 208, 0.4); /* Écho turquoise intensifié */
+  transform: translateY(-5px) scale(1.06) rotate(1deg); /* Micro-vibration de vie */
+}
+
+
 .icon-btn:hover .nav-icon-svg {
-  opacity: 1;
-  /* Effet "Sacred Glow": halo turquoise lumineux */
-  filter: invert(1) brightness(1.6) drop-shadow(0 0 15px rgba(64, 224, 208, 0.7));
-  transform: scale(1.35); /* MEGA ZOOM */
+  /* Seul l'argent s'éveille avec une intensité solaire */
+  filter: brightness(1.5) contrast(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
+  transition: all 0.4s ease;
 }
 
-/* Redéfinition du hover exclusif sur la loupe pour combiner le translateY et le mega zoom variables */
-.icon-btn:hover .nav-icon-svg.icon-loupe {
-  transform: scale(var(--loupe-zoom-hover)) translateY(var(--loupe-descente));
+
+@keyframes shinePatinaComplex {
+  0% { background-position: 0% 50%, 100% 50%, 50% 100%; }
+  100% { background-position: 100% 50%, 0% 50%, 50% 0%; }
 }
 
 .nav-logo-img {
-  height: 80px; /* Logo central rendu plus massif et majestueux */
+  height: var(--nav-logo-height);
   width: auto;
-  filter: invert(1) brightness(1.2) drop-shadow(0 0 10px rgba(170, 158, 146, 0.4));
-  transition: transform 0.6s ease;
+  min-height: var(--nav-logo-height);
+  
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    #ffffff 45%,
+    rgba(255, 255, 255, 0.95) 50%,
+    #ffffff 55%,
+    rgba(255, 255, 255, 0.4) 70%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  animation: shinePatina 19s ease-in-out infinite alternate; /* Aller-retour fluide */
+  animation-delay: -6s;
+
+  /* On utilise le logo comme un moule pour cette lumière pure */
+  -webkit-mask-image: url('/images/logo01.svg');
+  mask-image: url('/images/logo01.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  /* Éclat spectral additionnel */
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+  transition: all 0.6s ease;
+  content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 }
 
-/* Suppression de la vieille ligne de code sans effet qui causait une erreur "Empty ruleset" */
+
+
+
 .navbar-logo-absolute:hover .nav-logo-img {
-  transform: scale(1.1); /* Joli pulse pour le logo principal aussi ! */
+  transform: scale(1.05);
 }
 
 .nav-logo-glow {
   position: absolute;
-  width: 90px;
-  height: 90px;
-  background: radial-gradient(circle, rgba(170, 158, 146, 0.2) 0%, transparent 60%);
-  filter: blur(8px);
+  width: calc(var(--nav-logo-height) * 1.5);
+  height: calc(var(--nav-logo-height) * 1.5);
+  background: radial-gradient(circle, rgba(160, 140, 110, 0.35) 0%, transparent 60%);
+  filter: blur(15px);
   z-index: -1;
-  opacity: 0.8;
+  opacity: 1;
+  animation: navGlowPulse 10s ease-in-out infinite;
 }
 
 /* === MAGICAL CENTRAL PROJECTION (HOLOGRAM) === */
