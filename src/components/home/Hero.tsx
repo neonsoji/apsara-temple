@@ -1,57 +1,73 @@
+'use client';
+
 import './Hero.css';
 
-export default function Hero() {
+interface HeroProps {
+  dict: any;
+}
+
+export default function Hero({ dict }: HeroProps) {
+  if (!dict) return null;
+
   return (
-    <section className="hero">
-      {/* Decorative Hero Background Elements */}
-      <div className="hero-atmosphere">
-        <div className="smoke-element left"></div>
-        <div className="smoke-element right"></div>
-        <div className="floating-particles"></div>
+    <section className="hero" style={{ 
+      /* Valeurs premium forgées par le client via l'ancienne télécommande */
+      '--tapisserie-luminosite': '40%',
+      '--tapisserie-opacite': '0.20',
+      '--tapisserie-saturation': '6000%'
+    } as React.CSSProperties}>
+      
+      {/* Tapisserie Vivante 4.0 : 6 zones fixes asynchrones, respiration pure sans mouvement */}
+      <div className="hero-texture-layer">
+        <div className="bg-spot bg-spot-1"></div>
+        <div className="bg-spot bg-spot-2"></div>
+        <div className="bg-spot bg-spot-3"></div>
+        <div className="bg-spot bg-spot-4"></div>
+        <div className="bg-spot bg-spot-5"></div>
+        <div className="bg-spot bg-spot-6"></div>
       </div>
-
+      
       <div className="hero-grid-container">
-        {/* LEFT = Text Content with Atmosphere */}
-        <div className="hero-column left-content">
-          <div className="text-highlight-glow"></div>
-          <div className="hero-text-wrapper">
-            <span className="hero-label">Sacred Arts</span>
-            <h1 className="hero-title">APSARA TEMPLE</h1>
-            <p className="hero-subtitle">Sacred talismans of protection</p>
-            <p className="hero-description">
-              Forged from ancient rituals and forgotten traditions. 
-              Each object is a vessel of intention, crafted for the modern seeker 
-              to guard the spiritual path and manifest sacred harmony.
+        
+        {/* TEXT CONTENT (À GAUCHE MÊME SUR MOBILE) */}
+        <div className="hero-content left-content">
+          <span className="hero-label-top">{dict.label}</span>
+          
+          <h1 className="hero-title">{dict.title}</h1>
+          
+          <div className="hero-subtitle-block">
+            <div className="subtitle-bar"></div>
+            <p className="hero-subtitle-text">
+              {(() => {
+                const words = dict.subtitle.split(' ');
+                const half = Math.ceil(words.length / 2);
+                const part1 = words.slice(0, half).join(' ');
+                const part2 = words.slice(half).join(' ');
+                return (
+                  <>
+                    <span style={{ color: 'var(--ivory)' }}>{part1}</span>{' '}
+                    <span style={{ color: 'var(--turquoise)' }}>{part2}</span>
+                  </>
+                );
+              })()}
             </p>
-            <div className="hero-action-hint">
-               <span className="scroll-indicator">Explore the relics</span>
-               <div className="scroll-line"></div>
-            </div>
+          </div>
+          
+          <p className="hero-description">{dict.description}</p>
+        </div>
+
+        {/* VISUAL COMPONENT (À DROITE MÊME SUR MOBILE) */}
+        <div className="hero-visual right-visual">
+          <div className="talisman-box">
+             <div className="talisman-glow"></div>
+             <img 
+               src="/images/talisman.webp" 
+               alt="Sacred Talisman" 
+               className="hero-talisman animated"
+             />
           </div>
         </div>
 
-        {/* RIGHT = The "Alive" Talisman with Mystical Energy */}
-        <div className="hero-column right-visual">
-          <div className="talisman-presentation-box">
-             {/* Mystical Energy Glows & Integration */}
-             <div className="talisman-glow-core"></div>
-             <div className="talisman-aura"></div>
-             <div className="turquoise-ambient-pulse"></div>
-             <div className="gold-talisman-highlight"></div>
-             <div className="talisman-dust-particles"></div>
-             
-             <div className="hero-talisman-container">
-                <img 
-                  src="/images/talisman.webp" 
-                  alt="Sacred Talisman" 
-                  className="hero-talisman animated-talisman"
-                />
-             </div>
-             
-             {/* Dynamic shadows & depth */}
-             <div className="talisman-shadow-base"></div>
-          </div>
-        </div>
       </div>
     </section>
   );

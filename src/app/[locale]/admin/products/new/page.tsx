@@ -105,12 +105,16 @@ export default function NewProductPage() {
         </div>
         <div>
           <label className="block text-sm font-medium">Category</label>
-          <input
-            type="text"
+          <select
             className="w-full border p-2 rounded"
             value={formData.category}
             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-          />
+          >
+            <option value="">Select a category</option>
+            <option value="talismans">Talismans</option>
+            <option value="bracelets">Bracelets</option>
+            <option value="pendentifs">Pendentifs</option>
+          </select>
         </div>
         <div>
           <label className="block text-sm font-medium">Product Image</label>

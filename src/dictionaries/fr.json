@@ -1,0 +1,103 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "talismans": "Talismans",
+    "bracelets": "Bracelets",
+    "about": "À Propos",
+    "contact": "Contact",
+    "journal": "Journal",
+    "search": "Recherche",
+    "cart": "Panier"
+  },
+  "hero": {
+    "label": "Arts Sacrés",
+    "title": "APSARA TEMPLE",
+    "subtitle": "Talismans sacrés de protection",
+    "description": "Forgés à partir de rituels anciens et de traditions oubliées. Chaque objet est un vaisseau d'intention, conçu pour le chercheur moderne afin de garder le chemin spirituel et manifester l'harmonie sacrée.",
+    "explore": "Explorez les reliques"
+  },
+  "home": {
+    "sections": {
+      "pendentifs": {
+        "label": "Arts Ancestraux",
+        "title": "Reliques",
+        "accent": "Vénérables"
+      },
+      "talismans": {
+        "label": "Protection Ancestrale",
+        "title": "Talismans",
+        "accent": "Sacrés"
+      },
+      "bracelets": {
+        "label": "Liens Sacrés",
+        "title": "Bracelets",
+        "accent": "Artisanaux"
+      }
+    },
+    "story": {
+      "title": "Le Temple",
+      "p1": "Là où les symboles anciens rencontrent la protection moderne. Nos talismans sacrés sont fabriqués avec intention, faisant écho à l'héritage spirituel des temples oubliés et à la sagesse intemporelle de la géométrie sacrée.",
+      "p2": "Chaque pièce est un vaisseau d'énergie, un gardien silencieux pour l'âme contemporaine, portant le poids du rituel et la beauté des arts sacrés."
+    }
+  },
+  "products": {
+    "available": "En attente de son chercheur",
+    "preorder": "En attente de son chercheur",
+    "claim": "S'unir à cette Relique",
+    "ritual_notice": "Disponible pour une union rituelle immédiate",
+    "specs": {
+       "material": "Travail du Métal",
+       "mechanism": "Mécanique",
+       "protection": "Symbolisme",
+       "material_val": "Finition Argent Vieilli",
+       "mechanism_val": "Cœur Rotatif à 360°",
+       "protection_val": "Gravure du Sutra du Cœur"
+    },
+    "shunyata": {
+      "name": "SUTRA DU CŒUR SILENCIEUX",
+      "intro": "Un compagnon pour le chercheur moderne. Ce talisman sert d'ancre silencieuse, une manifestation physique du calme intérieur par le mouvement perpétuel.",
+      "story": {
+        "title": "L'Écrit Sacré",
+        "body": "Forgé dans un argent de haute qualité, le bord extérieur est méticuleusement gravé des caractères anciens du Sutra du Cœur—la pierre angulaire de la sagesse bouddhiste. L'écrit s'enroule autour de la pièce comme un voile protecteur, portant la vibration de siècles de chants rituels.",
+        "core_title": "Le Noyau Rotatif",
+        "core_body": "En son centre se trouve le visage serein du Bouddha, conçu avec un mécanisme de précision. Ce mouvement reflète la mise en mouvement de la Roue du Dharma, offrant un point de focalisation tactile pour la pleine conscience.",
+        "presence_title": "Présence Ancestrale",
+        "presence_body": "Mesurant 42 mm de diamètre, le pendentif affiche un poids profond. Sa patine vieillie suggère un objet récupéré d'un temple oublié, portant le silence des ères perdues."
+      },
+      "features": [
+        "<strong>Sagesse Ancestrale :</strong> Caractères du Sutra du Cœur gravés à la main pour l'alignement spirituel.",
+        "<strong>Grâce Mécanique :</strong> Centre rotatif fluide à 360° pour la méditation tactile.",
+        "<strong>Protection Polyvalente :</strong> Idéal pour un usage quotidien, la méditation ou le bouclier énergétique.",
+        "<strong>Coffret Sacré :</strong> Livré dans une pochette rituelle en soie avec sa carte d'authenticité."
+      ],
+      "faq": {
+        "title": "Conseils Rituels",
+        "items": [
+          {
+            "q": "Quelle est la signification du centre rotatif ?",
+            "a": "La rotation signifie la 'Mise en mouvement de la Roue', un symbole ancien pour l'enseignement de l'éveil. Elle sert de point de focalisation physique pour la pleine conscience."
+          },
+          {
+            "q": "La gravure est-elle authentique ?",
+            "a": "Oui, les caractères sont la calligraphie traditionnelle classique de la Prajnaparamita (Sutra du Cœur), reproduits avec un respect absolu du texte sacré."
+          },
+          {
+            "q": "Comment porter ce talisman ?",
+            "a": "Il est équilibré pour reposer parfaitement contre le centre du cœur. Nous le proposons sur un cordon sacré renforcé, mais il peut être transféré sur une chaîne de votre choix."
+          }
+        ]
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Préserver la Sagesse Ancienne depuis 1904",
+    "col1": "Le Temple",
+    "col2": "Les Reliques",
+    "links": {
+      "rituals": "Nos Rituels",
+      "shrines": "Sanctuaires",
+      "journal": "Le Journal"
+    },
+    "copyright": "© 2026 APSARA TEMPLE. Conçu pour le Chercheur Moderne."
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "navigation": {
+    "home": "Home",
+    "talismans": "Talismans",
+    "bracelets": "Bracelets",
+    "about": "About",
+    "contact": "Contact",
+    "journal": "Journal",
+    "search": "Search",
+    "cart": "Cart"
+  },
+  "hero": {
+    "label": "Sacred Arts",
+    "title": "APSARA TEMPLE",
+    "subtitle": "Sacred talismans of protection",
+    "description": "Forged from ancient rituals and forgotten traditions. Each object is a vessel of intention, crafted for the modern seeker to guard the spiritual path and manifest sacred harmony.",
+    "explore": "Explore the relics"
+  },
+  "home": {
+    "sections": {
+      "pendentifs": {
+        "label": "Ancestral Arts",
+        "title": "Venerable",
+        "accent": "Relics"
+      },
+      "talismans": {
+        "label": "Ancient Protection",
+        "title": "Sacred",
+        "accent": "Talismans"
+      },
+      "bracelets": {
+        "label": "Sacred Links",
+        "title": "Handcrafted",
+        "accent": "Bracelets"
+      }
+    },
+    "story": {
+      "title": "The Temple",
+      "p1": "Where ancient symbols meet modern protection. Our sacred talismans are crafted with intention, echoing the spiritual legacy of forgotten temples and the timeless wisdom of sacred geometry.",
+      "p2": "Each piece is a vessel of energy, a silent guardian for the contemporary soul, carrying the weight of ritual and the beauty of sacred arts."
+    }
+  },
+  "products": {
+    "available": "Awaiting its Seeker",
+    "preorder": "Awaiting its Seeker",
+    "claim": "Bond with this Relic",
+    "ritual_notice": "Available for immediate ritual bonding",
+    "specs": {
+       "material": "Metal Work",
+       "mechanism": "Mechanism",
+       "protection": "Symbolism",
+       "material_val": "Aged Silver Finish",
+       "mechanism_val": "360° Rotating Heart",
+       "protection_val": "Heart Sutra Engraving"
+    },
+    "shunyata": {
+      "name": "SUTRA OF THE SILENT HEART",
+      "intro": "A companion for the modern seeker. This talisman serves as a silent anchor, a physical manifestation of inner stillness through perpetual motion.",
+      "story": {
+        "title": "The Sacred Script",
+        "body": "Forged from high-grade silver, the outer rim is meticulously engraved with the ancient characters of the Heart Sutra—the cornerstone of Buddhist wisdom. The script wraps around the piece like a protective veil, carrying the vibration of centuries of ritual chanting.",
+        "core_title": "The Rotating Core",
+        "core_body": "At its center lies the serene countenance of the Buddha, designed with a precision mechanical mechanism. This movement mirrors the turning of the Wheel of Dharma, providing a tactile focus for mindfulness.",
+        "presence_title": "Ancient Presence",
+        "presence_body": "Measuring 42mm in diameter, the pendant exhibits a profound weight. Its weathered patina suggests an object recovered from a forgotten temple, carrying the silence of lost eras."
+      },
+      "features": [
+        "<strong>Ancestral Wisdom:</strong> Hand-engraved Heart Sutra characters for spiritual alignment.",
+        "<strong>Mechanical Grace:</strong> Smooth 360° rotating center for tactile meditation.",
+        "<strong>Versatile Protection:</strong> Ideal for daily wear, meditation, or energetic shielding.",
+        "<strong>Sacred Packaging:</strong> Delivered in a ritual silk pouch with an authenticity card."
+      ],
+      "faq": {
+        "title": "Ritual Guidance",
+        "items": [
+          {
+            "q": "What is the significance of the rotating center?",
+            "a": "The rotation signifies the 'Turning of the Wheel,' an ancient symbol for teaching enlightenment. It serves as a physical focus for mindfulness."
+          },
+          {
+            "q": "Is the engraving authentic?",
+            "a": "Yes, the characters are classical traditional Chinese script of the Prajnaparamita (Heart Sutra), reproduced with absolute respect for the sacred text."
+          },
+          {
+            "q": "How should I wear this talisman?",
+            "a": "It is balanced to rest perfectly against the heart center. We share it on a reinforced sacred cord, but it can be transferred to a chain of your choosing."
+          }
+        ]
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Preserving Ancient Wisdom Since 1904",
+    "col1": "The Temple",
+    "col2": "The Relics",
+    "links": {
+      "rituals": "Our Rituals",
+      "shrines": "Shrines",
+      "journal": "The Journal"
+    },
+    "copyright": "© 2026 APSARA TEMPLE. Crafted for the Modern Seeker."
+  }
+}

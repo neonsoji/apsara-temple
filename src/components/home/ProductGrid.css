@@ -1,13 +1,11 @@
 .product-grid-section {
   width: 100%;
-  max-width: none;
-  margin: 0 auto;
   padding: 150px 8%;
-  background-color: transparent;
-  text-align: center;
+  background: transparent;
   font-family: var(--font-cinzel), serif;
+  text-align: center;
   position: relative;
-  z-index: 5;
+  z-index: 10;
 }
 
 .section-header {
@@ -19,173 +17,166 @@
   letter-spacing: 0.5em;
   color: var(--turquoise);
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: block;
 }
 
 .section-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: var(--ivory);
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  font-weight: 700;
 }
 
 .product-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 60px;
+  grid-template-columns: repeat(4, 1fr); /* 4 VIGNETTES au lieu de 3 */
+  gap: 30px; /* Plus serré pour laisser de l'espace vital aux 4 colonnes */
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
 }
 
-/* --- BACKGROUND GLOW --- */
-.product-grid-ambient-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 800px;
-  background: radial-gradient(ellipse at center, rgba(13, 1, 1, 0.5) 0%, transparent 70%);
-  filter: blur(100px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* --- THE CARD: Glass / Dark Translucent Treatment --- */
+/* --- PRODUCT CARD 2.0 (Relique Sacrée UI) --- */
 .product-card {
-  perspective: 1000px;
-  transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
-  cursor: pointer;
+  position: relative;
+  
+  /* Transparence Vitre Subtile (Pas Opaque - Retour à 0.4) */
+  background: rgba(26, 1, 1, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* Coins légèrement arrondis pour l'élégance */
+  border-radius: 6px;
+  
+  /* Filet extérieur or désaturé */
+  border: 1px solid rgba(175, 155, 125, 0.25);
+  
+  /* Double effet intérieur : Filet turquoise très discret + Ombrage interne */
+  box-shadow: 
+    inset 0 0 0 1px rgba(64, 224, 208, 0.06),
+    inset 0 0 30px rgba(0, 0, 0, 0.4),
+    0 15px 40px rgba(0, 0, 0, 0.3);
+    
+  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  padding: 40px 20px;
+  overflow: hidden;
 }
 
 .product-card:hover {
-  transform: translateY(-20px);
+  /* Élévation délicate (fini les sauts brutaux) */
+  transform: translateY(-6px);
+  
+  background: rgba(26, 1, 1, 0.5);
+  /* Accentuation subtile du doré désaturé */
+  border-color: rgba(175, 155, 125, 0.4);
+  
+  /* Renforcement du halo intérieur turquoise + glow très soft */
+  box-shadow: 
+    inset 0 0 0 1px rgba(64, 224, 208, 0.15),
+    inset 0 0 40px rgba(0, 0, 0, 0.6),
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(64, 224, 208, 0.08);
 }
+
+.card-ornament {
+  position: absolute;
+  font-size: 1rem;
+  color: var(--turquoise);
+  opacity: 0.3;
+}
+
+.card-ornament.top-left { top: 15px; left: 15px; }
+.card-ornament.top-right { top: 15px; right: 15px; }
 
 .product-image-box {
-  width: 100%;
-  aspect-ratio: 4/5;
-  background: rgba(26, 1, 1, 0.4);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(253, 250, 241, 0.08);
+  width: calc(100% + 40px); /* Annulation parfaite du padding latéral (20px * 2) de .product-card */
+  height: 480px; /* Plus grande hauteur pour rendre honneur au format Portrait */
+  margin-top: -40px; /* Annule le padding du haut pour coller contre le plafond de la carte */
+  margin-left: -20px;
+  margin-right: -20px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 40px;
+  align-items: center;
+  margin-bottom: 25px; /* Laisse de l'espace avant le texte Tiers */
   position: relative;
   overflow: hidden;
-  transition: all 0.6s ease;
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5), 0 10px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 0; /* Retire l'arrondi pour s'adosser parfaitement aux bords si la carte n'en a pas */
+  
+  /* L'EXTINCTEUR DE FILTRE ROUGE VITAL : 
+     Puisque la photo contient des pixels transparents (fumée/roche), 
+     les superposer sur le fond rouge du site donnait l'impression d'un filtre sang.
+     Ce fond de "Studio Noir" isole totalement l'œuvre d'art ! */
+  background: radial-gradient(circle at center, #151515 0%, #020202 100%);
 }
 
-.product-card:hover .product-image-box {
-  background: rgba(26, 1, 1, 0.6);
-  border-color: rgba(229, 193, 88, 0.2); /* Gold subtle border on hover */
-  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8), 0 30px 60px rgba(0, 0, 0, 0.8);
-}
-
-.glass-reflection {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 150%;
+.product-image-box img {
+  width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, transparent, rgba(229, 193, 88, 0.03), transparent);
-  transition: left 1s cubic-bezier(0.2, 1, 0.3, 1);
+  object-fit: cover; /* Recouvre magistralement l'espace bord-à-bord (zéro marge visible) */
+  /* AUCUN FILTRE ABSOLUMENT AUCUN : Rendu natif pur à 100% de l'image source ! */
+  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-.product-card:hover .glass-reflection {
-  left: 100%;
+.product-card:hover .product-image-box img {
+  transform: scale(1.08); /* Effet d'aspiration visuelle luxueux au survol */
 }
 
-.placeholder-icon {
-  font-size: 2.5rem;
-  color: var(--ivory);
-  opacity: 0.15;
-  transition: opacity 0.4s ease, transform 0.6s ease;
-}
-
-.product-card:hover .placeholder-icon {
-  opacity: 0.3;
-  transform: scale(1.1);
-}
-
-/* --- CARD INFO AREA --- */
-.product-info-panel {
-  text-align: center;
-}
-
-.product-type {
-  font-size: 0.75rem;
-  letter-spacing: 0.35em;
-  color: var(--gold-glow); /* Subtle gold */
-  opacity: 0.8;
-  text-transform: uppercase;
-  margin-bottom: 1.2rem;
-  display: block;
-}
-
-.product-name {
-  font-size: 1.5rem;
-  color: var(--ivory);
-  letter-spacing: 0.2em;
-  margin-bottom: 2rem;
-  font-weight: 400;
-  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-
-.product-line {
-  width: 40px;
-  height: 1px;
-  background: var(--ivory);
-  opacity: 0.15;
-  margin: 0 auto 1.5rem auto;
-  transition: width 0.4s ease, opacity 0.4s ease, background 0.4s ease;
-}
-
-.product-card:hover .product-line {
-   width: 120px;
-   opacity: 0.4;
-   background: rgba(229, 193, 88, 0.8);
+.product-info {
+  margin-top: 20px;
 }
 
 .product-availability {
   font-size: 0.7rem;
-  color: rgba(229, 193, 88, 0.8); /* Gold accent */
-  opacity: 0.6;
-  letter-spacing: 0.45em;
-  font-weight: 500;
+  color: var(--turquoise);
+  letter-spacing: 0.3em;
   text-transform: uppercase;
+  margin-bottom: 1rem;
+  opacity: 0.6;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 1200px) {
-  .product-container {
-    gap: 40px;
-  }
+.product-name {
+  font-size: 1.4rem;
+  color: var(--ivory);
+  letter-spacing: 0.1em;
+  font-weight: 400;
 }
 
-@media (max-width: 900px) {
-  .product-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width: 1100px) {
+  .product-container { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 600px) {
-  .product-grid-section {
-    padding: 80px 20px;
-  }
-
-  .product-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
+@media (max-width: 700px) {
+  /* Compression maximale de l'espace vide pour se souder direct sous le Héros */
+  .product-grid-section { padding: 30px 4% 60px 4%; }
+  .section-header { margin-bottom: 40px; }
+  .section-title { font-size: 1.8rem; }
+  
+  /* L'exigence Mobile : 2 Produits côte à côte quoiqu'il arrive */
+  .product-container { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; 
   }
   
-  .section-title {
-    font-size: 2rem;
-    margin-bottom: 40px;
+  /* Retardement des espaces intérieurs de la carte pour faire de la place aux 2 colonnes */
+  .product-card {
+    padding: 15px 10px; 
   }
+  
+  /* Mathématiques des marges négatives recalculées sur le nouveau padding Mobile */
+  .product-image-box {
+    width: calc(100% + 20px);
+    height: 180px; /* Image bien plus petite (miniature) */
+    margin-top: -15px; 
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: 15px;
+  }
+  
+  /* Miniaturisation textuelle pour éviter tout débordement dans les cartes étroites */
+  .product-name { font-size: 0.95rem; line-height: 1.3; }
+  .product-availability { font-size: 0.55rem; margin-bottom: 0.5rem; }
+  .card-ornament { font-size: 0.7rem; }
+  .card-ornament.top-left { top: 8px; left: 8px; }
+  .card-ornament.top-right { top: 8px; right: 8px; }
 }

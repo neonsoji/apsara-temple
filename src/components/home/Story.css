@@ -59,7 +59,6 @@
   margin-right: auto;
   letter-spacing: 0.05em;
 }
-
 @media (max-width: 768px) {
   .story-section {
     padding: 100px 20px 120px 20px;

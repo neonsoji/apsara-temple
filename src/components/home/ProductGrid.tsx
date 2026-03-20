@@ -1,38 +1,71 @@
+'use client';
+
+import Link from 'next/link';
 import './ProductGrid.css';
 
-const PLACEHOLDER_PRODUCTS = [
-  { id: 1, title: 'Sacred Emblem I', subtitle: 'Sacred Silver' },
-  { id: 2, title: 'Mystic Protection II', subtitle: 'Obsidian Core' },
-  { id: 3, title: 'Celestial Talisman III', subtitle: 'Ivory Bone' }
-];
+interface ProductGridProps {
+  category: string;
+  label: string;
+  title: string;
+  accentTitle: string;
+  dict: any;
+  locale: string;
+}
 
-export default function ProductGrid() {
+export default function ProductGrid({ category, label, title, accentTitle, dict, locale }: ProductGridProps) {
+  // Demo relics for the restoration (Adapté pour la Boutique Premium)
+  const relics = category === 'pendentifs' ? [
+    { 
+      id: 1, 
+      name: "SUTRA OF THE SILENT HEART", 
+      slug: "sutra-of-the-silent-heart", 
+      image: "/images/products/pendentifs/pendentif-bouddha-sutra-coeur-rotatif-protection.png",
+      price: "185.00 €" 
+    },
+    { id: 2, name: "VENERABLE TALISMAN", slug: "venerable-talisman", price: "210.00 €" },
+    { id: 3, name: "SACRED BRACELET", slug: "sacred-bracelet", price: "145.00 €" },
+    { id: 4, name: "ANCIENT LOTUS RING", slug: "ancient-lotus-ring", price: "160.00 €" }
+  ] : [
+    { id: 1, name: "SUTRA OF THE SILENT HEART", slug: "sutra-of-the-silent-heart", price: "185.00 €" },
+    { id: 2, name: "VENERABLE TALISMAN", slug: "venerable-talisman", price: "210.00 €" },
+    { id: 3, name: "SACRED BRACELET", slug: "sacred-bracelet", price: "145.00 €" },
+    { id: 4, name: "ANCIENT LOTUS RING", slug: "ancient-lotus-ring", price: "160.00 €" }
+  ];
+
   return (
-    <section className="product-grid-section">
-      {/* Background Ambient Glow */}
-      <div className="product-grid-ambient-glow"></div>
-
+    <section id={category} className="product-grid-section">
       <div className="section-header">
-        <span className="section-label"><span className="text-accent-gold">✧</span> Selected Objects <span className="text-accent-gold">✧</span></span>
-        <h2 className="section-title">The <span className="text-accent-turquoise">First</span> Relics</h2>
+        <span className="section-label">{label}</span>
+        <h2 className="section-title">
+          {title} <span className="text-accent-turquoise">{accentTitle}</span>
+        </h2>
       </div>
       
       <div className="product-container">
-        {PLACEHOLDER_PRODUCTS.map(product => (
-          <div key={product.id} className="product-card">
-            <div className="product-image-box">
-              <div className="glass-reflection"></div>
-              <div className="placeholder-icon">✧</div>
-              {/* Future product image goes here */}
-              <div className="card-hover-overlay"></div>
-            </div>
-            
-            <div className="product-info-panel">
-              <span className="product-type">{product.subtitle}</span>
-              <h3 className="product-name">{product.title}</h3>
-              <div className="product-line"></div>
-              <p className="product-availability">PRE-ORDER OPEN</p>
-            </div>
+        {relics.map((relic) => (
+          <div key={relic.id} className="product-card">
+            <Link href={`/${locale}/products/${relic.slug}`}>
+              <div className="card-ornament top-left">✧</div>
+              <div className="card-ornament top-right">✧</div>
+              
+              <div className="product-image-box">
+                <img 
+                  src={relic.image || `/images/products/${relic.slug}-01.webp`} 
+                  alt={relic.name}
+                  onError={(e) => {
+                    // Fallback to placeholder if image missing during restoration
+                    e.currentTarget.src = "/images/talisman.webp";
+                    e.currentTarget.style.opacity = "0.3";
+                  }}
+                />
+              </div>
+              
+              <div className="product-info">
+                <p className="product-availability">{dict.available}</p>
+                <h3 className="product-name">{relic.name}</h3>
+                <p className="product-price" style={{ marginTop: '10px', fontSize: '0.9rem', color: 'var(--turquoise)', letterSpacing: '1px' }}>{relic.price}</p>
+              </div>
+            </Link>
           </div>
         ))}
       </div>

@@ -32,8 +32,8 @@ html, body {
 body {
   /* Layered background for atmosphere */
   background-image: 
-    radial-gradient(ellipse at 50% 30%, rgba(105, 5, 5, 0.45), transparent 70%), /* Perfect middle-ground center glow */
-    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.15)), /* Finely tuned overlay to dim the bright red slightly */
+    radial-gradient(ellipse at 50% 30%, rgba(105, 5, 5, 0.35), transparent 70%), 
+    linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.05)),
     url('/images/apsara-hero-bg.webp');
   background-size: cover; /* CHANGED to cover to eliminate hard left/right vertical image borders */
   background-position: center top;
@@ -49,23 +49,40 @@ body::after {
   pointer-events: none;
   /* Deep shadows on edges that progressively blend into blacks */
   background: 
-    linear-gradient(to right, rgba(13,0,0,1) 0%, rgba(13,0,0,0) 15%, rgba(13,0,0,0) 85%, rgba(13,0,0,1) 100%),
-    radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,1) 100%);
+    linear-gradient(to right, rgba(13,0,0,0.6) 0%, rgba(13,0,0,0) 25%, rgba(13,0,0,0) 75%, rgba(13,0,0,0.6) 100%),
+    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.8) 100%);
   z-index: 2;
 }
 
 /* Grain & Mist Overlay */
-body::before {
-  content: "";
+.grain-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.04;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.08; /* Ultra discret pour ne pas ruiner les photos */
   pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: overlay;
+  z-index: 1; /* Il vit en fond, sans JAMAIS recouvrir les photos du Product Grid ! */
+}
+
+/* Depth for Product Cards */
+.product-card-shadow-refined {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+}
+
+@keyframes grain-animation {
+  0%, 100% { transform:translate(0, 0) }
+  10% { transform:translate(-5%, -10%) }
+  20% { transform:translate(-15%, 5%) }
+  30% { transform:translate(7%, -25%) }
+  40% { transform:translate(-5%, 25%) }
+  50% { transform:translate(-15%, 10%) }
+  60% { transform:translate(15%, 0%) }
+  70% { transform:translate(0%, 15%) }
+  80% { transform:translate(3%, 35%) }
+  90% { transform:translate(-10%, 10%) }
 }
 
 /* Floating Mist Animation Base */

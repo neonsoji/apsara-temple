@@ -1,80 +1,122 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import './Navbar.css';
 
-const NAV_LINKS = [
-  { name: 'Home', href: '/' },
-  { name: 'Talismans', href: '/talismans' },
-  { name: 'Bracelets', href: '/bracelets' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' }
-];
+interface NavbarProps {
+  locale: string;
+  dict: any;
+}
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Navbar({ locale, dict }: NavbarProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSigil, setActiveSigil] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Déclenchement sur mobile (click) pour forcer l'affichage 2 secondes
+  const handleSigilTap = (src: string) => {
+    setActiveSigil(src);
+    setTimeout(() => setActiveSigil(null), 2000);
+  };
+
+  if (!dict) return null;
 
   return (
-    <>
-      <nav className={`navbar ${isOpen ? 'is-open' : ''}`}>
-        <div className="navbar-container">
-          {/* Left Navigation */}
-          <div className="navbar-links">
-            {NAV_LINKS.map(link => (
-              <a key={link.name} href={link.href} className="nav-item">{link.name}</a>
-            ))}
-          </div>
-
-          {/* Center Logo */}
-          <div className="navbar-logo">
-            <a href="/" style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-               <div className="nav-logo-glow"></div>
-               <img src="/images/logo01.svg" alt="APSARA TEMPLE" className="nav-logo-img" />
-             </a>
-          </div>
-
-          {/* Right Icons (Shop functionality) */}
-          <div className="navbar-icons">
-            <button className="icon-btn search-btn" aria-label="Search">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
-              </svg>
-            </button>
-            <button className="icon-btn cart-btn" aria-label="Cart">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                <path d="M1 1h4l2.7 12.5A2 2 0 0 0 9.7 15h9.6a2 2 0 0 0 2-1.5L23 6H6" />
-              </svg>
-            </button>
-            
-            <button 
-              className={`mobile-toggle ${isOpen ? 'is-active' : ''}`} 
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle Menu"
-            >
-              <div className="toggle-line"></div>
-              <div className="toggle-line short"></div>
-            </button>
-          </div>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-container">
+        
+        {/* === MOBILE NAV BLOCKS === */}
+        <div className="navbar-left-mobile">
+          <button 
+            className="icon-btn" aria-label="Menu"
+            onMouseEnter={() => setActiveSigil('/images/menu.svg')}
+            onMouseLeave={() => setActiveSigil(null)}
+            onClick={() => handleSigilTap('/images/menu.svg')}
+          >
+             <img src="/images/menu.svg" alt="" className="nav-icon-svg" />
+          </button>
+          <button 
+            className="icon-btn" aria-label="Search"
+            onMouseEnter={() => setActiveSigil('/images/loupe.svg')}
+            onMouseLeave={() => setActiveSigil(null)}
+            onClick={() => handleSigilTap('/images/loupe.svg')}
+          >
+             <img src="/images/loupe.svg" alt="" className="nav-icon-svg icon-loupe" />
+          </button>
         </div>
 
-        {/* Mobile Menu */}
-        <div className={`mobile-menu-overlay ${isOpen ? 'show' : ''}`}>
-          <div className="mobile-menu-content">
-            {NAV_LINKS.map((link, index) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                className="mobile-nav-link"
-                style={{ transitionDelay: `${index * 0.1}s` }}
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
+        <div className="navbar-right-mobile">
+          <button 
+            className="icon-btn" aria-label="Account"
+            onMouseEnter={() => setActiveSigil('/images/compte.svg')}
+            onMouseLeave={() => setActiveSigil(null)}
+            onClick={() => handleSigilTap('/images/compte.svg')}
+          >
+             <img src="/images/compte.svg" alt="" className="nav-icon-svg" />
+          </button>
+          <button 
+            className="icon-btn" aria-label="Cart"
+            onMouseEnter={() => setActiveSigil('/images/panier.svg')}
+            onMouseLeave={() => setActiveSigil(null)}
+            onClick={() => handleSigilTap('/images/panier.svg')}
+          >
+             <img src="/images/panier.svg" alt="" className="nav-icon-svg" />
+          </button>
         </div>
-      </nav>
-      {isOpen && <div className="navbar-dimmer" onClick={() => setIsOpen(false)}></div>}
-    </>
+
+        {/* === DESKTOP NAV BLOCKS === */}
+        <div className="navbar-left-desktop">
+          <Link href={`/${locale}/talismans`} className="nav-item">
+            {dict.talismans}
+          </Link>
+          <Link href={`/${locale}/bracelets`} className="nav-item">
+            {dict.bracelets}
+          </Link>
+        </div>
+
+        <div className="navbar-right-desktop">
+          <div className="lang-switcher">
+            <Link href="/fr" className={locale === 'fr' ? 'active' : ''} locale="fr">FR</Link>
+            <span className="lang-pipe">|</span>
+            <Link href="/en" className={locale === 'en' ? 'active' : ''} locale="en">EN</Link>
+          </div>
+          <Link href={`/${locale}/search`} className="nav-item">
+            {dict.search || "RECHERCHE"}
+          </Link>
+          <Link href={`/${locale}/account`} className="nav-item">
+            {dict.account || "COMPTE"}
+          </Link>
+          <Link href={`/${locale}/cart`} className="nav-item">
+            {dict.cart || "PANIER (0)"}
+          </Link>
+        </div>
+
+        {/* === CENTER LOGO (Absolute) === */}
+        <div className="navbar-logo-absolute">
+          <Link href={`/${locale}`}>
+            <div className="nav-logo-glow"></div>
+            <img 
+              src="/images/logo01.svg" 
+              alt="APSARA TEMPLE" 
+              className="nav-logo-img"
+            />
+          </Link>
+        </div>
+
+      </div>
+
+      {/* === MAGICAL CENTRAL PROJECTION === */}
+      <div className={`sigil-projection ${activeSigil ? 'active' : ''}`}>
+        {activeSigil && <img src={activeSigil} alt="" className="sigil-projection-img" />}
+      </div>
+    </nav>
   );
 }

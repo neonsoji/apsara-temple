@@ -1,324 +1,274 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 8% 0 8%;
-  overflow: visible;
-  color: var(--ivory);
-  font-family: var(--font-cinzel), serif;
-  background: transparent !important;
+  /* Retrait du flex-column qui écrasait le talisman et poussait les composants */
+  background-color: transparent !important;
 }
 
-/* --- HERO ATMOSPHERE --- */
-.hero-atmosphere {
+/* =========================================================================
+   PANNEAU DE CONTRÔLE : TAPISSERIE VIVANTE (MOTIFS ROUGES)
+   Modifie ces chiffres toi-même pour trouver la balance parfaite !
+   ========================================================================= */
+:root {
+  --tapisserie-luminosite: 90%;   /* Monte vers 150% pour du rouge vif/rosé, descends vers 20% pour du rouge sang/noir */
+  --tapisserie-saturation: 4000%; /* Force de la couleur. 0% = gris, 6000% = rouge pur saturé */
+  --tapisserie-teinte: 345deg;    /* 345deg = bordeaux. 0deg = rouge pompier. 30deg = orange. */
+  --tapisserie-opacite: 0.50;     /* Visibilité de l'apparition. 1 = 100% opaque. 0.1 = quasiment invisible */
+}
+
+/* ===== TEXTURE ===== */
+
+.hero-texture-layer {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   z-index: 1;
-  overflow: hidden;
+  pointer-events: none;
+  /* PLUS AUCUN OVERFLOW HIDDEN ! La magie a l'autorisation divine de couler sur la Boutique ! */
 }
 
-.smoke-element {
+/* === TAPISSERIE 4.0 : LA RESPIRATION SEQUENTIELLE (6 ZONES) === */
+
+.bg-spot {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, transparent 60%);
-  filter: blur(80px);
-  opacity: 0.3;
+  /* Larges "Hublots" statiques sans bords durs */
+  width: 900px; 
+  height: 900px;
+  background-image: url('/images/planche02.svg');
+  background-repeat: no-repeat;
+  filter: invert(12%) sepia(90%) saturate(var(--tapisserie-saturation)) hue-rotate(var(--tapisserie-teinte)) brightness(var(--tapisserie-luminosite)) contrast(110%);
+  opacity: 0;
+  pointer-events: none;
+  
+  /* L'Arme Absolue contre les "Lignes Droites" (Fondu adouci sur 65%) */
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 65%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 65%);
 }
 
-.smoke-element.left { left: -30%; top: -10%; }
-.smoke-element.right { right: -30%; bottom: -10%; }
+/* 6 Emplacements Totalement Figés et Sécurisés :
+   1. top: 75% et 100% pour déborder LARGEMENT dans la boutique (z-index le permet !)
+   2. background-position centriste (30-70%) GARANTIT de ne jamais taper les bords natifs de l'image.
+*/
+.bg-spot-1 { top: -5%; left: -5%; background-size: 150vw; background-position: 30% 30%; transform: rotate(15deg); }
+.bg-spot-2 { top: 15%; right: -5%; background-size: 180vw; background-position: 70% 35%; transform: rotate(-35deg); }
+.bg-spot-3 { top: 40%; left: 35%; background-size: 250vw; background-position: 45% 65%; transform: rotate(115deg); }
+.bg-spot-4 { top: 5%; right: 25%; background-size: 160vw; background-position: 60% 40%; transform: rotate(-75deg); }
+/* EMPIÈTEMENT MASSIF SUR LA BOUTIQUE : */
+.bg-spot-5 { top: 80%; left: 5%; background-size: 220vw; background-position: 35% 70%; transform: rotate(15deg); }
+.bg-spot-6 { top: 110%; right: 10%; background-size: 170vw; background-position: 65% 50%; transform: rotate(90deg); }
 
-/* --- GRID LAYOUT --- */
+/* 
+  L'Horlogerie de Respiration (Séquence ACCÉLÉRÉE à 6 temps - Zéro Chevauchement) :
+  Cycle 24 secondes. Chaque emplacement vit 4s pleines, bien plus percutant !
+*/
+.bg-spot-1 { animation: pureBreath 24s ease-in-out infinite 0s; }
+.bg-spot-2 { animation: pureBreath 24s ease-in-out infinite 4s; }
+.bg-spot-3 { animation: pureBreath 24s ease-in-out infinite 8s; }
+.bg-spot-4 { animation: pureBreath 24s ease-in-out infinite 12s; }
+.bg-spot-5 { animation: pureBreath 24s ease-in-out infinite 16s; }
+.bg-spot-6 { animation: pureBreath 24s ease-in-out infinite 20s; }
+
+@keyframes pureBreath {
+  0%    { opacity: 0; }
+  5%    { opacity: var(--tapisserie-opacite); }   /* Fondu d'apparition rapide (1.2s) */
+  13%   { opacity: var(--tapisserie-opacite); }   /* Maintien (1.9s) */
+  16.6% { opacity: 0; }                           /* Fondu de disparition rapide. 16.6% de 24s = pile 4s. */
+  100%  { opacity: 0; }                           /* Attente pour le reste du cycle */
+}
+
+/* ===== LAYOUT PROPRE ===== */
+
 .hero-grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  gap: 100px;
+  width: 100%; /* VITAL : S'ouvre sur les bords ! */
+  max-width: 1200px;
+  padding: 18vh 8% 8vh 8%;
+  gap: 20px;
+  margin: 0 auto;
   position: relative;
   z-index: 5;
 }
 
-/* --- LEFT CONTENT: TEXT --- */
-.left-content {
+/* TEXTE GAUCHE */
+
+.hero-content {
+  flex: 0 0 55%; /* Exige strictement 55% de la place à gauche */
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
-  text-align: left;
-  position: relative; /* Anchor for highlight */
 }
 
-/* Subtle gold highlight behind text */
-.text-highlight-glow {
-  position: absolute;
-  width: 150%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(229, 193, 88, 0.05) 0%, transparent 60%);
-  filter: blur(50px);
-  z-index: -1;
-  top: 50%;
-  left: -20%;
-  transform: translateY(-50%);
-  pointer-events: none;
+/* VISUEL DROITE */
+
+.hero-visual {
+  flex: 0 0 40%; /* Exige 40% de la place à droite (avec 5% de gap) */
+  display: flex;
+  justify-content: flex-end; /* Repousse viscéralement l'image au fond à droite */
+  align-items: center;
 }
 
-.hero-label {
-  font-size: 0.8rem;
-  letter-spacing: 0.5em;
-  color: var(--turquoise);
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  display: block;
-  opacity: 0.8;
-  font-weight: 500;
+.hero-talisman {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 60px rgba(0,0,0,0.9));
+  animation: floatTalisman 6s ease-in-out infinite;
 }
+
+@keyframes floatTalisman {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px); /* Lévitation douce et prolongée */
+  }
+}
+
+/* ===== TYPO ===== */
 
 .hero-title {
   font-family: var(--font-cinzel), serif;
-  font-size: 5rem;
-  letter-spacing: 0.25em; /* Wider for imperial elegance */
-  font-weight: 500; /* Lighter than 700 to feel more majestic */
-  margin-bottom: 1rem;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 50px rgba(229, 193, 88, 0.15); /* Subtle gold backglow */
+  font-size: clamp(2.8rem, 5vw, 4.5rem); /* Taille élastique adaptative : grand écran 4.5rem, sinon se réduit ! */
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  margin-bottom: 2rem;
+  white-space: nowrap; /* VERROUILLAGE ABSOLU : interdiction formelle de passer à la ligne ! */
+  
+  /* L'authentique Patine Vivante (Idée UX du client !) */
+  background: linear-gradient(
+    110deg,
+    #11100f 0%,
+    #423d37 20%,
+    #b8b1a9 40%,
+    #ffffff 50%,    /* Le point d'éclat lumineux */
+    #b8b1a9 60%,
+    #423d37 80%,
+    #11100f 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  
+  /* Mouvement d'ombre et lumière extrêmement lent et majestueux */
+  animation: shinePatina 35s ease-in-out infinite alternate;
+  
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
   line-height: 1.1;
 }
 
-.hero-subtitle {
-  font-size: 1.5rem;
-  color: var(--ivory);
-  opacity: 0.9;
-  letter-spacing: 0.1em;
-  font-weight: 300;
+@keyframes shinePatina {
+  0% { background-position: 150% center; }
+  100% { background-position: -150% center; }
+}
+
+.hero-label-top {
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5em;
+  color: var(--turquoise);
   margin-bottom: 2.5rem;
   text-transform: uppercase;
-  border-left: 3px solid var(--turquoise);
-  padding-left: 1.5rem;
+}
+
+.hero-subtitle-block {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.subtitle-bar {
+  width: 4px; 
+  height: 35px;
+  background: var(--turquoise);
+  box-shadow: 0 0 10px rgba(64, 224, 208, 0.4);
+}
+
+.hero-subtitle-text {
+  font-family: var(--font-cinzel), serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: 0.15em;
+  color: var(--ivory);
+  text-transform: uppercase;
 }
 
 .hero-description {
   font-family: var(--font-playfair), serif;
-  font-size: 1.25rem;
-  line-height: 1.9;
-  max-width: 550px;
-  opacity: 0.75;
-  letter-spacing: 0.05em;
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.7;
+  max-width: 520px;
+  color: var(--ivory);
+  opacity: 0.85;
 }
 
-.hero-action-hint {
-   margin-top: 4rem;
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   opacity: 0.6;
-}
-
-.scroll-indicator {
-   font-size: 0.7rem;
-   letter-spacing: 0.4em;
-   text-transform: uppercase;
-   margin-bottom: 1rem;
-}
-
-.scroll-line {
-   width: 1px;
-   height: 60px;
-   background: var(--ivory);
-   transform-origin: top;
-   animation: scrollLineGrow 3s infinite;
-}
-
-@keyframes scrollLineGrow {
-   0% { transform: scaleY(0); opacity: 0; }
-   50% { transform: scaleY(1); opacity: 1; }
-   100% { transform: scaleY(1); opacity: 0; transform: translateY(20px); }
-}
-
-/* --- RIGHT VISUAL: ALIVE TALISMAN --- */
-.right-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.talisman-presentation-box {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.hero-talisman-container {
-  position: relative;
-  z-index: 10;
-  perspective: 1000px;
-}
-
-.hero-talisman {
-  max-width: 100%;
-  max-height: 65vh;
-  width: auto;
-  height: auto;
-  filter: drop-shadow(0 20px 80px rgba(0, 0, 0, 0.9));
-  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.animated-talisman {
-  animation: levitate 10s infinite ease-in-out;
-  transform-style: preserve-3d;
-}
-
-@keyframes levitate {
-  0% { transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1); }
-  33% { transform: translateY(-25px) rotateX(4deg) rotateY(-6deg) scale(1.02); }
-  66% { transform: translateY(15px) rotateX(-3deg) rotateY(4deg) scale(0.98); }
-  100% { transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1); }
-}
-
-/* Mystical Energy Effects around Talisman */
-.turquoise-ambient-pulse {
-  position: absolute;
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, var(--turquoise) 0%, transparent 60%);
-  opacity: 0.08; /* Much more subtle */
-  filter: blur(80px);
-  animation: auraPulse 6s infinite alternate ease-in-out;
-  z-index: 5;
-}
-
-.talisman-aura {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(64, 224, 208, 0.05) 0%, transparent 70%);
-  opacity: 0.8;
-  filter: blur(120px);
-  z-index: 4;
-}
-
-.talisman-glow-core {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background: var(--turquoise);
-  opacity: 0.05;
-  filter: blur(50px);
-  z-index: 6;
-}
-
-.gold-talisman-highlight {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(229, 193, 88, 0.05) 0%, transparent 65%);
-  filter: blur(90px);
-  z-index: 3;
-}
-
-.talisman-dust-particles {
-  position: absolute;
-  width: 150%;
-  height: 150%;
-  background-image: radial-gradient(circle, rgba(253, 250, 241, 0.3) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.15;
-  mask-image: radial-gradient(circle, black 20%, transparent 60%);
-  -webkit-mask-image: radial-gradient(circle, black 20%, transparent 60%);
-  z-index: 8;
-  pointer-events: none;
-  animation: driftDust 25s linear infinite;
-}
-
-@keyframes driftDust {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-50px) rotate(5deg); }
-  100% { transform: translateY(0) rotate(0deg); }
-}
-
-@keyframes auraPulse {
-  0% { transform: scale(1); opacity: 0.04; }
-  100% { transform: scale(1.2); opacity: 0.1; }
-}
-
-.talisman-shadow-base {
-  position: absolute;
-  bottom: -60px;
-  width: 250px;
-  height: 30px;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 80%);
-  filter: blur(20px);
-  z-index: 2;
-  transition: transform 0.8s ease;
-  animation: floatShadow 10s infinite ease-in-out;
-}
-
-@keyframes floatShadow {
-  0% { transform: scale(1); opacity: 0.6; }
-  33% { transform: scale(0.85); opacity: 0.3; }
-  66% { transform: scale(1.1); opacity: 0.7; }
-  100% { transform: scale(1); opacity: 0.6; }
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .hero-title {
-    font-size: 3.5rem;
-  }
-}
+/* ===== MOBILE ===== */
 
 @media (max-width: 900px) {
   .hero {
     height: auto;
-    min-height: 100vh;
-    padding: 150px 20px 80px 20px;
-    flex-direction: column;
+    min-height: auto; /* DÉVERROUILLAGE : Permet à la section Boutique de remonter tout en haut ! */
   }
 
   .hero-grid-container {
-    grid-template-columns: 1fr;
     height: auto;
-    gap: 40px;
-    text-align: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; /* Aligne le texte et le talisman par le haut, PAS par le milieu */
+    padding-top: 130px; /* Barre de navigation = 100px. Démarre exactement 30px en dessous ! */
+    padding-bottom: 10px; /* Suppression brutale du vide pour que la boutique s'y colle */
+    gap: 15px;
   }
 
-  .left-content {
-    align-items: center;
-    text-align: center;
+  .hero-content {
+    flex: 1 1 65%; /* Le texte reprend ses droits avec 65% de l'image */
   }
 
-  .hero-title {
-    font-size: 3rem;
-    letter-spacing: 0.2em;
+  .hero-visual {
+    flex: 1 1 35%; /* La visualisation se réduit à 35% */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Pour que le talisman accompagne le texte au sommet du bloc */
+    padding-top: 15px;
   }
 
-  .hero-subtitle {
-     font-size: 1.2rem;
-     border-left: none;
-     padding-left: 0;
+  /* Textes grossis puisque la colonne (65%) est plus large */
+  .hero-title { font-size: 2.2rem; margin-bottom: 0.6rem; letter-spacing: 0.1em; }
+  .hero-label-top { font-size: 0.65rem; margin-bottom: 0.8rem; }
+  .hero-subtitle-block { margin-bottom: 1rem; gap: 0.5rem; }
+  .subtitle-bar { height: 18px; }
+  .hero-subtitle-text { font-size: 0.9rem; line-height: 1.3; }
+  .hero-description { font-size: 0.8rem; line-height: 1.5; padding-right: 0; }
+
+  /* Le Talisman est réduit et retrouve sa vraie taille */
+  .hero-talisman {
+    width: 100%;
+    min-width: unset;
+    max-width: 180px; 
+    transform: none; /* Fin des enchantements optiques d'agrandissement */
   }
+}
+
+@media (max-width: 600px) {
+  .hero-grid-container {
+    padding-top: 110px; /* navbar (100px) + 10px d'espace de respiration pure et dure */
+    gap: 5px;
+  }
+  .hero-content { flex: 1 1 65%; }
+  .hero-visual { flex: 1 1 35%; }
   
-  .hero-description {
-     font-size: 1.1rem;
-     line-height: 1.7;
-  }
+  .hero-title { font-size: 1.7rem; }
+  .hero-subtitle-text { font-size: 0.75rem; }
+  .hero-description { font-size: 0.7rem; }
   
   .hero-talisman {
-     max-height: 50vh;
-  }
-  
-  .hero-action-hint {
-     align-items: center;
-     margin-top: 2rem;
+    max-width: 140px; /* Sensiblement réduit pour le ratio 65/35 */
+    transform: none;
   }
 }

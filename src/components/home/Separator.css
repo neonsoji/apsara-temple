@@ -7,10 +7,18 @@
 }
 
 .separator-img {
-  width: auto;
+  width: 100%;
+  max-width: 400px; /* Taille optimale de l'ornement */
   height: 40px;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+  
+  /* L'Astuce UX Experte : Utiliser le SVG de Séparation comme un Masque, qu'on remplit de lumière Turquoise ! */
+  background-color: var(--turquoise);
+  -webkit-mask: url("/images/motif-fleur-separation.svg") no-repeat center / contain;
+  mask: url("/images/motif-fleur-separation.svg") no-repeat center / contain;
+  
+  /* L'Aura lumineuse comme sur FR/EN et les Reliques Vénérables */
+  filter: drop-shadow(0 0 15px rgba(64, 224, 208, 0.4));
+  opacity: 0.85;
 }
 
 @media (max-width: 768px) {
