@@ -45,6 +45,17 @@
     "preorder": "Awaiting its Seeker",
     "claim": "Bond with this Relic",
     "ritual_notice": "Available for immediate ritual bonding",
+    "names": {
+      "sutra-of-the-silent-heart": "SUTRA OF THE SILENT HEART",
+      "pixiu-celestial-prosperity": "PIXIU : THE CELESTIAL PROSPERITY",
+      "pixiu-rotating-destiny": "PIXIU : THE ROTATING DESTINY",
+      "pixiu-imperial-seal": "PIXIU : THE IMPERIAL SEAL",
+      "woofo-silent-shield": "WOOFO : THE SILENT SHIELD",
+      "pixiu-two-faces-fortune": "PIXIU : THE TWO FACES OF FORTUNE",
+      "venerable-talisman": "VENERABLE TALISMAN",
+      "sacred-bracelet": "SACRED BRACELET",
+      "ancient-lotus-ring": "ANCIENT LOTUS RING"
+    },
     "specs": {
        "material": "Metal Work",
        "mechanism": "Mechanism",

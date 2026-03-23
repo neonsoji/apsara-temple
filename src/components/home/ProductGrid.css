@@ -40,44 +40,119 @@
 /* --- PRODUCT CARD 2.0 (Relique Sacrée UI) --- */
 .product-card {
   position: relative;
+  background: rgba(10, 10, 10, 0.45); /* Aspect Obsidienne sombre */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   
-  /* Transparence Vitre Subtile (Pas Opaque - Retour à 0.4) */
-  background: rgba(26, 1, 1, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  
-  /* Coins légèrement arrondis pour l'élégance */
-  border-radius: 6px;
-  
-  /* Filet extérieur or désaturé */
-  border: 1px solid rgba(175, 155, 125, 0.25);
-  
-  /* Double effet intérieur : Filet turquoise très discret + Ombrage interne */
+  /* BISEAU MASSIF (EFFET D'ÉPAISSEUR VISIBLE) */
+  border: 1px solid rgba(175, 155, 125, 0.1); 
   box-shadow: 
-    inset 0 0 0 1px rgba(64, 224, 208, 0.06),
-    inset 0 0 30px rgba(0, 0, 0, 0.4),
-    0 15px 40px rgba(0, 0, 0, 0.3);
+    /* L'arête supérieure et gauche (LUMIÈRE FORCÉE) */
+    inset 0 4px 6px rgba(255, 255, 255, 0.12),   /* Biseau large - Haut */
+    inset 4px 0 6px rgba(255, 255, 255, 0.08),   /* Biseau large - Gauche */
+    inset 1px 1px 0 rgba(255, 255, 255, 0.25),   /* Filet tranchant diamant */
+    /* L'arête inférieure et droite (OMBRE DE MASSE) */
+    inset -2px -2px 4px rgba(0, 0, 0, 0.8),
+    /* Profondeur Interne & Shadow Externe */
+    inset 0 0 50px rgba(0, 0, 0, 0.6),
+    0 30px 60px rgba(0, 0, 0, 0.5);              /* On décolle la carte du fond */
     
-  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
   padding: 40px 20px;
   overflow: hidden;
+  border-radius: 4px;
 }
 
 .product-card:hover {
-  /* Élévation délicate (fini les sauts brutaux) */
-  transform: translateY(-6px);
+  transform: translateY(-12px);
+  background: rgba(15, 15, 15, 0.6);
+  border-color: rgba(64, 224, 208, 0.45);
   
-  background: rgba(26, 1, 1, 0.5);
-  /* Accentuation subtile du doré désaturé */
-  border-color: rgba(175, 155, 125, 0.4);
-  
-  /* Renforcement du halo intérieur turquoise + glow très soft */
+  /* BISEAU DYNAMIQUE ÉCLATANT AU SURVOL */
   box-shadow: 
-    inset 0 0 0 1px rgba(64, 224, 208, 0.15),
-    inset 0 0 40px rgba(0, 0, 0, 0.6),
-    0 20px 50px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(64, 224, 208, 0.08);
+    inset 0 5px 8px rgba(255, 255, 255, 0.18),    /* L'arête s'éclaire au contact */
+    inset 5px 0 8px rgba(255, 255, 255, 0.12),
+    inset 0 0 70px rgba(0, 0, 0, 0.9),            /* Le fond "s'enfonce" */
+    0 40px 80px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(64, 224, 208, 0.2);
 }
+
+
+
+.product-image-box {
+  width: calc(100% + 40px);
+  height: 480px;
+  margin-top: -40px;
+  margin-left: -20px;
+  margin-right: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+  
+  /* SPOTLIGHT CURATORIAL : L'objet semble éclairé en studio */
+  background: radial-gradient(circle at center, #2a2a2a 0%, #050505 100%);
+}
+
+.product-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.product-card:hover .product-image-box img {
+  transform: scale(1.08); /* Aspiration visuelle douce */
+}
+
+.product-info {
+  margin-top: 20px;
+}
+
+.product-availability {
+  font-size: 0.75rem;
+  color: #c9c2b9; /* Ivoire désaturé */
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  opacity: 0.7;
+}
+
+.product-name {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  
+  /* PATINE SACRÉE (DÉJA UTILISÉE POUR LE LOGO) */
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    #ffffff 45%,
+    rgba(255, 255, 255, 0.95) 50%,
+    #ffffff 55%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shinePatina 15s ease-in-out infinite alternate;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  color: var(--turquoise); /* Prix en turquoise pour l'appel à l'œil */
+  letter-spacing: 0.2em;
+  font-family: var(--font-outfit), sans-serif;
+}
+
 
 .card-ornament {
   position: absolute;

@@ -1,11 +1,22 @@
 import { Metadata } from 'next';
 import Navbar from "@/components/layout/Navbar"
 
-export const metadata: Metadata = {
-  title: 'APSARA TEMPLE | Sacred Talismans & Spiritual Protection Relics',
-  description: 'Discover the collection of sacred talismans and handcrafted protection relics. Forged from ancient rituals, each object is a vessel of intention for the modern seeker.',
-  keywords: ['sacred talismans', 'protection jewelry', 'buddha pendant', 'spiritual relics', 'meditation tools', 'Apsara Temple'],
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isEN = locale === 'en';
+  
+  return {
+    title: isEN 
+      ? 'APSARA TEMPLE | Sacred Talismans & Spiritual Protection Relics'
+      : 'APSARA TEMPLE | Talismans Sacrés & Reliques de Protection Spirituelle',
+    description: isEN
+      ? 'Discover the collection of sacred talismans and handcrafted protection relics. Forged from ancient rituals, each object is a vessel of intention for the modern seeker.'
+      : 'Découvrez la collection de talismans sacrés et de reliques de protection artisanales. Forgés à partir de rituels anciens, chaque objet est un vaisseau d\'intention.',
+    keywords: isEN 
+      ? ['sacred talismans', 'protection jewelry', 'buddha pendant', 'spiritual relics', 'meditation tools', 'Apsara Temple']
+      : ['talismans sacrés', 'bijoux de protection', 'pendentif bouddha', 'reliques spirituelles', 'outils de méditation', 'Apsara Temple'],
+  };
+}
 import Hero from "@/components/home/Hero"
 import ProductGrid from "@/components/home/ProductGrid"
 import Story from "@/components/home/Story"

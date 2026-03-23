@@ -14,9 +14,9 @@
   --menu-y: 0px;
 
   /* 3. Loupe (Recherche) */
-  --loupe-zoom: 2.0;
+  --loupe-zoom: 1.4;        /* On revient à une taille cohérente */
   --loupe-x: 0px;
-  --loupe-y: 48%;
+  --loupe-y: 0px;           /* Le manche est libre de descendre */
 
   /* 4. Balance (Compte/Balance) */
   --account-zoom: 1.4;
@@ -72,11 +72,11 @@
   display: none;
   align-items: center;
   gap: 1.5rem;
-  flex: 1;
+  flex: 0 0 auto; /* On désactive l'éparpillement automatique */
 }
 
 .navbar-right-mobile {
-  justify-content: flex-end;
+  justify-content: flex-start; /* Changé de flex-end à flex-start pour la grappe */
 }
 
 /* --- DESKTOP SPECIFIC --- */
@@ -259,7 +259,6 @@
   content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 }
 
-
 /* 1. Menu (Ganesh / Sigil Gauche) */
 .navbar-left-mobile button:nth-child(1) .nav-icon-svg {
   -webkit-mask-image: url('/images/menu.svg');
@@ -273,11 +272,12 @@
 
 /* 2. Loupe (Recherche) */
 .nav-icon-svg.icon-loupe {
-  -webkit-mask-image: url('/images/loupe.svg');
-  mask-image: url('/images/loupe.svg');
-  background: linear-gradient(140deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
+  -webkit-mask-image: url('/images/loupe.svg') !important;
+  mask-image: url('/images/loupe.svg') !important;
+  background: linear-gradient(140deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%) !important;
   background-size: 200% auto;
-  transform: translate(var(--loupe-x), var(--loupe-y)) scale(var(--loupe-zoom));
+  transform: translateY(12px) scale(1.3) !important; /* On décale vers le bas pour sortir le pied */
+  height: 55px !important; /* Zone plus haute pour accueillir le pied */
   animation-duration: 15s;
   animation-delay: -5s;
 }
@@ -414,26 +414,26 @@
 
 /* === RESPONSIVE SWAP & CLUSTERING (MOBILE) === */
 @media (max-width: 900px) {
+  :root {
+    --icon-circle-size: 60px;
+    --nav-logo-height: 95px; /* Agrandissement impérial pour dominer la grappe */
+  }
+
+  .navbar-container {
+    justify-content: center !important;
+  }
 
   .navbar-left-mobile,
   .navbar-right-mobile {
     display: flex;
-    gap: 1.2rem;
+    gap: 12px;
+    padding: 0 !important;
+    flex: 0 0 auto !important;
   }
 
-  /* On regroupe tout au centre autour du logo au lieu de coller aux bords */
-  .navbar-left-mobile {
-    justify-content: flex-end;
-    /* pousse les icônes vers le centre */
-    padding-right: 55px;
-    /* Marge pour laisser la place au logo central ENORME */
-  }
-
-  .navbar-right-mobile {
-    justify-content: flex-start;
-    /* pousse vers le centre */
-    padding-left: 55px;
-  }
+  /* Resserrement avec zone de respiration accrue pour le grand logo */
+  .navbar-left-mobile { margin-right: 65px !important; }
+  .navbar-right-mobile { margin-left: 65px !important; }
 
   .navbar-left-desktop,
   .navbar-right-desktop {
@@ -441,41 +441,42 @@
   }
 
   .nav-logo-img {
-    height: 75px;
+    height: var(--nav-logo-height);
   }
-
-  /* Reste très massif sur tablette / mobile */
 }
 
 @media (max-width: 600px) {
-  .navbar {
-    height: 90px;
-    padding: 0 2%;
+  :root {
+    --icon-circle-size: 55px;
+    --nav-logo-height: 82px;
   }
 
-  /* Rapprochement extrême des 5 élements */
+  .navbar {
+    height: 95px;
+    padding: 0 10px;
+  }
+
   .navbar-left-mobile,
   .navbar-right-mobile {
-    gap: 0.8rem;
+    gap: 10px;
   }
 
-  .navbar-left-mobile {
-    padding-right: 45px;
-  }
-
-  .navbar-right-mobile {
-    padding-left: 45px;
-  }
+  /* Grappe compacte sur téléphone sans chevauchement */
+  .navbar-left-mobile { margin-right: 55px !important; }
+  .navbar-right-mobile { margin-left: 55px !important; }
 
   .nav-logo-img {
-    height: 60px;
+    height: var(--nav-logo-height);
   }
 
-  /* Même sur petit écran, il est gros */
   .nav-icon-svg {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
   }
-
-  /* Icônes plus grandes */
+  
+  /* Libération du pied de la loupe sur mobile */
+  .icon-btn[aria-label="Search"] .nav-icon-svg {
+    transform: translateY(14px) scale(1.3) !important;
+    height: 55px !important; 
+  }
 }

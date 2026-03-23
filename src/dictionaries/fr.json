@@ -45,6 +45,17 @@
     "preorder": "En attente de son chercheur",
     "claim": "S'unir à cette Relique",
     "ritual_notice": "Disponible pour une union rituelle immédiate",
+    "names": {
+      "sutra-of-the-silent-heart": "SUTRA DU CŒUR SILENCIEUX",
+      "pixiu-celestial-prosperity": "PIXIU : LA PROSPÉRITÉ CÉLESTE",
+      "pixiu-rotating-destiny": "PIXIU : LA ROUE DES DESTINÉES",
+      "pixiu-imperial-seal": "PIXIU : LE SCEAU IMPÉRIAL",
+      "woofo-silent-shield": "WOOFO : LE BOUCLIER SILENCIEUX",
+      "pixiu-two-faces-fortune": "PIXIU : LES DEUX VISAGES DE LA FORTUNE",
+      "venerable-talisman": "TALISMAN VÉNÉRABLE",
+      "sacred-bracelet": "BRACELET SACRÉ",
+      "ancient-lotus-ring": "BAGUE LOTUS ANCIENNE"
+    },
     "specs": {
        "material": "Travail du Métal",
        "mechanism": "Mécanique",
