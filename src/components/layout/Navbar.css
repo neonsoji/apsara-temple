@@ -45,16 +45,16 @@
   z-index: 1000;
   transition: all 0.5s ease;
   padding: 0 4%;
-  background: linear-gradient(to bottom, rgba(10, 1, 1, 0.9) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(10, 1, 1, 0.4) 0%, transparent 100%);
 }
 
 .navbar.scrolled {
   height: 80px;
-  background: rgba(12, 5, 5, 0.45);
+  background: linear-gradient(to bottom, rgba(120, 10, 10, 0.75), rgba(40, 5, 5, 0.85)); /* Plus opaque pour la lisibilité sur fond rouge */
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px); /* Compatibilité Safari Luxe */
-  border-bottom: 1px solid rgba(175, 155, 125, 0.12); /* Filet Or Antique Très Fin */
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(175, 155, 125, 0.15);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
 .navbar-container {
@@ -84,12 +84,18 @@
 .navbar-right-desktop {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 3.5rem;
   flex: 1;
 }
 
-.navbar-right-desktop {
+.navbar-left-desktop {
   justify-content: flex-end;
+  padding-right: 100px; /* Espace pour le logo central */
+}
+
+.navbar-right-desktop {
+  justify-content: flex-start;
+  padding-left: 100px; /* Espace pour le logo central */
 }
 
 /* --- CENTER LOGO (Absolute) --- */
@@ -113,9 +119,7 @@
   transition: transform 0.6s ease;
 }
 
-.navbar-logo-absolute:hover .nav-logo-img {
-  /* slight pulse */
-}
+/* Correction Lint : Règle vide supprimée */
 
 /* Clean, crisp glow without fog */
 .nav-logo-glow {
@@ -135,11 +139,11 @@
   font-family: var(--font-cinzel), serif;
   font-size: 0.8rem;
   letter-spacing: 0.25em;
-  color: var(--ivory);
+  color: rgba(255,255,255,0.9);
 }
 
 .lang-switcher a {
-  opacity: 0.5;
+  opacity: 0.75;
   transition: all 0.4s ease;
   cursor: pointer;
 }
@@ -167,7 +171,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--ivory);
+  color: rgba(255,255,255,0.9);
   opacity: 0.7;
   transition: all 0.4s ease;
   white-space: nowrap;
@@ -223,9 +227,47 @@
 
 
 
-/* Gestion du Manche Loupe */
-.icon-btn[aria-label="Search"] { overflow: visible !important; }
-.icon-btn:not([aria-label="Search"]) { overflow: hidden; }
+/* Gestion du Manche Loupe et du Badge Panier */
+.icon-btn[aria-label="Search"],
+.icon-btn[aria-label="Cart"] { overflow: visible !important; }
+.icon-btn:not([aria-label="Search"]):not([aria-label="Cart"]) { overflow: hidden; }
+
+/* === ELEGANT CART DOTS (PLAN B) === */
+.cart-dots-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1005;
+}
+
+.cart-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px; /* Petite boule argentée */
+  height: 8px;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #d0ccc5 40%, #8a8178 80%, #4a453f 100%);
+  border-radius: 50%;
+  box-shadow: 
+    inset -1px -1px 2px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 5px rgba(64, 224, 208, 0.6); /* Aura turquoise */
+  transform-origin: center;
+  /* 
+     Fixé élégamment sur le côté supérieur droit (65 degrés).
+  */
+  transform: rotate(65deg) translateY(calc(var(--icon-circle-size) / -2 - 4px)) rotate(-65deg);
+  animation: dotPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+}
+
+@keyframes dotPop {
+  0% { transform: scale(0) rotate(65deg) translateY(0); opacity: 0; }
+  100% { transform: scale(1) rotate(65deg) translateY(calc(var(--icon-circle-size) / -2 - 4px)) rotate(-65deg); opacity: 1; }
+}
 
 .nav-icon-svg {
   width: 34px;
@@ -260,7 +302,7 @@
 }
 
 /* 1. Menu (Ganesh / Sigil Gauche) */
-.navbar-left-mobile button:nth-child(1) .nav-icon-svg {
+.navbar-left-mobile .icon-btn:nth-child(1) .nav-icon-svg {
   -webkit-mask-image: url('/images/menu.svg');
   mask-image: url('/images/menu.svg');
   background: linear-gradient(110deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
@@ -283,7 +325,7 @@
 }
 
 /* 3. Balance (Compte) */
-.navbar-right-mobile button:nth-child(1) .nav-icon-svg {
+.navbar-right-mobile .icon-btn:nth-child(1) .nav-icon-svg {
   -webkit-mask-image: url('/images/compte.svg');
   mask-image: url('/images/compte.svg');
   background: linear-gradient(210deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
@@ -294,7 +336,7 @@
 }
 
 /* 4. Panier (Relique Droite) */
-.navbar-right-mobile button:nth-child(2) .nav-icon-svg {
+.navbar-right-mobile .icon-btn:nth-child(2) .nav-icon-svg {
   -webkit-mask-image: url('/images/panier.svg');
   mask-image: url('/images/panier.svg');
   background: linear-gradient(250deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
@@ -382,34 +424,35 @@
 
 /* === MAGICAL CENTRAL PROJECTION (HOLOGRAM) === */
 .sigil-projection {
-  position: absolute; /* Aligné par rapport à la Navbar fixe */
-  top: 280px; /* Remonté drastiquement pour s'aligner parfaitement sur le bloc APSARA TEMPLE */
-  left: 50vw;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none; /* Ne doit JAMAIS bloquer les clics de la page */
+  position: fixed;
+  top: 110px; /* juste sous la navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  pointer-events: none;
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: -20; /* Projette "derrière" ou "sous" le contenu principal */
+  align-items: flex-start;
+  z-index: 10;
   opacity: 0;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.4s ease;
 }
 .sigil-projection.active {
   opacity: 1;
 }
 .sigil-projection-img {
-  width: 60vw; 
-  max-width: 450px;
-  filter: invert(1) brightness(1.5) drop-shadow(0 0 30px rgba(64, 224, 208, 0.5));
-  opacity: 0; 
+  width: 260px; /* taille réelle contrôlée */
+  height: auto;
+  filter: invert(1) brightness(1.6) contrast(1.1)
+          drop-shadow(0 0 60px rgba(64, 224, 208, 0.35));
+  opacity: 0;
   transform: scale(0.6);
-  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.4s ease;
 }
 .sigil-projection.active .sigil-projection-img {
-  transform: scale(1);
-  opacity: 0.15; /* Fantomatique, élégant, ne cache pas trop le texte */
+  transform: scale(1.4); /* x2.2 propre */
+  opacity: 0.28;
 }
 
 /* === RESPONSIVE SWAP & CLUSTERING (MOBILE) === */
@@ -465,18 +508,162 @@
   .navbar-left-mobile { margin-right: 55px !important; }
   .navbar-right-mobile { margin-left: 55px !important; }
 
-  .nav-logo-img {
-    height: var(--nav-logo-height);
-  }
+  .nav-logo-img { height: 26px; }
+  .sigil-projection-img {
+  width: 260px; /* taille réelle contrôlée */
+  height: auto;
+  filter: invert(1) brightness(1.6) contrast(1.1)
+          drop-shadow(0 0 60px rgba(64, 224, 208, 0.35));
+  opacity: 0;
+  transform: scale(0.6);
+  transition: transform 0.5s ease, opacity 0.4s ease;
+}
+}
 
-  .nav-icon-svg {
-    width: 32px;
-    height: 32px;
-  }
+
+/* =========================================================================
+   MOBILE MENU OVERLAY (LE PORTAIL SECRET)
+   ========================================================================= */
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: radial-gradient(circle at center, rgba(130, 20, 20, 0.98), rgba(40, 5, 5, 1));
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-background-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/planche02.svg');
+  background-position: center;
+  background-size: 200vw;
+  filter: invert(15%) sepia(95%) saturate(4000%) hue-rotate(350deg) brightness(55%) contrast(115%);
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+}
+
+.menu-content-sacred {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 0 10%;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu-overlay.open .menu-content-sacred {
+  transform: translateY(0);
+}
+
+.menu-ornament-top {
+  color: var(--turquoise);
+  font-size: 1.2rem;
+  letter-spacing: 0.5em;
+  margin-bottom: 3rem;
+  opacity: 0.85;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.menu-link {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.8rem;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.menu-link:hover {
+  color: var(--turquoise);
+}
+
+.link-num {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 0.6rem;
+  color: var(--turquoise);
+  opacity: 0.75;
+  letter-spacing: 0.2em;
+}
+
+.menu-footer {
+  border-top: 1px solid rgba(175, 155, 125, 0.1);
+  padding-top: 2rem;
+}
+
+.menu-lang-switcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.9);
+  opacity: 0.85;
+}
+
+.menu-lang-switcher a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.menu-lang-switcher a.active {
+  color: var(--turquoise);
+  opacity: 1;
+}
+
+.menu-motto {
+  font-family: var(--font-playfair), serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.9);
+  opacity: 0.65;
+  letter-spacing: 0.1em;
+}
   
   /* Libération du pied de la loupe sur mobile */
   .icon-btn[aria-label="Search"] .nav-icon-svg {
     transform: translateY(14px) scale(1.3) !important;
     height: 55px !important; 
-  }
 }
+.nav-icon-svg {
+  transition: transform 0.3s ease;
+}
+
+.nav-icon-svg.open {
+  transform: rotate(90deg);
+}
+
+
+
+
+

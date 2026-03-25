@@ -1,36 +1,28 @@
 .hero {
   position: relative;
   width: 100%;
-  /* Retrait du flex-column qui écrasait le talisman et poussait les composants */
   background-color: transparent !important;
 }
 
 /* =========================================================================
    PANNEAU DE CONTRÔLE : TAPISSERIE VIVANTE (MOTIFS ROUGES)
-   Modifie ces chiffres toi-même pour trouver la balance parfaite !
    ========================================================================= */
 :root {
-  --tapisserie-luminosite: 90%;   /* Monte vers 150% pour du rouge vif/rosé, descends vers 20% pour du rouge sang/noir */
-  --tapisserie-saturation: 4000%; /* Force de la couleur. 0% = gris, 6000% = rouge pur saturé */
-  --tapisserie-teinte: 345deg;    /* 345deg = bordeaux. 0deg = rouge pompier. 30deg = orange. */
-  --tapisserie-opacite: 0.50;     /* Visibilité de l'apparition. 1 = 100% opaque. 0.1 = quasiment invisible */
+  --tapisserie-luminosite: 130%;   
+  --tapisserie-saturation: 4200%; 
+  --tapisserie-teinte: 345deg;    
+  --tapisserie-opacite: 0.65;     
 }
-
-/* ===== TEXTURE ===== */
 
 .hero-texture-layer {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* PLUS AUCUN OVERFLOW HIDDEN ! La magie a l'autorisation divine de couler sur la Boutique ! */
 }
-
-/* === TAPISSERIE 4.0 : LA RESPIRATION SEQUENTIELLE (6 ZONES) === */
 
 .bg-spot {
   position: absolute;
-  /* Larges "Hublots" statiques sans bords durs */
   width: 900px; 
   height: 900px;
   background-image: url('/images/planche02.svg');
@@ -38,28 +30,17 @@
   filter: invert(12%) sepia(90%) saturate(var(--tapisserie-saturation)) hue-rotate(var(--tapisserie-teinte)) brightness(var(--tapisserie-luminosite)) contrast(110%);
   opacity: 0;
   pointer-events: none;
-  
-  /* L'Arme Absolue contre les "Lignes Droites" (Fondu adouci sur 65%) */
   mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 65%);
   -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 65%);
 }
 
-/* 6 Emplacements Totalement Figés et Sécurisés :
-   1. top: 75% et 100% pour déborder LARGEMENT dans la boutique (z-index le permet !)
-   2. background-position centriste (30-70%) GARANTIT de ne jamais taper les bords natifs de l'image.
-*/
 .bg-spot-1 { top: -5%; left: -5%; background-size: 150vw; background-position: 30% 30%; transform: rotate(15deg); }
 .bg-spot-2 { top: 15%; right: -5%; background-size: 180vw; background-position: 70% 35%; transform: rotate(-35deg); }
 .bg-spot-3 { top: 40%; left: 35%; background-size: 250vw; background-position: 45% 65%; transform: rotate(115deg); }
 .bg-spot-4 { top: 5%; right: 25%; background-size: 160vw; background-position: 60% 40%; transform: rotate(-75deg); }
-/* EMPIÈTEMENT MASSIF SUR LA BOUTIQUE : */
 .bg-spot-5 { top: 80%; left: 5%; background-size: 220vw; background-position: 35% 70%; transform: rotate(15deg); }
 .bg-spot-6 { top: 110%; right: 10%; background-size: 170vw; background-position: 65% 50%; transform: rotate(90deg); }
 
-/* 
-  L'Horlogerie de Respiration (Séquence ACCÉLÉRÉE à 6 temps - Zéro Chevauchement) :
-  Cycle 24 secondes. Chaque emplacement vit 4s pleines, bien plus percutant !
-*/
 .bg-spot-1 { animation: pureBreath 24s ease-in-out infinite 0s; }
 .bg-spot-2 { animation: pureBreath 24s ease-in-out infinite 4s; }
 .bg-spot-3 { animation: pureBreath 24s ease-in-out infinite 8s; }
@@ -69,19 +50,19 @@
 
 @keyframes pureBreath {
   0%    { opacity: 0; }
-  5%    { opacity: var(--tapisserie-opacite); }   /* Fondu d'apparition rapide (1.2s) */
-  13%   { opacity: var(--tapisserie-opacite); }   /* Maintien (1.9s) */
-  16.6% { opacity: 0; }                           /* Fondu de disparition rapide. 16.6% de 24s = pile 4s. */
-  100%  { opacity: 0; }                           /* Attente pour le reste du cycle */
+  5%    { opacity: var(--tapisserie-opacite); }
+  13%   { opacity: var(--tapisserie-opacite); }
+  16.6% { opacity: 0; }
+  100%  { opacity: 0; }
 }
 
-/* ===== LAYOUT PROPRE ===== */
+/* ===== LAYOUT ===== */
 
 .hero-grid-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%; /* VITAL : S'ouvre sur les bords ! */
+  width: 100%; 
   max-width: 1200px;
   padding: 18vh 8% 8vh 8%;
   gap: 20px;
@@ -90,22 +71,20 @@
   z-index: 5;
 }
 
-/* TEXTE GAUCHE */
-
 .hero-content {
-  flex: 0 0 55%; /* Exige strictement 55% de la place à gauche */
+  flex: 0 0 55%; 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-/* VISUEL DROITE */
-
 .hero-visual {
-  flex: 0 0 40%; /* Exige 40% de la place à droite (avec 5% de gap) */
+  flex: 0 0 45%; 
   display: flex;
-  justify-content: flex-end; /* Repousse viscéralement l'image au fond à droite */
+  justify-content: flex-end; 
   align-items: center;
+  flex-shrink: 0; 
+  position: relative;
 }
 
 .hero-talisman {
@@ -118,49 +97,30 @@
 }
 
 @keyframes floatTalisman {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-18px); /* Lévitation douce et prolongée */
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 
-/* ===== TYPO ===== */
+/* ===== TYPO COMPACTE ===== */
 
 .hero-title {
   font-family: var(--font-cinzel), serif;
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   font-weight: 700;
   letter-spacing: 0.25em;
-  margin-bottom: 2rem;
+  margin-bottom: 0.3rem; /* REDUIT : Plus compact */
   text-transform: uppercase;
-  
-  /* NOUVELLE PATINE SACRÉE ULTRA-LUMINEUSE (RELIQUE D'ARGENT) */
-  background: linear-gradient(
-    110deg,
-    #ffffff 0%,
-    rgba(255, 255, 255, 0.45) 30%,
-    #ffffff 45%,
-    rgba(255, 255, 255, 0.95) 50%, /* Le flash de lumière pur */
-    #ffffff 55%,
-    rgba(255, 255, 255, 0.45) 70%,
-    #ffffff 100%
-  );
+  background: linear-gradient(110deg, #ffffff 0%, rgba(255, 255, 255, 0.45) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, rgba(255, 255, 255, 0.45) 70%, #ffffff 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  
-  /* FLUX RESPIRANT ACCÉLÉRÉ (ZEN & VIBRANT) */
   animation: shinePatina 18s ease-in-out infinite alternate;
-  
-  /* RELIEF SUR FOND ROUGE */
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95));
-  line-height: 1.25;
+  line-height: 1;
+  white-space: nowrap !important; 
 }
-
 
 @keyframes shinePatina {
   0% { background-position: 150% center; }
@@ -173,28 +133,28 @@
   font-weight: 600;
   letter-spacing: 0.5em;
   color: var(--turquoise);
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.3rem; /* REDUIT : Plus compact */
+  margin-left: 3px; /* Alignement optique avec le titre */
   text-transform: uppercase;
 }
 
 .hero-subtitle-block {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 2.5rem;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem; /* REDUIT : Plus compact */
 }
 
 .subtitle-bar {
   width: 4px; 
-  height: 35px;
+  height: 25px; /* RÉDUIT */
   background: var(--turquoise);
-  box-shadow: 0 0 10px rgba(64, 224, 208, 0.4);
 }
 
 .hero-subtitle-text {
   font-family: var(--font-cinzel), serif;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1.3rem; 
   letter-spacing: 0.15em;
   color: var(--ivory);
   text-transform: uppercase;
@@ -202,75 +162,46 @@
 
 .hero-description {
   font-family: var(--font-playfair), serif;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  line-height: 1.7;
+  line-height: 1.6;
   max-width: 520px;
-  color: var(--ivory);
-  opacity: 0.85;
+  color: var(--ivory) !important;
+  opacity: 1 !important; 
 }
 
-/* ===== MOBILE ===== */
+/* === MOBILE FIXES (TEXT LEFT / TALISMAN RIGHT / COMPACT) === */
 
 @media (max-width: 900px) {
-  .hero {
-    height: auto;
-    min-height: auto; /* DÉVERROUILLAGE : Permet à la section Boutique de remonter tout en haut ! */
-  }
-
   .hero-grid-container {
-    height: auto;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start; /* Aligne le texte et le talisman par le haut, PAS par le milieu */
-    padding-top: 130px; /* Barre de navigation = 100px. Démarre exactement 30px en dessous ! */
-    padding-bottom: 10px; /* Suppression brutale du vide pour que la boutique s'y colle */
+    padding-top: 130px; 
+    padding-bottom: 40px;
+    flex-direction: row !important;
     gap: 15px;
   }
-
-  .hero-content {
-    flex: 1 1 65%; /* Le texte reprend ses droits avec 65% de l'image */
-  }
-
-  .hero-visual {
-    flex: 1 1 35%; /* La visualisation se réduit à 35% */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Pour que le talisman accompagne le texte au sommet du bloc */
-    padding-top: 15px;
-  }
-
-  /* Textes grossis puisque la colonne (65%) est plus large */
-  .hero-title { font-size: 2.2rem; margin-bottom: 0.6rem; letter-spacing: 0.1em; }
-  .hero-label-top { font-size: 0.65rem; margin-bottom: 0.8rem; }
-  .hero-subtitle-block { margin-bottom: 1rem; gap: 0.5rem; }
-  .subtitle-bar { height: 18px; }
-  .hero-subtitle-text { font-size: 0.9rem; line-height: 1.3; }
-  .hero-description { font-size: 0.8rem; line-height: 1.5; padding-right: 0; }
-
-  /* Le Talisman est réduit et retrouve sa vraie taille */
+  .hero-content { flex: 0 0 60% !important; }
+  .hero-visual { flex: 0 0 35% !important; flex-shrink: 0; padding-top: 20px; }
+  
+  .hero-title { font-size: 1.5rem !important; margin-bottom: 0.2rem !important; }
+  .hero-label-top { font-size: 0.7rem !important; margin-bottom: 0.2rem !important; margin-left: 2px !important; }
+  .hero-subtitle-block { margin-bottom: 0.6rem !important; gap: 0.4rem !important; }
+  .hero-description { font-size: 0.82rem !important; line-height: 1.5; }
+  
   .hero-talisman {
-    width: 100%;
-    min-width: unset;
-    max-width: 180px; 
-    transform: none; /* Fin des enchantements optiques d'agrandissement */
+    width: 32vw !important;
+    min-width: 120px !important;
   }
 }
 
-@media (max-width: 600px) {
-  .hero-grid-container {
-    padding-top: 110px; /* navbar (100px) + 10px d'espace de respiration pure et dure */
-    gap: 5px;
-  }
-  .hero-content { flex: 1 1 65%; }
-  .hero-visual { flex: 1 1 35%; }
-  
-  .hero-title { font-size: 1.7rem; }
-  .hero-subtitle-text { font-size: 0.75rem; }
-  .hero-description { font-size: 0.7rem; }
+@media (max-width: 480px) {
+  .hero-grid-container { padding-top: 120px; gap: 10px; }
+  .hero-title { font-size: 1.25rem !important; }
+  .hero-label-top { font-size: 0.6rem !important; margin-bottom: 0.2rem !important; margin-left: 1px !important; }
+  .hero-subtitle-block { margin-bottom: 0.5rem !important; gap: 0.3rem !important; }
+  .hero-subtitle-text { font-size: 0.95rem !important; }
   
   .hero-talisman {
-    max-width: 140px; /* Sensiblement réduit pour le ratio 65/35 */
-    transform: none;
+    width: 35vw !important;
+    min-width: 110px !important;
   }
 }

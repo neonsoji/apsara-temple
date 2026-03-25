@@ -3,7 +3,8 @@ import { getProducts } from "@/services/products";
 
 export const dynamic = "force-dynamic";
 
-export default async function ProductsPage() {
+export default async function ProductsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const products = await getProducts();
 
   if (!products || products.length === 0) {
@@ -22,7 +23,7 @@ export default async function ProductsPage() {
           const mainImage = product.product_images?.[0]?.url || "/placeholder.jpg";
           return (
             <Link 
-              href={`/products/${product.slug}`} 
+              href={`/${locale}/products/${product.slug}`} 
               key={product.id}
               className="group flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-all hover:shadow-md"
             >

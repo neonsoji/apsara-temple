@@ -1,0 +1,124 @@
+.about-page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('/images/apsara-hero-bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  color: var(--ivory);
+  padding-top: 100px;
+  position: relative;
+}
+
+.about-hero {
+  position: relative;
+  width: 100%;
+  padding: 150px 5% 100px;
+  text-align: center;
+  z-index: 10;
+}
+
+.about-mist {
+  position: absolute;
+  top: 0; left: 50%; width: 90%; height: 500px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(160, 140, 110, 0.1) 0%, transparent 70%);
+  filter: blur(100px);
+  z-index: -1;
+}
+
+.about-title {
+  font-family: var(--font-cinzel), serif;
+  font-size: 4rem;
+  letter-spacing: 0.4em;
+  margin-bottom: 2rem;
+  color: var(--ivory);
+  text-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+}
+
+.about-subtitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  opacity: 0.6;
+  letter-spacing: 0.15em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-story-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  padding: 100px 5% 150px;
+  align-items: center;
+}
+
+.story-image-decoration {
+  width: 100%;
+  height: 600px;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  position: relative;
+}
+
+.story-image-decoration::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 40%, #000 100%);
+  opacity: 0.8;
+}
+
+.story-image-decoration img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+.story-text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.story-text-content .ornament {
+  font-size: 2rem;
+  color: var(--turquoise);
+  opacity: 0.5;
+  margin-bottom: 2rem;
+}
+
+.story-text-content h2 {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 2.5rem;
+  color: var(--turquoise);
+}
+
+.story-text-content p {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.25rem;
+  line-height: 2.2;
+  opacity: 0.7;
+  margin-bottom: 2.5rem;
+  text-align: justify;
+}
+
+@media (max-width: 1000px) {
+  .about-story-section {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .story-image-decoration {
+    height: 400px;
+  }
+  .about-title {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,105 @@
+.contact-page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('/images/apsara-hero-bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  color: var(--ivory);
+  padding-top: 100px;
+  position: relative;
+}
+
+.contact-hero {
+  position: relative;
+  width: 100%;
+  padding: 100px 5% 50px;
+  text-align: center;
+  z-index: 10;
+}
+
+.contact-mist {
+  position: absolute;
+  top: 0; left: 50%; width: 90%; height: 400px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(160, 140, 110, 0.08) 0%, transparent 60%);
+  filter: blur(80px);
+  z-index: -1;
+}
+
+.contact-title {
+  font-family: var(--font-cinzel), serif;
+  font-size: 3rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 2rem;
+  color: var(--ivory);
+}
+
+.contact-subtitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.1rem;
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 100px;
+  padding: 80px 5% 150px;
+}
+
+.info-block h3 {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.1rem;
+  color: var(--turquoise);
+  letter-spacing: 0.2em;
+  margin-bottom: 1.5rem;
+}
+
+.info-block p {
+  font-family: var(--font-playfair), serif;
+  opacity: 0.6;
+  line-height: 2;
+  margin-bottom: 3rem;
+}
+
+.mystic-input, .mystic-textarea {
+  width: 100%;
+  background: rgba(20, 12, 12, 0.4);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.2rem 1.5rem;
+  font-family: var(--font-cinzel), serif;
+  color: var(--ivory);
+  letter-spacing: 0.1em;
+  margin-bottom: 25px;
+  transition: all 0.4s ease;
+}
+
+.mystic-input:focus, .mystic-textarea:focus {
+  outline: none;
+  border-color: var(--turquoise);
+  background: rgba(25, 15, 15, 0.6);
+}
+
+.mystic-submit-btn {
+  /* On hérite de .btn-sacred via le JSX */
+}
+
+.mystic-submit-btn:hover {
+  background: var(--turquoise);
+  color: #000;
+  box-shadow: 0 0 30px rgba(64, 224, 208, 0.3);
+}
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}

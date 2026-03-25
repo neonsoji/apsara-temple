@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { products } from '@/lib/products';
 import './ProductGrid.css';
 
 interface ProductGridProps {
@@ -13,59 +14,10 @@ interface ProductGridProps {
 }
 
 export default function ProductGrid({ category, label, title, accentTitle, dict, locale }: ProductGridProps) {
-  // Demo relics for the restoration (Adapté pour la Boutique Premium)
-  const relics = category === 'pendentifs' ? [
-    { 
-      id: 1, 
-      name: "SUTRA OF THE SILENT HEART", 
-      slug: "sutra-of-the-silent-heart", 
-      image: "/images/products/pendentifs/pendentif-bouddha-sutra-coeur-rotatif-protection.webp",
-      price: "45.00 €" 
-    },
-    { 
-      id: 2, 
-      name: "PIXIU : THE CELESTIAL PROSPERITY", 
-      slug: "pixiu-celestial-prosperity", 
-      image: "/images/products/pendentifs/talisman-pixiu-prosperite-sacree.webp",
-      price: "39.00 €" 
-    },
-    { 
-      id: 3, 
-      name: "PIXIU : THE ROTATING DESTINY", 
-      slug: "pixiu-rotating-destiny", 
-      image: "/images/products/pendentifs/talisman-pixiu-roue-destinees.webp",
-      price: "29.00 €" 
-    },
-    { 
-      id: 4, 
-      name: "PIXIU : THE IMPERIAL SEAL", 
-      slug: "pixiu-imperial-seal", 
-      image: "/images/products/pendentifs/talisman-pixiu-sceau-imperial.webp",
-      price: "49.00 €" 
-    },
-    { 
-      id: 5, 
-      name: "WOOFO : THE SILENT SHIELD", 
-      slug: "woofo-silent-shield", 
-      image: "/images/products/pendentifs/talisman-wu-shi-plaque-paix-protection-argent-apsara-temple.webp",
-      price: "29.00 €" 
-    },
-    { 
-      id: 6, 
-      name: "PIXIU : THE TWO FACES OF FORTUNE", 
-      slug: "pixiu-two-faces-fortune", 
-      image: "/images/products/pendentifs/talisman-pixiu-double-face-protection.webp",
-      price: "39.00 €" 
-    },
-    { id: 7, name: "VENERABLE TALISMAN", slug: "venerable-talisman", price: "210.00 €" },
-    { id: 8, name: "SACRED BRACELET", slug: "sacred-bracelet", price: "145.00 €" },
-    { id: 9, name: "ANCIENT LOTUS RING", slug: "ancient-lotus-ring", price: "160.00 €" }
-  ] : [
-    { id: 1, name: "SUTRA OF THE SILENT HEART", slug: "sutra-of-the-silent-heart", price: "185.00 €" },
-    { id: 2, name: "VENERABLE TALISMAN", slug: "venerable-talisman", price: "210.00 €" },
-    { id: 3, name: "SACRED BRACELET", slug: "sacred-bracelet", price: "145.00 €" },
-    { id: 4, name: "ANCIENT LOTUS RING", slug: "ancient-lotus-ring", price: "160.00 €" }
-  ];
+  // Filtrage des produits par catégorie via le moteur de boutique
+  const relics = products.filter(p => p.category === category);
+
+  if (relics.length === 0) return null;
 
   return (
     <section id={category} className="product-grid-section">
@@ -85,10 +37,9 @@ export default function ProductGrid({ category, label, title, accentTitle, dict,
               
               <div className="product-image-box">
                 <img 
-                  src={relic.image || `/images/products/${relic.slug}-01.webp`} 
-                  alt={relic.name}
+                  src={relic.image} 
+                  alt={relic.names[locale as 'fr'|'en']}
                   onError={(e) => {
-                    // Fallback to placeholder if image missing during restoration
                     e.currentTarget.src = "/images/talisman.webp";
                     e.currentTarget.style.opacity = "0.3";
                   }}
@@ -96,9 +47,10 @@ export default function ProductGrid({ category, label, title, accentTitle, dict,
               </div>
               
               <div className="product-info">
+                <h3 className="product-name">{relic.names[locale as 'fr'|'en']}</h3>
+                <p className="product-price">{relic.price}</p>
                 <p className="product-availability">{dict.available}</p>
-                <h3 className="product-name">{dict.names[relic.slug] || relic.name}</h3>
-                <p className="product-price" style={{ marginTop: '10px', fontSize: '0.9rem', color: 'var(--turquoise)', letterSpacing: '1px' }}>{relic.price}</p>
+
               </div>
             </Link>
           </div>
@@ -107,3 +59,5 @@ export default function ProductGrid({ category, label, title, accentTitle, dict,
     </section>
   );
 }
+
+

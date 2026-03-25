@@ -40,7 +40,7 @@
 /* --- PRODUCT CARD 2.0 (Relique Sacrée UI) --- */
 .product-card {
   position: relative;
-  background: rgba(10, 10, 10, 0.45); /* Aspect Obsidienne sombre */
+  background: rgba(58, 1, 1, 0.55); /* Rouge Sang de Bœuf : Sombre et Profond */
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   
@@ -64,17 +64,16 @@
 }
 
 .product-card:hover {
-  transform: translateY(-12px);
-  background: rgba(15, 15, 15, 0.6);
-  border-color: rgba(64, 224, 208, 0.45);
-  
-  /* BISEAU DYNAMIQUE ÉCLATANT AU SURVOL */
+  transform: translateY(-14px) scale(1.015);
+  background: rgba(90, 5, 5, 0.7);
+  border-color: rgba(64, 224, 208, 0.6);
+
   box-shadow: 
-    inset 0 5px 8px rgba(255, 255, 255, 0.18),    /* L'arête s'éclaire au contact */
-    inset 5px 0 8px rgba(255, 255, 255, 0.12),
-    inset 0 0 70px rgba(0, 0, 0, 0.9),            /* Le fond "s'enfonce" */
-    0 40px 80px rgba(0, 0, 0, 0.8),
-    0 0 40px rgba(64, 224, 208, 0.2);
+    inset 0 6px 10px rgba(255, 255, 255, 0.22),
+    inset 6px 0 10px rgba(255, 255, 255, 0.15),
+    inset 0 0 90px rgba(0, 0, 0, 0.95),
+    0 50px 100px rgba(0, 0, 0, 0.9),
+    0 0 60px rgba(64, 224, 208, 0.25);
 }
 
 
@@ -93,7 +92,7 @@
   overflow: hidden;
   
   /* SPOTLIGHT CURATORIAL : L'objet semble éclairé en studio */
-  background: radial-gradient(circle at center, #2a2a2a 0%, #050505 100%);
+  background: radial-gradient(circle at center, #3a0101 0%, #150000 100%); /* Studio Rouge Sombre */
 }
 
 .product-image-box img {
@@ -182,7 +181,7 @@
      Puisque la photo contient des pixels transparents (fumée/roche), 
      les superposer sur le fond rouge du site donnait l'impression d'un filtre sang.
      Ce fond de "Studio Noir" isole totalement l'œuvre d'art ! */
-  background: radial-gradient(circle at center, #151515 0%, #020202 100%);
+  background: radial-gradient(circle at center, #2a0101 0%, #0a0000 100%); /* Studio Rouge Sombre */
 }
 
 .product-image-box img {
@@ -217,15 +216,18 @@
   font-weight: 400;
 }
 
+/* --- ÉQUILIBRE TABLETTE (Ratio 2 colonnes) --- */
 @media (max-width: 1100px) {
-  .product-container { grid-template-columns: repeat(2, 1fr); }
+  .product-container { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .product-image-box { height: 350px; } /* On évite l'effet "allongé" en réduisant la hauteur proportionnellement à la largeur */
 }
 
 @media (max-width: 700px) {
-  /* Compression maximale de l'espace vide pour se souder direct sous le Héros */
-  .product-grid-section { padding: 30px 4% 60px 4%; }
-  .section-header { margin-bottom: 40px; }
-  .section-title { font-size: 1.8rem; }
+  /* Fin de la compression maximale : le temple a besoin de calme */
+  .product-grid-section { padding: 80px 4% 60px 4%; }
+  .section-header { margin-bottom: 50px; }
+  .section-title { font-size: 1.7rem; line-height: 1.2; letter-spacing: 0.1em; }
+  .section-label { margin-bottom: 1rem; font-size: 0.7rem; }
   
   /* L'exigence Mobile : 2 Produits côte à côte quoiqu'il arrive */
   .product-container { 
@@ -255,3 +257,9 @@
   .card-ornament.top-left { top: 8px; left: 8px; }
   .card-ornament.top-right { top: 8px; right: 8px; }
 }
+
+.product-card:hover .product-image-box img {
+  transform: scale(1.12);
+  filter: brightness(1.05) contrast(1.05);
+}
+

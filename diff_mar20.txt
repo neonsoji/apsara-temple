@@ -1,0 +1,879 @@
+commit 029ba12370d2b953c9db4a4e5eaf76e20519d4fd
+Author: neonsoji <neonsoji@users.noreply.github.com>
+Date:   Fri Mar 20 09:56:55 2026 +0100
+
+    💎 Navigation Sacrée : Patine Argent Diamant, Cœur de Rubis et Sertissage Turquoise liquide. Titre Sutra magnifié.
+
+diff --git a/public/images/bouton01.webp b/public/images/bouton01.webp
+new file mode 100644
+index 0000000..c0464f4
+Binary files /dev/null and b/public/images/bouton01.webp differ
+diff --git a/src/app/[locale]/account/page.tsx b/src/app/[locale]/account/page.tsx
+new file mode 100644
+index 0000000..4c81ff1
+--- /dev/null
++++ b/src/app/[locale]/account/page.tsx
+@@ -0,0 +1,14 @@
++import { getDictionary } from "@/i18n/get-dictionary";
++import type { Locale } from "@/i18n/locales";
++import UnderConstruction from "@/components/home/UnderConstruction";
++
++export default async function AccountPage({
++  params,
++}: {
++  params: Promise<{ locale: Locale }>;
++}) {
++  const { locale } = await params;
++  const dict = await getDictionary(locale);
++
++  return <UnderConstruction locale={locale} dictNav={dict.navigation} dictFooter={dict.footer} title={dict.navigation.account} />;
++}
+diff --git a/src/app/[locale]/cart/page.tsx b/src/app/[locale]/cart/page.tsx
+new file mode 100644
+index 0000000..751d095
+--- /dev/null
++++ b/src/app/[locale]/cart/page.tsx
+@@ -0,0 +1,14 @@
++import { getDictionary } from "@/i18n/get-dictionary";
++import type { Locale } from "@/i18n/locales";
++import UnderConstruction from "@/components/home/UnderConstruction";
++
++export default async function CartPage({
++  params,
++}: {
++  params: Promise<{ locale: Locale }>;
++}) {
++  const { locale } = await params;
++  const dict = await getDictionary(locale);
++
++  return <UnderConstruction locale={locale} dictNav={dict.navigation} dictFooter={dict.footer} title={dict.navigation.cart} />;
++}
+diff --git a/src/app/[locale]/products/[slug]/page.tsx b/src/app/[locale]/products/[slug]/page.tsx
+index 4602c89..7393d81 100644
+--- a/src/app/[locale]/products/[slug]/page.tsx
++++ b/src/app/[locale]/products/[slug]/page.tsx
+@@ -1,66 +1,47 @@
+-import { getProductBySlug } from "@/services/products";
+-import { notFound } from "next/navigation";
++import Navbar from "@/components/layout/Navbar";
++import Footer from "@/components/layout/Footer";
++import { getDictionary } from "@/i18n/get-dictionary";
++import type { Locale } from "@/i18n/locales";
+ 
+-export default async function ProductDetailPage({
++export default async function PlaceholderProductPage({
+   params,
+ }: {
+-  params: Promise<{ slug: string }>;
++  params: Promise<{ locale: Locale, slug: string }>;
+ }) {
+-  const { slug } = await params;
+-  const product = await getProductBySlug(slug);
+-
+-  if (!product) {
+-    notFound();
+-  }
++  const { locale, slug } = await params;
++  const dict = await getDictionary(locale);
+ 
++  // Fallback luxe pour masquer l'erreur 404 et la "laideur" du template e-commerce par défaut
+   return (
+-    <div className="container mx-auto px-4 py-12">
+-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+-        {/* Gallery */}
+-        <div className="space-y-4">
+-          <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden">
+-            <img
+-              src={product.product_images?.[0]?.url || "/placeholder.jpg"}
+-              alt={product.name}
+-              className="w-full h-full object-cover"
+-            />
+-          </div>
+-          <div className="grid grid-cols-4 gap-4">
+-            {product.product_images?.slice(1).map((img: any) => (
+-              <div key={img.id} className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+-                <img src={img.url} className="w-full h-full object-cover" />
+-              </div>
+-            ))}
++    <main style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "url('/images/apsara-hero-bg.webp') center/cover no-repeat" }}>
++      <Navbar locale={locale} dict={dict.navigation} />
++      
++      <section style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "150px 20px" }}>
++        
++        <div style={{ background: "rgba(15, 8, 8, 0.7)", padding: "60px", borderRadius: "8px", border: "1px solid rgba(175, 155, 125, 0.3)", backdropFilter: "blur(15px)", textAlign: "center", maxWidth: "800px" }}>
++          <div style={{ fontSize: "2rem", color: "var(--gold-glow)", marginBottom: "20px", display: "flex", justifyContent: "center", gap: "10px" }}>
++             <span>✧</span><span>✦</span><span>✧</span>
+           </div>
+-        </div>
+-
+-        {/* Info */}
+-        <div className="flex flex-col">
+-          <h1 className="text-4xl font-bold text-gray-900 mb-2">{product.name}</h1>
+-          <p className="text-sm text-emerald-600 font-medium tracking-wide uppercase mb-6">
+-            {product.category}
++          
++          <h1 style={{ fontFamily: "var(--font-cinzel)", color: "var(--ivory)", fontSize: "2.5rem", letterSpacing: "0.2em", marginBottom: "30px", textTransform: "uppercase" }}>
++            {slug.replace(/-/g, ' ')}
++          </h1>
++          
++          <p style={{ fontFamily: "var(--font-playfair)", color: "var(--ivory)", opacity: 0.8, fontSize: "1.2rem", lineHeight: 1.8, marginBottom: "40px", letterSpacing: "0.05em" }}>
++            {locale === 'fr' 
++              ? "Les énergies de cette relique sont actuellement en cours d'alignement avec les archives de notre temple. Les rituels de présentation seront bientôt achevés pour vous révéler sa véritable aura."
++              : "The energies of this relic are currently being aligned within our temple archives. Presentation rituals will soon be completed to reveal its true aura to you."
++            }
+           </p>
+           
+-          <div className="text-3xl font-light text-gray-900 mb-8 font-mono">
+-            {product.price} {product.currency}
+-          </div>
+-
+-          <div className="prose prose-sm text-gray-600 mb-8 border-t border-b border-gray-100 py-8">
+-            <p>{product.description}</p>
++          <div style={{ fontSize: "0.8rem", letterSpacing: "0.4em", color: "var(--turquoise)", textTransform: "uppercase" }}>
++            {locale === 'fr' ? "Purification en cours" : "Purification in progress"}
+           </div>
++        </div>
+ 
+-          <div className="flex items-center gap-4 mb-8">
+-            <button className="flex-1 bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition-colors">
+-              Add to Cart
+-            </button>
+-          </div>
++      </section>
+ 
+-          <div className="mt-8 pt-8 border-t border-gray-100 text-xs text-gray-400 space-y-2">
+-            <p>Weight: 150g</p>
+-            <p>SKU: {product.slug.toUpperCase()}-{product.id.slice(0, 4)}</p>
+-          </div>
+-        </div>
+-      </div>
+-    </div>
++      <Footer dict={dict.footer} />
++    </main>
+   );
+ }
+diff --git a/src/app/[locale]/products/sutra-of-the-silent-heart/ProductDetail.css b/src/app/[locale]/products/sutra-of-the-silent-heart/ProductDetail.css
+index f2f9f2c..d0fd220 100644
+--- a/src/app/[locale]/products/sutra-of-the-silent-heart/ProductDetail.css
++++ b/src/app/[locale]/products/sutra-of-the-silent-heart/ProductDetail.css
+@@ -29,7 +29,7 @@
+   pointer-events: none;
+ }
+ 
+-.product-hero-content {
++.product-hero-layout {
+   display: grid;
+   grid-template-columns: 1.2fr 1fr;
+   gap: 80px;
+@@ -87,11 +87,19 @@
+   opacity: 0.6;
+   text-transform: uppercase;
+   margin-bottom: 2rem;
+-  display: flex;
++  display: flex; /* Flex permet au point de s'aligner */
+   align-items: center;
+   gap: 10px;
+ }
+ 
++/* Sur mobile on le centre de force par rapport à l'écran */
++@media (max-width: 1100px) {
++  .product-badge {
++    justify-content: center;
++    width: 100%;
++  }
++}
++
+ .product-badge::before {
+   content: "";
+   width: 4px;
+@@ -102,15 +110,50 @@
+ }
+ 
+ .product-title-lux {
++  font-family: var(--font-cinzel), serif;
+   font-size: 4.5rem;
+   line-height: 0.9;
+-  margin-bottom: 3rem;
++  margin-bottom: 1.5rem;
+   font-weight: 700;
+   letter-spacing: -0.02em;
+-  color: var(--ivory);
++  
++  /* Patine Argentée Lumineuse (Idée UX : Métal noble sans noirs) */
++  background: linear-gradient(
++    110deg,
++    #7a7a7a 0%,
++    #b8b1a9 20%,
++    #ffffff 45%,
++    #ffffff 55%,
++    #b8b1a9 80%,
++    #7a7a7a 100%
++  );
++  background-size: 200% auto;
++  -webkit-background-clip: text;
++  background-clip: text;
++  -webkit-text-fill-color: transparent;
++  color: transparent;
++  
++  animation: shinePatina 45s ease-in-out infinite alternate;
+   text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+ }
+ 
++@keyframes shinePatina {
++  0% { background-position: 150% center; }
++  100% { background-position: -150% center; }
++}
++
++.product-intro p {
++
++  font-family: var(--font-playfair), serif;
++  font-size: 1.15rem;
++  line-height: 1.8;
++  color: var(--ivory);
++  opacity: 0.7;
++  margin-bottom: 2rem;
++  letter-spacing: 0.05em;
++  font-weight: 300;
++}
++
+ /* --- VISUAL PANE (CHIAROSCURO) --- */
+ .product-visual-pane {
+   position: relative;
+@@ -176,39 +219,72 @@
+ /* --- PRICE & CTA --- */
+ .price-tag {
+   font-family: var(--font-cinzel), serif;
+-  font-size: 3rem;
+-  margin-bottom: 3.5rem;
+-  color: var(--ivory);
++  font-size: 2.2rem;
++  margin-bottom: 2rem;
++  color: var(--turquoise);
+   opacity: 0.9;
+-  letter-spacing: 0.05em;
++  letter-spacing: 0.1em;
++  text-shadow: 0 0 20px rgba(64, 224, 208, 0.2);
+ }
+ 
+-.cta-button-gold {
++.btn-add-to-relics {
+   position: relative;
+-  width: fit-content;
+-  padding: 1.4rem 5rem;
+-  background: linear-gradient(135deg, #dfc37f 0%, #a27e36 100%);
+-  border: none;
+-  color: #1a0101;
++  width: 100%;
++  max-width: 440px;
++  min-height: 85px;
++  background: rgba(15, 8, 8, 0.6);
++  backdrop-filter: blur(12px);
++  border: 1px solid rgba(175, 155, 125, 0.3);
++  border-radius: 6px;
++  
++  /* Noblesse restaurée : Texte Ivoire lisible et puissant */
++  color: var(--ivory);
+   font-family: var(--font-cinzel), serif;
+   font-weight: 700;
+   text-transform: uppercase;
+-  letter-spacing: 0.4em;
+-  font-size: 0.8rem;
++  letter-spacing: 0.45em;
++  font-size: 0.95rem;
++  
+   cursor: pointer;
+-  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
++  transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
++  margin: 0 auto 1.5rem auto;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  padding: 0 40px;
++  z-index: 1;
++  overflow: hidden;
++  /* Ombre portée pour détacher le texte du motif chargé */
++  text-shadow: 0 4px 15px rgba(0,0,0,1);
+ }
+ 
+-.cta-button-gold:hover {
++.btn-add-to-relics::before {
++  content: "";
++  position: absolute;
++  top: 4px;
++  left: 4px;
++  right: 4px;
++  bottom: 4px;
++  
++  background: url('/images/bouton01.webp') center/contain no-repeat;
++  filter: brightness(0) saturate(100%) invert(70%) sepia(80%) saturate(2000%) hue-rotate(130deg) brightness(1.2);
++  z-index: -1;
++  /* Transformation en texture subtile pour libérer la lecture */
++  opacity: 0.35;
++  transition: opacity 0.5s ease;
++}
++
++.btn-add-to-relics:hover {
+   transform: translateY(-5px);
+-  box-shadow: 
+-    0 30px 60px rgba(0,0,0,0.6),
+-    0 0 30px rgba(229, 193, 88, 0.3);
+-  letter-spacing: 0.45em;
++  background: rgba(22, 12, 12, 0.85);
++}
++
++.btn-add-to-relics:hover::before {
++  opacity: 0.55; /* Le motif s'illumine doucement au survol */
+ }
+ 
+ .shipping-notice {
++
+   margin-top: 1.5rem;
+   font-size: 0.65rem;
+   letter-spacing: 0.3em;
+@@ -372,7 +448,7 @@
+ 
+ /* --- RESPONSIVE --- */
+ @media (max-width: 1100px) {
+-  .product-hero-content {
++  .product-hero-layout {
+     grid-template-columns: 1fr;
+     gap: 60px;
+   }
+@@ -382,8 +458,13 @@
+      align-items: center;
+   }
+   
+-  .product-title {
+-    font-size: 3rem;
++  .product-title-lux {
++    font-size: clamp(2.5rem, 6vw, 4.5rem);
++    line-height: 1;
++  }
++  
++  .quick-specs {
++    margin-top: 40px;
+   }
+ }
+ 
+@@ -395,4 +476,9 @@
+   .premium-bullets {
+      grid-template-columns: 1fr;
+   }
++  
++  .story-heading { font-size: 2rem; }
++  .story-body { font-size: 1.1rem; }
++  .product-hero { padding: 40px 20px; }
++  .price-tag { margin-bottom: 2rem; }
+ }
+diff --git a/src/app/[locale]/products/sutra-of-the-silent-heart/page.tsx b/src/app/[locale]/products/sutra-of-the-silent-heart/page.tsx
+index b3f5bb2..0fa489c 100644
+--- a/src/app/[locale]/products/sutra-of-the-silent-heart/page.tsx
++++ b/src/app/[locale]/products/sutra-of-the-silent-heart/page.tsx
+@@ -6,8 +6,8 @@ import type { Locale } from '@/i18n/locales';
+ import './ProductDetail.css';
+ import { Metadata } from 'next';
+ 
+-export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+-  const { locale } = params;
++export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
++  const { locale } = await params;
+   const dict = await getDictionary(locale);
+   
+   return {
+@@ -19,9 +19,9 @@ export async function generateMetadata({ params }: { params: { locale: Locale }
+ export default async function ShunyataProductPage({
+   params,
+ }: {
+-  params: { locale: Locale };
++  params: Promise<{ locale: Locale }>;
+ }) {
+-  const { locale } = params;
++  const { locale } = await params;
+   const dict = await getDictionary(locale);
+ 
+   const jsonLd = {
+diff --git a/src/app/[locale]/search/page.tsx b/src/app/[locale]/search/page.tsx
+new file mode 100644
+index 0000000..c05cb22
+--- /dev/null
++++ b/src/app/[locale]/search/page.tsx
+@@ -0,0 +1,14 @@
++import { getDictionary } from "@/i18n/get-dictionary";
++import type { Locale } from "@/i18n/locales";
++import UnderConstruction from "@/components/home/UnderConstruction";
++
++export default async function SearchPage({
++  params,
++}: {
++  params: Promise<{ locale: Locale }>;
++}) {
++  const { locale } = await params;
++  const dict = await getDictionary(locale);
++
++  return <UnderConstruction locale={locale} dictNav={dict.navigation} dictFooter={dict.footer} title={dict.navigation.search} />;
++}
+diff --git a/src/components/home/Hero.css b/src/components/home/Hero.css
+index a979c63..cf18ec8 100644
+--- a/src/components/home/Hero.css
++++ b/src/components/home/Hero.css
+@@ -130,22 +130,22 @@
+ 
+ .hero-title {
+   font-family: var(--font-cinzel), serif;
+-  font-size: clamp(2.8rem, 5vw, 4.5rem); /* Taille élastique adaptative : grand écran 4.5rem, sinon se réduit ! */
++  font-size: clamp(2.8rem, 5vw, 4.5rem);
+   font-weight: 700;
+   letter-spacing: 0.25em;
+   margin-bottom: 2rem;
+-  white-space: nowrap; /* VERROUILLAGE ABSOLU : interdiction formelle de passer à la ligne ! */
++  text-transform: uppercase;
+   
+-  /* L'authentique Patine Vivante (Idée UX du client !) */
++  /* NOUVELLE PATINE SACRÉE ULTRA-LUMINEUSE (RELIQUE D'ARGENT) */
+   background: linear-gradient(
+     110deg,
+-    #11100f 0%,
+-    #423d37 20%,
+-    #b8b1a9 40%,
+-    #ffffff 50%,    /* Le point d'éclat lumineux */
+-    #b8b1a9 60%,
+-    #423d37 80%,
+-    #11100f 100%
++    #ffffff 0%,
++    rgba(255, 255, 255, 0.45) 30%,
++    #ffffff 45%,
++    rgba(255, 255, 255, 0.95) 50%, /* Le flash de lumière pur */
++    #ffffff 55%,
++    rgba(255, 255, 255, 0.45) 70%,
++    #ffffff 100%
+   );
+   background-size: 200% auto;
+   -webkit-background-clip: text;
+@@ -153,13 +153,15 @@
+   -webkit-text-fill-color: transparent;
+   color: transparent;
+   
+-  /* Mouvement d'ombre et lumière extrêmement lent et majestueux */
+-  animation: shinePatina 35s ease-in-out infinite alternate;
++  /* FLUX RESPIRANT ACCÉLÉRÉ (ZEN & VIBRANT) */
++  animation: shinePatina 18s ease-in-out infinite alternate;
+   
+-  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
+-  line-height: 1.1;
++  /* RELIEF SUR FOND ROUGE */
++  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95));
++  line-height: 1.25;
+ }
+ 
++
+ @keyframes shinePatina {
+   0% { background-position: 150% center; }
+   100% { background-position: -150% center; }
+diff --git a/src/components/home/UnderConstruction.tsx b/src/components/home/UnderConstruction.tsx
+new file mode 100644
+index 0000000..28b0578
+--- /dev/null
++++ b/src/components/home/UnderConstruction.tsx
+@@ -0,0 +1,44 @@
++import Navbar from "@/components/layout/Navbar";
++import Footer from "@/components/layout/Footer";
++
++interface Props {
++  locale: string;
++  dictNav: any;
++  dictFooter: any;
++  title: string;
++}
++
++export default function UnderConstruction({ locale, dictNav, dictFooter, title }: Props) {
++  return (
++    <main style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "url('/images/apsara-hero-bg.webp') center/cover no-repeat" }}>
++      <Navbar locale={locale} dict={dictNav} />
++      
++      <section style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "150px 20px" }}>
++        
++        <div style={{ background: "rgba(15, 8, 8, 0.7)", padding: "60px", borderRadius: "8px", border: "1px solid rgba(175, 155, 125, 0.3)", backdropFilter: "blur(15px)", textAlign: "center", maxWidth: "800px" }}>
++          <div style={{ fontSize: "2rem", color: "var(--gold-glow)", marginBottom: "20px", display: "flex", justifyContent: "center", gap: "10px" }}>
++             <span>✧</span><span>✦</span><span>✧</span>
++          </div>
++          
++          <h1 style={{ fontFamily: "var(--font-cinzel)", color: "var(--ivory)", fontSize: "2.5rem", letterSpacing: "0.2em", marginBottom: "30px", textTransform: "uppercase" }}>
++            {title}
++          </h1>
++          
++          <p style={{ fontFamily: "var(--font-playfair)", color: "var(--ivory)", opacity: 0.8, fontSize: "1.2rem", lineHeight: 1.8, marginBottom: "40px", letterSpacing: "0.05em" }}>
++            {locale === 'fr' 
++              ? "L'accès à ce sanctuaire est momentanément scellé. Les maîtres-artisans du Temple sont en train de restaurer ces espaces sacrés pour vous offrir une expérience d'une pureté absolue."
++              : "Access to this sanctuary is temporarily sealed. The Temple's master artisans are restoring these sacred spaces to offer you an experience of absolute purity."
++            }
++          </p>
++          
++          <div style={{ fontSize: "0.8rem", letterSpacing: "0.4em", color: "var(--turquoise)", textTransform: "uppercase" }}>
++            {locale === 'fr' ? "Restauration en cours" : "Restoration in progress"}
++          </div>
++        </div>
++
++      </section>
++
++      <Footer dict={dictFooter} />
++    </main>
++  );
++}
+diff --git a/src/components/layout/Footer.tsx b/src/components/layout/Footer.tsx
+index 08bf86e..2b76811 100644
+--- a/src/components/layout/Footer.tsx
++++ b/src/components/layout/Footer.tsx
+@@ -23,16 +23,16 @@ export default function Footer({ dict }: FooterProps) {
+           <div className="footer-nav">
+             <div className="footer-col">
+               <h4 className="footer-h4">{dict.col1}</h4>
+-              <Link href="/about" className="footer-link">{dict.links.rituals}</Link>
+-              <Link href="/rituals" className="footer-link">{dict.links.shrines}</Link>
+-              <Link href="/locations" className="footer-link">{dict.links.journal}</Link>
++              <Link href="#" className="footer-link">{dict.links.rituals}</Link>
++              <Link href="#" className="footer-link">{dict.links.shrines}</Link>
++              <Link href="/fr/journal" className="footer-link">{dict.links.journal}</Link>
+             </div>
+             
+             <div className="footer-col">
+               <h4 className="footer-h4">{dict.col2}</h4>
+-              <Link href="/talismans" className="footer-link">Talismans</Link>
+-              <Link href="/bracelets" className="footer-link">Bracelets</Link>
+-              <Link href="/journal" className="footer-link">Journal</Link>
++              <Link href="#talismans" className="footer-link">Talismans</Link>
++              <Link href="#bracelets" className="footer-link">Bracelets</Link>
++              <Link href="/fr/journal" className="footer-link">Journal</Link>
+             </div>
+           </div>
+         </div>
+diff --git a/src/components/layout/Navbar.css b/src/components/layout/Navbar.css
+index ed94c00..e589888 100644
+--- a/src/components/layout/Navbar.css
++++ b/src/components/layout/Navbar.css
+@@ -1,14 +1,34 @@
+-/* ======================================================== */
+-/* 🛠️ TABLEAU DE BORD : RÉGLAGES DE LA LOUPE 🛠️ */
+-/* Change ces nombres pour modifier la disposition du cercle */
+-/* ======================================================== */
+ :root {
+-  --loupe-zoom: 1.7;
+-  /* Taille par défaut */
+-  --loupe-zoom-hover: 2.3;
+-  /* MEGA ZOOM au survol pour voir les détails ! */
+-  --loupe-descente: 7px;
+-  /* Descente du manche */
++  /* -------------------------------------------------------- */
++  /* 🛠️ TÉLÉCOMMANDE DE PRÉCISION (RÉGLAGES INDIVIDUELS) 🛠️ */
++  /* -------------------------------------------------------- */
++
++  /* 1. Structure Globale */
++  --nav-logo-height: 90px;      /* Taille du logo central */
++  --icon-circle-size: 62px;      /* Diamètre des cercles de verre */
++  --icon-brightness: 2.2;        /* Éclat d'Argent Blanc */
++
++  /* 2. Menu (Ganesh / Sigil Gauche) */
++  --menu-zoom: 1.4;
++  --menu-x: 0px;
++  --menu-y: 0px;
++
++  /* 3. Loupe (Recherche) */
++  --loupe-zoom: 2.0;
++  --loupe-x: 0px;
++  --loupe-y: 48%;
++
++  /* 4. Balance (Compte/Balance) */
++  --account-zoom: 1.4;
++  --account-x: 0px;
++  --account-y: 0px;
++
++  /* 5. Panier (Relique Droite) */
++  --cart-zoom: 1.4;
++  --cart-x: 0px;
++  --cart-y: 0px;
++
++  /* -------------------------------------------------------- */
+ }
+ 
+ /* -------------------------------------------------------- */
+@@ -30,9 +50,11 @@
+ 
+ .navbar.scrolled {
+   height: 80px;
+-  background: rgba(10, 1, 1, 0.95);
+-  backdrop-filter: blur(15px);
+-  border-bottom: 1px solid rgba(64, 224, 208, 0.1);
++  background: rgba(12, 5, 5, 0.45);
++  backdrop-filter: blur(20px);
++  -webkit-backdrop-filter: blur(20px); /* Compatibilité Safari Luxe */
++  border-bottom: 1px solid rgba(175, 155, 125, 0.12); /* Filet Or Antique Très Fin */
++  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+ }
+ 
+ .navbar-container {
+@@ -156,66 +178,206 @@
+   color: var(--turquoise);
+ }
+ 
+-/* === ICÔNES SPÉCIFIQUES & LOGO === */
++:root {
++  --loupe-zoom: 2.3; /* Zoom massif permanent sur la tête */
++  --loupe-zoom-hover: 2.5;
++  --loupe-descente: 5px; /* Ajustement pour pas que le manche ne monte trop */
++}
++
++/* === CONSOLE DE MIXAGE INDIVIDUELLE (TRANSFORMS) === */
++
+ .icon-btn {
+-  background: none;
+-  border: none;
++  /* ÉTANCHÉITÉ TOTALE (MODE OPAQUE) : Plus aucune fuite du fond rouge */
++  background-color: #1eb4aa; /* Fondation Turquoise MASSIVE et OPAQUE */
++  background-image: radial-gradient(
++    circle at center,
++    rgba(97, 12, 12, 1) 0%,     /* Rouge Œil de Bœuf : Sombre, Profond, Noble */
++    rgba(97, 12, 12, 0.95) 55%, 
++    transparent 80%              /* On laisse voir la fondation turquoise pure sur les bords */
++  );
++
++
++  backdrop-filter: blur(15px);
++  -webkit-backdrop-filter: blur(15px);
++  
++  /* RELIEF DU SOCLE & ÉCHO DE GEMME (AURA DIFFUSE) */
++  border: 1.5px solid rgba(64, 224, 208, 0.6);
++  box-shadow: 
++    inset 0 0 15px rgba(0, 0, 0, 0.3),
++    0 0 15px rgba(64, 224, 208, 0.25), /* L'écho turquoise qui ancre le bijou */
++    0 4px 15px rgba(0, 0, 0, 0.4);      /* Ombre de poids */
++
++  
++  border-radius: 50%;
+   cursor: pointer;
+-  padding: 5px;
++  padding: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
++  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
++  width: var(--icon-circle-size);
++  height: var(--icon-circle-size);
++  position: relative;
++  z-index: 1001; 
+ }
+ 
++
++
++/* Gestion du Manche Loupe */
++.icon-btn[aria-label="Search"] { overflow: visible !important; }
++.icon-btn:not([aria-label="Search"]) { overflow: hidden; }
++
+ .nav-icon-svg {
+-  width: 44px;
+-  height: 44px;
+-  /* REHAUSSEMENT COULEUR/LUMINEUX: Beaucoup plus blanc et moins gris/triste ! */
+-  filter: invert(1) brightness(1.35) drop-shadow(0 0 5px rgba(253, 250, 241, 0.3));
+-  opacity: 0.95;
+-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Animation très douce et "premium" */
++  width: 34px;
++  height: 34px;
++  /* PATINE ARGENT BLANC (FLUX CONTINU ALTERNÉ) */
++  background: linear-gradient(
++    90deg,
++    #ffffff 0%,
++    rgba(255, 255, 255, 0.4) 30%,
++    #ffffff 45%,
++    rgba(255, 255, 255, 0.95) 50%,
++    #ffffff 55%,
++    #ffffff 100%
++  );
++  background-size: 200% auto;
++  animation: shinePatina 12s ease-in-out infinite alternate; /* Aller-retour sans saut */
++
++  -webkit-mask-size: contain;
++  mask-size: contain;
++  -webkit-mask-repeat: no-repeat;
++  mask-repeat: no-repeat;
++  -webkit-mask-position: center;
++  mask-position: center;
++
++  /* MICRO-RELIEF CISELÉ (Z-DEPTH) : Combinaison Éclat + Ombre de relief */
++  filter: 
++    drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5)) /* Ombre de décollage de la pièce */
++    drop-shadow(0 0 5px rgba(255, 255, 255, 0.4)); /* Lueur de nacre */
++  
++  transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
++  content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
++}
++
++
++/* 1. Menu (Ganesh / Sigil Gauche) */
++.navbar-left-mobile button:nth-child(1) .nav-icon-svg {
++  -webkit-mask-image: url('/images/menu.svg');
++  mask-image: url('/images/menu.svg');
++  background: linear-gradient(110deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
++  background-size: 200% auto;
++  transform: translate(var(--menu-x), var(--menu-y)) scale(var(--menu-zoom));
++  animation-duration: 13s;
++  animation-delay: -2s;
++}
++
++/* 2. Loupe (Recherche) */
++.nav-icon-svg.icon-loupe {
++  -webkit-mask-image: url('/images/loupe.svg');
++  mask-image: url('/images/loupe.svg');
++  background: linear-gradient(140deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
++  background-size: 200% auto;
++  transform: translate(var(--loupe-x), var(--loupe-y)) scale(var(--loupe-zoom));
++  animation-duration: 15s;
++  animation-delay: -5s;
+ }
+ 
+-/* La loupe utilise les variables du tableau de bord tout en haut de fichier */
+-/* On se base UNIQUEMENT sur son cercle avec un scale */
+-.nav-icon-svg.icon-loupe {
+-  transform: scale(var(--loupe-zoom)) translateY(var(--loupe-descente));
+-  transform-origin: center;
++/* 3. Balance (Compte) */
++.navbar-right-mobile button:nth-child(1) .nav-icon-svg {
++  -webkit-mask-image: url('/images/compte.svg');
++  mask-image: url('/images/compte.svg');
++  background: linear-gradient(210deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
++  background-size: 200% auto;
++  transform: translate(var(--account-x), var(--account-y)) scale(var(--account-zoom));
++  animation-duration: 17s;
++  animation-delay: -8s;
++}
++
++/* 4. Panier (Relique Droite) */
++.navbar-right-mobile button:nth-child(2) .nav-icon-svg {
++  -webkit-mask-image: url('/images/panier.svg');
++  mask-image: url('/images/panier.svg');
++  background: linear-gradient(250deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 30%, #ffffff 45%, rgba(255, 255, 255, 0.95) 50%, #ffffff 55%, #ffffff 100%);
++  background-size: 200% auto;
++  transform: translate(var(--cart-x), var(--cart-y)) scale(var(--cart-zoom));
++  animation-duration: 14s;
++  animation-delay: -3s;
++}
++
++/* --- INTERACTIONS PRÉCISES (L'ÉVEIL DES MÉDAILLONS) --- */
++
++.icon-btn:hover {
++  border-color: rgba(64, 224, 208, 0.95);
++  box-shadow: 
++    inset 0 0 20px rgba(0, 0, 0, 0.35),
++    0 0 25px rgba(64, 224, 208, 0.4); /* Écho turquoise intensifié */
++  transform: translateY(-5px) scale(1.06) rotate(1deg); /* Micro-vibration de vie */
+ }
+ 
+-/* 🔎 ZOOM généralisé au passage de la souris pour Révéler les Détails ! */
++
+ .icon-btn:hover .nav-icon-svg {
+-  opacity: 1;
+-  /* Effet "Sacred Glow": halo turquoise lumineux */
+-  filter: invert(1) brightness(1.6) drop-shadow(0 0 15px rgba(64, 224, 208, 0.7));
+-  transform: scale(1.35); /* MEGA ZOOM */
++  /* Seul l'argent s'éveille avec une intensité solaire */
++  filter: brightness(1.5) contrast(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
++  transition: all 0.4s ease;
+ }
+ 
+-/* Redéfinition du hover exclusif sur la loupe pour combiner le translateY et le mega zoom variables */
+-.icon-btn:hover .nav-icon-svg.icon-loupe {
+-  transform: scale(var(--loupe-zoom-hover)) translateY(var(--loupe-descente));
++
++@keyframes shinePatinaComplex {
++  0% { background-position: 0% 50%, 100% 50%, 50% 100%; }
++  100% { background-position: 100% 50%, 0% 50%, 50% 0%; }
+ }
+ 
+ .nav-logo-img {
+-  height: 80px; /* Logo central rendu plus massif et majestueux */
++  height: var(--nav-logo-height);
+   width: auto;
+-  filter: invert(1) brightness(1.2) drop-shadow(0 0 10px rgba(170, 158, 146, 0.4));
+-  transition: transform 0.6s ease;
++  min-height: var(--nav-logo-height);
++  
++  background: linear-gradient(
++    90deg,
++    #ffffff 0%,
++    rgba(255, 255, 255, 0.4) 30%,
++    #ffffff 45%,
++    rgba(255, 255, 255, 0.95) 50%,
++    #ffffff 55%,
++    rgba(255, 255, 255, 0.4) 70%,
++    #ffffff 100%
++  );
++  background-size: 200% auto;
++  animation: shinePatina 19s ease-in-out infinite alternate; /* Aller-retour fluide */
++  animation-delay: -6s;
++
++  /* On utilise le logo comme un moule pour cette lumière pure */
++  -webkit-mask-image: url('/images/logo01.svg');
++  mask-image: url('/images/logo01.svg');
++  -webkit-mask-size: contain;
++  mask-size: contain;
++  -webkit-mask-repeat: no-repeat;
++  mask-repeat: no-repeat;
++  -webkit-mask-position: center;
++  mask-position: center;
++
++  /* Éclat spectral additionnel */
++  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
++  transition: all 0.6s ease;
++  content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+ }
+ 
+-/* Suppression de la vieille ligne de code sans effet qui causait une erreur "Empty ruleset" */
++
++
++
+ .navbar-logo-absolute:hover .nav-logo-img {
+-  transform: scale(1.1); /* Joli pulse pour le logo principal aussi ! */
++  transform: scale(1.05);
+ }
+ 
+ .nav-logo-glow {
+   position: absolute;
+-  width: 90px;
+-  height: 90px;
+-  background: radial-gradient(circle, rgba(170, 158, 146, 0.2) 0%, transparent 60%);
+-  filter: blur(8px);
++  width: calc(var(--nav-logo-height) * 1.5);
++  height: calc(var(--nav-logo-height) * 1.5);
++  background: radial-gradient(circle, rgba(160, 140, 110, 0.35) 0%, transparent 60%);
++  filter: blur(15px);
+   z-index: -1;
+-  opacity: 0.8;
++  opacity: 1;
++  animation: navGlowPulse 10s ease-in-out infinite;
+ }
+ 
+ /* === MAGICAL CENTRAL PROJECTION (HOLOGRAM) === */
+diff --git a/src/dictionaries/en.json b/src/dictionaries/en.json
+index d82bc15..c45ba82 100644
+--- a/src/dictionaries/en.json
++++ b/src/dictionaries/en.json
+@@ -58,7 +58,7 @@
+       "intro": "A companion for the modern seeker. This talisman serves as a silent anchor, a physical manifestation of inner stillness through perpetual motion.",
+       "story": {
+         "title": "The Sacred Script",
+-        "body": "Forged from high-grade silver, the outer rim is meticulously engraved with the ancient characters of the Heart Sutra—the cornerstone of Buddhist wisdom. The script wraps around the piece like a protective veil, carrying the vibration of centuries of ritual chanting.",
++        "body": "Crafted with a premium silver finish, the outer rim is meticulously engraved with the ancient characters of the Heart Sutra—the cornerstone of Buddhist wisdom. The script wraps around the piece like a protective veil, carrying the vibration of centuries of ritual chanting.",
+         "core_title": "The Rotating Core",
+         "core_body": "At its center lies the serene countenance of the Buddha, designed with a precision mechanical mechanism. This movement mirrors the turning of the Wheel of Dharma, providing a tactile focus for mindfulness.",
+         "presence_title": "Ancient Presence",
+diff --git a/src/dictionaries/fr.json b/src/dictionaries/fr.json
+index f4214ce..e699cc6 100644
+--- a/src/dictionaries/fr.json
++++ b/src/dictionaries/fr.json
+@@ -58,7 +58,7 @@
+       "intro": "Un compagnon pour le chercheur moderne. Ce talisman sert d'ancre silencieuse, une manifestation physique du calme intérieur par le mouvement perpétuel.",
+       "story": {
+         "title": "L'Écrit Sacré",
+-        "body": "Forgé dans un argent de haute qualité, le bord extérieur est méticuleusement gravé des caractères anciens du Sutra du Cœur—la pierre angulaire de la sagesse bouddhiste. L'écrit s'enroule autour de la pièce comme un voile protecteur, portant la vibration de siècles de chants rituels.",
++        "body": "Magnifié par une finition argentée de haute qualité, le bord extérieur est méticuleusement gravé des caractères anciens du Sutra du Cœur—la pierre angulaire de la sagesse bouddhiste. L'écrit s'enroule autour de la pièce comme un voile protecteur, portant la vibration de siècles de chants rituels.",
+         "core_title": "Le Noyau Rotatif",
+         "core_body": "En son centre se trouve le visage serein du Bouddha, conçu avec un mécanisme de précision. Ce mouvement reflète la mise en mouvement de la Roue du Dharma, offrant un point de focalisation tactile pour la pleine conscience.",
+         "presence_title": "Présence Ancestrale",

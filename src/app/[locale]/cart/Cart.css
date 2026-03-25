@@ -1,0 +1,186 @@
+.cart-page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('/images/apsara-hero-bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  color: var(--ivory);
+  padding-top: 100px;
+  position: relative;
+}
+
+.cart-hero {
+  position: relative;
+  width: 100%;
+  padding: 100px 5% 50px;
+  text-align: center;
+  z-index: 10;
+}
+
+.cart-mist {
+  position: absolute;
+  top: 0; left: 50%; width: 90%; height: 400px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(64, 224, 208, 0.05) 0%, transparent 60%);
+  filter: blur(80px);
+  z-index: -1;
+}
+
+.cart-title {
+  font-family: var(--font-cinzel), serif;
+  font-size: 3rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 1.5rem;
+  color: var(--ivory);
+}
+
+.cart-subtitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.2rem;
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+  color: var(--ivory);
+}
+
+.cart-container-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 5% 150px;
+}
+
+.cart-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 80px;
+}
+
+.cart-item-row {
+  display: flex;
+  gap: 40px;
+  background: transparent;
+  padding: 30px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 20px;
+  transition: all 0.4s ease;
+}
+
+.cart-item-row:hover {
+  border-bottom-color: rgba(64, 224, 208, 0.2);
+}
+
+.cart-item-image {
+  width: 150px;
+  height: 180px;
+  background: #000;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cart-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cart-item-name {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  color: var(--ivory);
+  text-decoration: none;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.cart-item-name:hover {
+  color: var(--turquoise);
+}
+
+.cart-item-price {
+  font-family: var(--font-cinzel), serif;
+  color: var(--turquoise);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cart-remove-btn {
+  background: none;
+  border: none;
+  color: var(--ivory);
+  opacity: 0.6;
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  width: fit-content;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+}
+
+.cart-remove-btn:hover {
+  opacity: 1;
+  color: var(--turquoise);
+}
+
+.summary-box {
+  background: transparent;
+  padding: 20px 0;
+  position: sticky;
+  top: 140px;
+}
+
+.summary-box h3 {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.25em;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-playfair), serif;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.summary-line.total-price {
+  color: var(--ivory);
+  font-size: 1.4rem;
+  font-family: var(--font-cinzel), serif;
+  margin-top: 1.5rem;
+}
+
+.summary-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 1.5rem 0;
+}
+
+/* --- BUTTONS --- */
+.checkout-btn {
+  /* Inherits from .btn-sacred via globals.css */
+  margin: 2rem auto 0 !important;
+}
+
+.back-to-shop {
+  /* Inherits most looks from .btn-sacred, specific overrides here if needed */
+  margin: 2rem auto 0 !important;
+}
+
+@media (max-width: 1000px) {
+  .cart-content-grid {
+    grid-template-columns: 1fr;
+  }
+}

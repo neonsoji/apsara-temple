@@ -1,0 +1,2 @@
+16925e889975f27004e17fb5760a43bbf5aa969a:src/app/[locale]/products/sutra-of-the-silent-heart/ProductDetail.css:  background: url('/images/bouton01.webp') center/contain no-repeat;
+029ba12370d2b953c9db4a4e5eaf76e20519d4fd:src/app/[locale]/products/sutra-of-the-silent-heart/ProductDetail.css:  background: url('/images/bouton01.webp') center/contain no-repeat;

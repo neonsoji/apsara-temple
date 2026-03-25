@@ -95,5 +95,65 @@ export const articles: Record<string, any> = {
 
 <p class="article-outro">By understanding the profound meaning of a buddha pendant, you elevate it from an object to an instrument of awakening. You are no longer wearing an ornament: you have adopted a guardian.</p>
     `
+  },
+  
+  // --- FRENCH ARTICLES ---
+  'signification-sutra-du-coeur': {
+    locale: 'fr',
+    seoTitle: 'Le Sutra du Cœur : Signification et Sagesse | APSARA TEMPLE',
+    metaDescription: 'Comprendre le Sutra du Cœur (Prajnaparamita), le texte fondamental de la vacuité bouddhiste et son importance sur nos talismans.',
+    tag: 'Textes Sacrés',
+    readTime: '8 min de lecture',
+    title: 'Le Sutra du Cœur : L\'Essence de la Vacuité',
+    bodyHtml: `
+      <p class="article-lead">Le Sutra du Cœur est le cœur battant de la sagesse bouddhiste. En seulement 260 caractères, il condense l'enseignement le plus profond sur la nature de la réalité.</p>
+      <h2>Le Texte de la Grande Sagesse</h2>
+      <p>Aussi appelé Prajnaparamita Hridaya, ce texte est récité chaque jour dans les monastères du monde entier. Il nous enseigne que "la forme est vacuité, et la vacuité est forme".</p>
+      <h2>Pourquoi le porter ?</h2>
+      <p>Porter le Sutra du Cœur sur une relique rotative permet d'harmoniser son esprit avec cette vérité universelle. C'est un rappel constant que rien n'est permanent et que tout est lié.</p>
+    `
+  },
+  'pourquoi-porter-talisman-spirituel': {
+    locale: 'fr',
+    tag: 'Pratique Rituelle',
+    readTime: '6 min de lecture',
+    title: 'Pourquoi Porter un Talisman au Quotidien ?',
+    bodyHtml: `<p>Un talisman est un bouclier mental. Il nous aide à rester ancrés dans nos intentions sacrées...</p>`
+  },
+  'symboles-bouddhistes-protection': {
+    locale: 'fr',
+    tag: 'Sagesse Ancienne',
+    readTime: '10 min de lecture',
+    title: 'Symboles et Protection',
+    bodyHtml: `<p>Les symboles sacrés agissent comme des résonateurs énergétiques...</p>`
+  },
+
+  // --- ENGLISH ARTICLES ---
+  'heart-sutra-meaning': {
+    locale: 'en',
+    seoTitle: 'Heart Sutra Meaning and Wisdom | APSARA TEMPLE',
+    metaDescription: 'Understand the Heart Sutra (Prajnaparamita), the fundamental text of Buddhist emptiness and its importance on our talismans.',
+    tag: 'Sacred Texts',
+    readTime: '8 min read',
+    title: 'The Heart Sutra: Essence of Emptiness',
+    bodyHtml: `
+      <p class="article-lead">The Heart Sutra is the beating heart of Buddhist wisdom. In just a few words, it condenses the deepest teaching on reality.</p>
+      <h2>The Text of Great Wisdom</h2>
+      <p>Also known as Prajnaparamita Hridaya, this text teaches us that "form is emptiness, and emptiness is form".</p>
+    `
+  },
+  'why-wear-spiritual-talisman': {
+    locale: 'en',
+    tag: 'Ritual Practice',
+    readTime: '6 min read',
+    title: 'Why Wear a Talisman Every Day?',
+    bodyHtml: `<p>A talisman is a mental shield. It helps us stay grounded in our sacred intentions...</p>`
+  },
+  'buddhist-protection-symbols': {
+    locale: 'en',
+    tag: 'Ancient Wisdom',
+    readTime: '10 min read',
+    title: 'Buddhist Symbols & Protection',
+    bodyHtml: `<p>Sacred symbols act as energetic resonators...</p>`
   }
 };

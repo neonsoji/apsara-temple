@@ -1,0 +1,143 @@
+.account-page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('/images/apsara-hero-bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  color: var(--ivory);
+  padding-top: 100px;
+  position: relative;
+}
+
+.account-hero {
+  position: relative;
+  width: 100%;
+  padding: 100px 5% 50px;
+  text-align: center;
+  z-index: 10;
+}
+
+.account-mist {
+  position: absolute;
+  top: 0; left: 50%; width: 90%; height: 400px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(160, 140, 110, 0.08) 0%, transparent 60%);
+  filter: blur(80px);
+  z-index: -1;
+}
+
+.account-title {
+  font-family: var(--font-cinzel), serif;
+  font-size: 3rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 2rem;
+  color: var(--ivory);
+}
+
+.account-subtitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.1rem;
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.login-section {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 60px 20px 150px;
+}
+
+.login-box {
+  width: 100%;
+  background: rgba(253, 250, 241, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(175, 155, 125, 0.25);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  padding: 0;
+}
+
+.login-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.login-tab {
+  background: none;
+  border: none;
+  padding: 1.5rem;
+  font-family: var(--font-cinzel), serif;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.login-tab.active {
+  color: var(--turquoise);
+  background: rgba(64, 224, 208, 0.05);
+  border-bottom: 2px solid var(--turquoise);
+}
+
+.login-form {
+  padding: 40px;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  opacity: 0.6;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.form-group input {
+  width: 100%;
+  background: rgba(30, 0, 0, 0.2);
+  border: 1px solid rgba(175, 155, 125, 0.15);
+  padding: 1.1rem;
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.95rem;
+  color: var(--ivory);
+  letter-spacing: 0.15em;
+  transition: all 0.5s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--turquoise);
+}
+
+.login-submit {
+  /* On hérite de .btn-sacred via le JSX */
+  margin-top: 10px;
+}
+
+.login-submit:hover {
+  background: #fff;
+  box-shadow: 0 0 30px rgba(64, 224, 208, 0.3);
+}
+
+.forgot-pass {
+  text-align: center;
+  margin-top: 2rem;
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.forgot-pass:hover {
+  opacity: 0.8;
+}

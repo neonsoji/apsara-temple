@@ -12,9 +12,9 @@ export default function Hero({ dict }: HeroProps) {
   return (
     <section className="hero" style={{ 
       /* Valeurs premium forgées par le client via l'ancienne télécommande */
-      '--tapisserie-luminosite': '40%',
-      '--tapisserie-opacite': '0.20',
-      '--tapisserie-saturation': '6000%'
+      '--tapisserie-luminosite': '65%',
+      '--tapisserie-opacite': '0.45',
+      '--tapisserie-saturation': '500%'
     } as React.CSSProperties}>
       
       {/* Tapisserie Vivante 4.0 : 6 zones fixes asynchrones, respiration pure sans mouvement */}

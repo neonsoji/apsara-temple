@@ -1,0 +1,192 @@
+/* =============================================
+   APSARA TEMPLE — LEGAL PAGES
+   Design luxe / sobre / lisible
+   ============================================= */
+
+.legal-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('/images/apsara-hero-bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  color: var(--ivory);
+  position: relative;
+}
+
+.legal-page {
+  position: relative;
+  z-index: 10;
+  padding: 140px 0 80px;
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  color: rgba(245, 235, 215, 0.9);
+}
+
+.legal-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Header */
+.legal-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.legal-label {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  color: rgba(64, 224, 208, 0.75);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.legal-title {
+  /* On hérite de .title-sacred via le JSX */
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 1.5rem;
+}
+
+.legal-accent {
+  color: rgba(64, 224, 208, 0.9);
+}
+
+.legal-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(64, 224, 208, 0.6), transparent);
+  margin: 0 auto;
+}
+
+/* Content */
+.legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.legal-section {
+  border-left: 1px solid rgba(64, 224, 208, 0.2);
+  padding-left: 1.5rem;
+}
+
+.legal-section h2 {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(64, 224, 208, 0.85);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.legal-section p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: rgba(235, 220, 195, 0.82);
+  margin-bottom: 0.85rem;
+}
+
+.legal-section p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.legal-section ul li {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(235, 220, 195, 0.78);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.legal-section ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: rgba(64, 224, 208, 0.5);
+  font-size: 0.8rem;
+}
+
+.legal-section a {
+  color: rgba(64, 224, 208, 0.85);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(64, 224, 208, 0.3);
+  transition: all 0.3s ease;
+}
+
+.legal-section a:hover {
+  color: rgba(64, 224, 208, 1);
+  border-bottom-color: rgba(64, 224, 208, 0.7);
+}
+
+/* Table livraison */
+.legal-table {
+  margin: 1.2rem 0;
+  border: 1px solid rgba(64, 224, 208, 0.15);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.legal-table-row {
+  display: flex;
+  gap: 1rem;
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid rgba(64, 224, 208, 0.1);
+}
+
+.legal-table-row:last-child {
+  border-bottom: none;
+}
+
+.legal-table-label {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(245, 235, 215, 0.6);
+  text-transform: uppercase;
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+.legal-table-value {
+  font-size: 0.95rem;
+  color: rgba(235, 220, 195, 0.85);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .legal-page {
+    padding: 120px 0 60px;
+  }
+
+  .legal-container {
+    padding: 0 1.25rem;
+  }
+
+  .legal-section {
+    padding-left: 1rem;
+  }
+
+  .legal-table-row {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .legal-table-label {
+    min-width: unset;
+    font-size: 0.7rem;
+  }
+}
