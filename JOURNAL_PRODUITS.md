@@ -126,18 +126,16 @@ Fichier `src/dictionaries/en.json` → section `products.names` :
 
 ## 🔄 Historique des sessions
 
-### 26 mars 2026
-- ✅ Intégration **Bracelet Fu** (#10) — 1 image, altText SEO
-- ✅ Intégration **Bracelet Pièce de Vie** (#11) — 2 images (bois + poignet)
-- ✅ Intégration **Bracelet Bagua de Protection** (#12) — 1 image, storytelling enrichi
-- ✅ Création du composant `ProductImageGallery` (carousel auto + vignettes + dots)
-- ✅ **Système de détection automatique** des images (`getProductImages.ts`) — plus besoin de renseigner `images[]` manuellement, il suffit de déposer `nom2.webp`, `nom3.webp` dans le dossier
-- ✅ Mise en place du champ `altText` bilingue sur toutes les nouvelles fiches
-- ✅ Section storytelling rendue dynamique (vraie description produit par page)
-- ✅ Correction du path image Bagua (`/images/products/bracelets/` au lieu de `/images/`)
-- ✅ Journal de suivi `JOURNAL_PRODUITS.md` créé
-
----
+### 26 mars 2026 (Session 2 — Audit & Production)
+- ✅ **Finalisation PayPal Live** : Basculement réussi du Sandbox vers la production réelle (Compte Fujuki).
+- ✅ **Audit de Sécurité** : Nettoyage complet des logs, scan de secrets, et sécurisation des API Routes.
+- ✅ **Audit SEO & Rayonnement** :
+    - Création du `src/middleware.ts` : Suppression des chaînes de redirection et établissement du domaine canonique (non-www).
+    - Mise en place de `robots.ts` et `sitemap.ts` pour guider Google à travers le sanctuaire.
+    - Métadonnées dynamiques : Configuration de `generateMetadata` pour chaque produit spécifique.
+- ✅ **Audit de Performance (Vitesse)** :
+    - Optimisation des images : Passage au composant `next/image` (WebP, Priority, Responsive) pour la Grille, le Hero et la Galerie.
+    - Allègement global : Suppression des polices inutiles (`Geist`) et rapatriement local des textures de grain et de brume (réduction des requêtes externes).
 
 ## 📐 Règles légales à respecter
 

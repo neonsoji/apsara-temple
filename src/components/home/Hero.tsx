@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import './Hero.css';
 
 interface HeroProps {
@@ -58,11 +59,14 @@ export default function Hero({ dict }: HeroProps) {
 
         {/* VISUAL COMPONENT (À DROITE MÊME SUR MOBILE) */}
         <div className="hero-visual right-visual">
-          <div className="talisman-box">
+          <div className="talisman-box" style={{ position: 'relative' }}>
              <div className="talisman-glow"></div>
-             <img 
+             <Image 
                src="/images/talisman.webp" 
                alt="Sacred Talisman" 
+               width={500}
+               height={500}
+               priority
                className="hero-talisman animated"
              />
           </div>

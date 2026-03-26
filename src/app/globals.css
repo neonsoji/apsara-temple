@@ -82,7 +82,7 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  background: url("/images/noise.svg");
   opacity: 0.08; /* Ultra discret pour ne pas ruiner les photos */
   pointer-events: none;
   z-index: 1; /* Il vit en fond, sans JAMAIS recouvrir les photos du Product Grid ! */
@@ -115,7 +115,7 @@ body::after {
 .mist-layer {
   position: fixed;
   inset: 0;
-  background: url("https://www.transparenttextures.com/patterns/asfalt-light.png"); /* Placeholder for mist texture */
+  background: url("/images/mist.png");
   opacity: 0.05;
   pointer-events: none;
   z-index: 1;

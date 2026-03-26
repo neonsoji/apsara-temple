@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -8,6 +9,41 @@ import { notFound } from "next/navigation";
 import AddToCartButton from "@/components/product/AddToCartButton";
 import ProductImageGallery from "@/components/product/ProductImageGallery";
 import './ProductDetail.css';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const product = getProductBySlug(slug);
+
+  if (!product) {
+    return {
+      title: "Produit non trouvé | APSARA TEMPLE",
+    };
+  }
+
+  const name = product.names[locale];
+  const description = product.descriptions[locale];
+
+  return {
+    title: `${name} | APSARA TEMPLE`,
+    description: description.substring(0, 160) + "...",
+    openGraph: {
+      title: `${name} | APSARA TEMPLE`,
+      description: description.substring(0, 160) + "...",
+      images: [
+        {
+          url: product.image,
+          width: 800,
+          height: 800,
+          alt: name,
+        },
+      ],
+    },
+  };
+}
 
 export default async function ProductPage({
   params,

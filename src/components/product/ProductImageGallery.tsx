@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect, useCallback } from 'react';
 
 interface ProductImageGalleryProps {
@@ -42,7 +43,14 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
     return (
       <div className="main-image-wrapper">
         <div className="image-aura" />
-        <img src={images[0]} alt={alt} className="main-product-image" />
+        <Image 
+          src={images[0]} 
+          alt={alt} 
+          width={800} 
+          height={800} 
+          priority 
+          className="main-product-image" 
+        />
       </div>
     );
   }
@@ -56,9 +64,12 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
         className="gallery-main"
         style={{ opacity: isAnimating ? 0 : 1 }}
       >
-        <img
+        <Image
           src={images[current]}
           alt={`${alt} — ${current + 1}`}
+          width={800}
+          height={800}
+          priority
           className="main-product-image"
         />
       </div>
@@ -92,7 +103,12 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
             onClick={() => goTo(i)}
             aria-label={`Vignette ${i + 1}`}
           >
-            <img src={src} alt={`${alt} vignette ${i + 1}`} />
+            <Image 
+              src={src} 
+              alt={`${alt} vignette ${i + 1}`} 
+              width={100} 
+              height={100} 
+            />
           </button>
         ))}
       </div>

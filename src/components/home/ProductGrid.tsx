@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { products } from '@/lib/products';
 import './ProductGrid.css';
@@ -35,14 +36,14 @@ export default function ProductGrid({ category, label, title, accentTitle, dict,
               <div className="card-ornament top-left">✧</div>
               <div className="card-ornament top-right">✧</div>
               
-              <div className="product-image-box">
-                <img 
+              <div className="product-image-box" style={{ position: 'relative', overflow: 'hidden' }}>
+                <Image 
                   src={relic.image} 
                   alt={relic.altText?.[locale as 'fr'|'en'] || relic.names[locale as 'fr'|'en']}
-                  onError={(e) => {
-                    e.currentTarget.src = "/images/talisman.webp";
-                    e.currentTarget.style.opacity = "0.3";
-                  }}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="product-image-core"
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
               
