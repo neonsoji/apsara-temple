@@ -42,10 +42,22 @@ export default function CartPage({ params }: { params: any }) {
                           {item.price} 
                         </p>
                         <div className="cart-quantity-controls" style={{ display: 'flex', alignItems: 'center', gap: '15px', background: 'rgba(255,255,255,0.05)', padding: '5px 15px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.1)' }}>
-  <button onClick={() => updateQuantity(item.id, item.quantity - 1)} style={{ background: 'none', border: 'none', color: 'var(--ivory)', fontSize: '1.2rem', cursor: 'pointer' }}>−</button>
-  <span style={{ color: 'var(--ivory)', fontSize: '1.1rem', fontWeight: 'bold' }}>{item.quantity}</span>
-  <button onClick={() => updateQuantity(item.id, item.quantity + 1)} style={{ background: 'none', border: 'none', color: 'var(--ivory)', fontSize: '1.2rem', cursor: 'pointer' }}>+</button>
-</div>
+                          <button onClick={() => updateQuantity(item.id, item.quantity - 1)} style={{ background: 'none', border: 'none', color: 'var(--ivory)', fontSize: '1.2rem', cursor: 'pointer' }}>−</button>
+                          <span style={{ color: 'var(--ivory)', fontSize: '1.1rem', fontWeight: 'bold' }}>{item.quantity}</span>
+                          <button 
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)} 
+                            disabled={item.quantity >= item.stock}
+                            style={{ 
+                              background: 'none', 
+                              border: 'none', 
+                              color: item.quantity >= item.stock ? 'rgba(255,255,255,0.1)' : 'var(--ivory)', 
+                              fontSize: '1.2rem', 
+                              cursor: item.quantity >= item.stock ? 'not-allowed' : 'pointer' 
+                            }}
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                       <button 
                         className="cart-remove-btn"

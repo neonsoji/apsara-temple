@@ -46,6 +46,7 @@ export default function SearchPage({ params }: { params: any }) {
               key={product.id}
               className="search-result-card"
             >
+              <div className="btn-aura"></div>
               <div className="result-image-box">
                 <img src={product.image} alt={product.names[locale as 'fr'|'en']} />
               </div>

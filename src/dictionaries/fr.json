@@ -43,6 +43,8 @@
   "products": {
     "available": "En attente de son chercheur",
     "preorder": "En attente de son chercheur",
+    "out_of_stock": "Momentanément hors du Temple",
+    "low_stock": "Plus que {count} reliques disponibles",
     "claim": "S'unir à cette Relique",
     "ritual_notice": "Disponible pour une union rituelle immédiate",
     "names": {
@@ -52,9 +54,15 @@
       "pixiu-imperial-seal": "PIXIU : LE SCEAU IMPÉRIAL",
       "woofo-silent-shield": "WOOFO : LE BOUCLIER SILENCIEUX",
       "pixiu-two-faces-fortune": "PIXIU : LES DEUX VISAGES DE LA FORTUNE",
+      "koi-flow-abundance-red-string": "KOI — BRACELET CORDON ROUGE FLUX D’ABONDANCE",
+      "koi-balance-red-turquoise": "KOI D'ÉQUILIBRE — PERSÉVÉRANCE & MAÎTRISE",
+      "koi-transformation-red-pink": "KOI DE TRANSFORMATION — ÉNERGIE & OUVERTURE",
       "venerable-talisman": "TALISMAN VÉNÉRABLE",
       "sacred-bracelet": "BRACELET SACRÉ",
-      "ancient-lotus-ring": "BAGUE LOTUS ANCIENNE"
+      "ancient-lotus-ring": "BAGUE LOTUS ANCIENNE",
+      "chinese-luck-bracelet-red-knot-fu-symbol": "BRACELET FU DE PROTECTION — CHANCE & ANCRAGE",
+      "lucky-coin-wealth-bracelet-red-beads-feng-shui": "BRACELET PIÈCE DE VIE — PROSPÉRITÉ & FENG SHUI",
+      "bagua-protection-bracelet-red-feng-shui": "BRACELET BAGUA DE PROTECTION — ÉQUILIBRE & DÉFENSE"
     },
     "specs": {
        "material": "Travail du Métal",
@@ -69,7 +77,7 @@
       "intro": "Un compagnon pour le chercheur moderne. Ce talisman sert d'ancre silencieuse, une manifestation physique du calme intérieur par le mouvement perpétuel.",
       "story": {
         "title": "L'Écrit Sacré",
-        "body": "Magnifié par une finition argentée de haute qualité, le bord extérieur est méticuleusement gravé des caractères anciens du Sutra du Cœur—la pierre angulaire de la sagesse bouddhiste. L'écrit s'enroule autour de la pièce comme un voile protecteur, portant la vibration de siècles de chants rituels.",
+        "body": "Magnifié par une finition argentée noble, le bord extérieur est méticuleusement gravé des caractères anciens du Sutra du Cœur—la pierre angulaire de la sagesse bouddhiste. L'écrit s'enroule autour de la pièce comme un voile protecteur, portant la vibration de siècles de chants rituels.",
         "core_title": "Le Noyau Rotatif",
         "core_body": "En son centre se trouve le visage serein du Bouddha, conçu avec un mécanisme de précision. Ce mouvement reflète la mise en mouvement de la Roue du Dharma, offrant un point de focalisation tactile pour la pleine conscience.",
         "presence_title": "Présence Ancestrale",

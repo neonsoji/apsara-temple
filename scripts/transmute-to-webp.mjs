@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import fs from 'fs/promises';
 import path from 'path';
 
-const dir = 'g:/APSARA/apsara-temple/public/images/products/pendentifs';
+const dir = 'g:/APSARA/apsara-temple/public/images/products/bracelets';
 
 async function transmute() {
   try {

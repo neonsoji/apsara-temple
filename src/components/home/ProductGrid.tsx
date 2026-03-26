@@ -38,7 +38,7 @@ export default function ProductGrid({ category, label, title, accentTitle, dict,
               <div className="product-image-box">
                 <img 
                   src={relic.image} 
-                  alt={relic.names[locale as 'fr'|'en']}
+                  alt={relic.altText?.[locale as 'fr'|'en'] || relic.names[locale as 'fr'|'en']}
                   onError={(e) => {
                     e.currentTarget.src = "/images/talisman.webp";
                     e.currentTarget.style.opacity = "0.3";
@@ -49,8 +49,13 @@ export default function ProductGrid({ category, label, title, accentTitle, dict,
               <div className="product-info">
                 <h3 className="product-name">{relic.names[locale as 'fr'|'en']}</h3>
                 <p className="product-price">{relic.price}</p>
-                <p className="product-availability">{dict.available}</p>
-
+                <p className={`product-availability ${relic.stock === 0 ? 'out-of-stock' : relic.stock < 5 ? 'low-stock' : ''}`}>
+                  {relic.stock === 0 
+                    ? dict.out_of_stock 
+                    : relic.stock < 5 
+                      ? dict.low_stock.replace('{count}', relic.stock.toString())
+                      : dict.available}
+                </p>
               </div>
             </Link>
           </div>

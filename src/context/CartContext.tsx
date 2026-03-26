@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Product } from '@/lib/products';
+import { Product, products } from '@/lib/products';
 
 interface CartItem extends Product {
   quantity: number;
@@ -27,7 +27,27 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const savedCart = localStorage.getItem('apsara-cart');
     if (savedCart) {
       try {
-        setCart(JSON.parse(savedCart));
+        const parsedCart = JSON.parse(savedCart);
+        
+        // --- SÉCURITÉ PROFONDE : RE-VALIDATION DES STOCKS RÉELS ---
+        // On cherche par ID ou par SLUG pour être certain de trouver le produit source
+        const validatedCart = parsedCart.map((item: any) => {
+          const product = products.find(p => p.id === item.id || p.slug === item.slug || p.slug === item.id);
+          
+          if (product) {
+            // On s'assure que la quantité ne dépasse jamais le stock actuel (fixé à 3)
+            // On normalise l'ID et on écrase le stock enregistré avec le stock réel
+            return { 
+              ...item, 
+              id: product.id,
+              stock: product.stock, 
+              quantity: Math.min(item.quantity, product.stock) 
+            };
+          }
+          return item;
+        });
+
+        setCart(validatedCart);
       } catch (e) {
         console.error("Failed to parse cart", e);
       }
@@ -42,6 +62,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const addToCart = (product: Product) => {
     setCart(prev => {
       const existing = prev.find(item => item.id === product.id);
+      
+      const currentQty = existing ? existing.quantity : 0;
+      if (currentQty >= product.stock) {
+        // Optionnel : on pourrait lever une notification ici
+        return prev;
+      }
+
       if (existing) {
         return prev.map(item => 
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
@@ -60,9 +87,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       removeFromCart(productId);
       return;
     }
-    setCart(prev => prev.map(item => 
-      item.id === productId ? { ...item, quantity } : item
-    ));
+    setCart(prev => prev.map(item => {
+      if (item.id === productId) {
+        const newQty = Math.min(quantity, item.stock);
+        return { ...item, quantity: newQty };
+      }
+      return item;
+    }));
   };
 
   const clearCart = () => {

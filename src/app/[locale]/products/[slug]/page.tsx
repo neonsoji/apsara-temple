@@ -3,8 +3,10 @@ import Footer from "@/components/layout/Footer";
 import { getDictionary } from "@/i18n/get-dictionary";
 import type { Locale } from "@/i18n/locales";
 import { getProductBySlug } from "@/lib/products";
+import { getProductImages } from "@/lib/getProductImages";
 import { notFound } from "next/navigation";
 import AddToCartButton from "@/components/product/AddToCartButton";
+import ProductImageGallery from "@/components/product/ProductImageGallery";
 import './ProductDetail.css';
 
 export default async function ProductPage({
@@ -23,6 +25,9 @@ export default async function ProductPage({
   const name = product.names[locale];
   const description = product.descriptions[locale];
 
+  // Auto-discover image variants from the filesystem (nom.webp, nom2.webp, nom3.webp…)
+  const galleryImages = getProductImages(product.image);
+
   return (
     <div className="product-page-container">
       <Navbar locale={locale} dict={dict.navigation} />
@@ -34,14 +39,10 @@ export default async function ProductPage({
         <div className="product-hero-layout">
           {/* Visual Presentation */}
           <div className="product-visual-pane">
-            <div className="main-image-wrapper">
-              <div className="image-aura"></div>
-              <img 
-                src={product.image} 
-                alt={name} 
-                className="main-product-image"
-              />
-            </div>
+            <ProductImageGallery
+              images={galleryImages}
+              alt={product.altText?.[locale as 'fr'|'en'] || name}
+            />
           </div>
 
           {/* Core Info Pane */}
@@ -83,14 +84,16 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* 2. STORYTELLING SECTION: THE MEANING (RESTAURÉ VIA GIT) */}
+      {/* 2. STORYTELLING SECTION */}
       <section className="product-story section-dark" style={{ padding: '120px 8%', background: 'rgba(13,0,0,0.4)', backdropFilter: 'blur(20px)', position: 'relative', overflow: 'hidden' }}>
         <div className="story-glow" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%', height: '600px', background: 'radial-gradient(circle, rgba(105, 5, 5, 0.1) 0%, transparent 60%)', filter: 'blur(100px)', zIndex: -1 }}></div>
         <div className="content-narrow" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
           <div className="ornament-divider" style={{ marginBottom: '2rem', color: 'var(--turquoise)', fontSize: '1.5rem' }}>✧</div>
-          <h2 className="story-heading" style={{ fontSize: '3rem', marginBottom: '2rem', fontFamily: 'var(--font-cinzel), serif' }}>LA SIGNIFICATION</h2>
+          <h2 className="story-heading" style={{ fontSize: '3rem', marginBottom: '2rem', fontFamily: 'var(--font-cinzel), serif' }}>
+            {locale === 'fr' ? 'LA SIGNIFICATION' : 'THE MEANING'}
+          </h2>
           <p className="story-body" style={{ fontSize: '1.25rem', lineHeight: 2, marginBottom: '5rem', opacity: 0.8, fontFamily: 'var(--font-playfair), serif' }}>
-            Chaque relique d'APSARA TEMPLE est plus qu'un simple objet. C'est un vaisseau d'intention, forgé pour accompagner le chercheur moderne dans sa quête d'équilibre et de protection.
+            {description}
           </p>
         </div>
       </section>

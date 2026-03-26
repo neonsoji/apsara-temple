@@ -43,6 +43,8 @@
   "products": {
     "available": "Awaiting its Seeker",
     "preorder": "Awaiting its Seeker",
+    "out_of_stock": "Temporarily away from the Temple",
+    "low_stock": "Only {count} relics remaining",
     "claim": "Bond with this Relic",
     "ritual_notice": "Available for immediate ritual bonding",
     "names": {
@@ -52,9 +54,15 @@
       "pixiu-imperial-seal": "PIXIU : THE IMPERIAL SEAL",
       "woofo-silent-shield": "WOOFO : THE SILENT SHIELD",
       "pixiu-two-faces-fortune": "PIXIU : THE TWO FACES OF FORTUNE",
+      "koi-flow-abundance-red-string": "KOI — FLOW OF ABUNDANCE RED STRING BRACELET",
+      "koi-balance-red-turquoise": "BALANCE KOI — PERSEVERANCE & MASTERY",
+      "koi-transformation-red-pink": "TRANSFORMATION KOI — ENERGY & OPENNESS",
       "venerable-talisman": "VENERABLE TALISMAN",
       "sacred-bracelet": "SACRED BRACELET",
-      "ancient-lotus-ring": "ANCIENT LOTUS RING"
+      "ancient-lotus-ring": "ANCIENT LOTUS RING",
+      "chinese-luck-bracelet-red-knot-fu-symbol": "FU PROTECTION BRACELET — LUCK & GROUNDING",
+      "lucky-coin-wealth-bracelet-red-beads-feng-shui": "WEALTH COIN BRACELET — ABUNDANCE & FENG SHUI",
+      "bagua-protection-bracelet-red-feng-shui": "BAGUA PROTECTION BRACELET — BALANCE & DEFENSE"
     },
     "specs": {
        "material": "Metal Work",
