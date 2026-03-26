@@ -20,9 +20,9 @@ export const metadata: Metadata = {
   title: "APSARA TEMPLE | Reliques Sacrées & Talismans Mystiques",
   description: "Entrez dans le sanctuaire d'APSARA TEMPLE. Découvrez des talismans sacrés, des bracelets bénis et des reliques ancestrales pour incarner votre véritable pouvoir spirituel.",
   icons: {
-    icon: "/images/favicon-eye.png",
-    shortcut: "/images/favicon-eye.png",
-    apple: "/images/favicon-eye.png",
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
   },
   openGraph: {
     title: "APSARA TEMPLE | Reliques Sacrées & Talismans Mystiques",

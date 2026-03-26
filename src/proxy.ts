@@ -1,42 +1,38 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { locales, defaultLocale } from './i18n/locales'
-
-function getLocale(request: NextRequest): string {
-  const acceptLanguage = request.headers.get('accept-language')
-  if (acceptLanguage) {
-    const preferredLocale = acceptLanguage.split(',')[0].split('-')[0]
-    if (locales.includes(preferredLocale as any)) {
-      return preferredLocale
-    }
-  }
-  return defaultLocale
-}
+import { locales } from './i18n/locales'
 
 export function proxy(request: NextRequest) {
-  const pathname = request.nextUrl.pathname
+  const url = request.nextUrl.clone();
+  const hostname = request.headers.get('host') || '';
 
+  // 1. Force Canonical Domain (non-www)
+  // This avoids duplicate content and keeps SEO juice on the main domain
+  if (hostname.startsWith('www.')) {
+    url.hostname = hostname.replace('www.', '');
+    return NextResponse.redirect(url, 301);
+  }
+
+  const { pathname } = request.nextUrl;
+
+  // 2. Handle Locales
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  )
+  );
 
-  // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request)
-
-    // e.g. /products -> /en/products
+    // We force 'fr' as default for better indexing consistency
+    const locale = 'fr';
     return NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
-        request.url
-      )
-    )
+      new URL(`/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url)
+    );
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images|lib).*)'],
+  // Matcher ignoring system files, images and api
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images|favicon-eye.png|robots.txt|sitemap.xml).*)'],
 }
-
