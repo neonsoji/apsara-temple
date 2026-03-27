@@ -83,7 +83,11 @@ export default async function ProductPage({
             <div className="price-tag">{product.price.toFixed(2)} €</div>
             
             <div className="product-intro">
-               <p>{desc}</p>
+               <p>
+                 {locale === 'fr' 
+                   ? "Chaque relique d'APSARA TEMPLE est plus qu'un simple objet. C'est un vaisseau d'intention, forgé pour accompagner le chercheur moderne dans sa quête d'équilibre et de protection."
+                   : "Every relic from APSARA TEMPLE is more than a simple object. It is a vessel of intention, forged to accompany the modern seeker in their quest for balance and protection."}
+               </p>
             </div>
             
             <div className="product-actions">
@@ -122,9 +126,7 @@ export default async function ProductPage({
             {locale === 'fr' ? 'LA SIGNIFICATION' : 'THE MEANING'}
           </h2>
           <p className="story-body" style={{ fontSize: '1.25rem', lineHeight: 2, marginBottom: '5rem', opacity: 0.8, fontFamily: 'var(--font-playfair), serif' }}>
-            {locale === 'fr' 
-              ? "Chaque relique d'APSARA TEMPLE est plus qu'un simple objet. C'est un vaisseau d'intention, forgé pour accompagner le chercheur moderne dans sa quête d'équilibre et de protection."
-              : "Every relic from APSARA TEMPLE is more than a simple object. It is a vessel of intention, forged to accompany the modern seeker in their quest for balance and protection."}
+            {desc}
           </p>
         </div>
       </section>
