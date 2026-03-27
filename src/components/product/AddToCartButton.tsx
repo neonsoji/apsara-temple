@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useCart } from '@/context/CartContext';
 import { DBProduct } from '@/services/products';
@@ -33,7 +35,7 @@ export default function AddToCartButton({ product, label }: AddToCartButtonProps
       id: product.id,
       slug: product.slug,
       price: `${product.price.toFixed(2)} €`,
-      image: (product.product_images?.[0]?.url) || '',
+      image: product.image || '',
       names: { fr: product.name, en: product.name_en || product.name },
       stock: product.stock
     };
