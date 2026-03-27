@@ -94,6 +94,40 @@ export async function getProducts() {
   return data;
 }
 
+export async function createProduct(productData: any) {
+  // Mapping category name to UUID
+  let dbSlug = productData.category;
+  if (dbSlug === 'pendentifs' || dbSlug === 'talismans') {
+    dbSlug = 'pendentifs-talismans';
+  } else if (dbSlug === 'bracelets') {
+    dbSlug = 'richesse-prosperite';
+  }
+
+  // Find category ID
+  const { data: catData } = await supabase
+    .from('categories')
+    .select('id')
+    .eq('slug', dbSlug)
+    .single();
+
+  const { data, error } = await supabase
+    .from('products')
+    .insert([
+      {
+        ...productData,
+        category_id: catData?.id || null,
+        // Ensure price and stock are numbers
+        price: Number(productData.price),
+        stock: Number(productData.stock),
+      }
+    ])
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
 export async function getAllSlugs(): Promise<string[]> {
   const { data, error } = await supabase
     .from('products')

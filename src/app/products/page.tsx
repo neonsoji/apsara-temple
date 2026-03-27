@@ -18,8 +18,8 @@ export default async function ProductsPage() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="mb-8 text-3xl font-bold text-gray-900">Spiritual Collection</h1>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {products.map((product) => {
-          const mainImage = product.product_images?.[0]?.url || "/placeholder.jpg";
+        {products.map((product: any) => {
+          const mainImage = product.image || "/placeholder.jpg";
           return (
             <Link 
               href={`/products/${product.slug}`} 
@@ -35,10 +35,9 @@ export default async function ProductsPage() {
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-1">{product.name}</h2>
-                <p className="text-sm text-gray-500 mb-4">{product.category}</p>
                 <div className="mt-auto flex items-center justify-between">
                   <span className="text-lg font-semibold text-emerald-600">
-                    {product.price} {product.currency}
+                    {product.price} EUR
                   </span>
                   <span className="text-xs text-gray-400">
                     {product.stock > 0 ? "In Stock" : "Out of Stock"}
