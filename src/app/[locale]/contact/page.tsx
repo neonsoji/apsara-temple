@@ -30,12 +30,12 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <div className="contact-info-side">
             <div className="info-block">
               <h3>LE SANCTUAIRE</h3>
-              <p>APSARA TEMPLE<br />Paris, France</p>
+              <p>APSARA TEMPLE<br />Toulouse, France</p>
             </div>
             <div className="info-block">
               <h3>RÉSEAUX SACRÉS</h3>
               <p>Instagram: @apsaratemple</p>
-              <p>Email: temple@apsara.fr</p>
+              <p>Email: contact@apsaratemple.com</p>
             </div>
           </div>
           
