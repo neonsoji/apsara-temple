@@ -40,23 +40,17 @@ export async function getProductsByCategory(categorySlug: string): Promise<DBPro
 
   console.log(`🔍 [SUPABASE] Requête produits pour slug catégorie: ${categorySlug}`);
   
-  // 1. Récupérer l'ID de la catégorie d'abord
-  // MAPPING FINAL RÉEL :
-  let dbSlug = categorySlug;
-  if (categorySlug === 'pendentifs' || categorySlug === 'talismans') {
-    dbSlug = 'pendentifs-talismans';
-  } else if (categorySlug === 'bracelets') {
-    dbSlug = 'richesse-prosperite';
-  }
+  // 1. Récupérer toutes les catégories pour trouver le meilleur match (robuste)
+  const { data: allCats } = await supabase.from('categories').select('id, slug, name');
+  
+  const target = allCats?.find((c: any) => 
+    c.slug.includes(categorySlug.replace('s', '')) || // pendentif -> pendentifs-talismans
+    categorySlug.includes(c.slug) ||
+    (categorySlug === 'bracelets' && (c.slug === 'chance-destin' || c.slug === 'richesse-prosperite'))
+  );
 
-  const { data: catData, error: catError } = await supabase
-    .from('categories')
-    .select('id')
-    .eq('slug', dbSlug)
-    .single();
-
-  if (catError || !catData) {
-    console.error(`❌ [SUPABASE] Catégorie introuvable : ${dbSlug}`);
+  if (!target) {
+    console.error(`❌ [SUPABASE] Aucune catégorie trouvée pour : ${categorySlug}`);
     return [];
   }
 
@@ -64,7 +58,7 @@ export async function getProductsByCategory(categorySlug: string): Promise<DBPro
   const { data, error } = await supabase
     .from('products')
     .select('*')
-    .eq('category_id', catData.id)
+    .eq('category_id', target.id)
     .eq('active', true)
     .order('name');
 
