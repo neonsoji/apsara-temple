@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { products } from '@/lib/products';
 import ProductGrid from '@/components/home/ProductGrid';
 import { getDictionary } from '@/i18n/get-dictionary';
 import type { Locale } from '@/i18n/locales';
@@ -10,8 +9,7 @@ export default async function talismansPage({ params }: { params: Promise<{ loca
   const { locale } = await params;
   const dict = await getDictionary(locale);
   
-  // Filter for pendants/talismans
-  const talismans = products.filter(p => p.category === 'pendentifs');
+  // filtering is now handled inside ProductGrid via Supabase
 
   return (
     <div className="category-page">

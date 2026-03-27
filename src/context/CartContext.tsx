@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Product, products } from '@/lib/products';
+import { Product } from '@/lib/products';
 
 interface CartItem extends Product {
   quantity: number;
@@ -28,26 +28,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart);
-        
-        // --- SÉCURITÉ PROFONDE : RE-VALIDATION DES STOCKS RÉELS ---
-        // On cherche par ID ou par SLUG pour être certain de trouver le produit source
-        const validatedCart = parsedCart.map((item: any) => {
-          const product = products.find(p => p.id === item.id || p.slug === item.slug || p.slug === item.id);
-          
-          if (product) {
-            // On s'assure que la quantité ne dépasse jamais le stock actuel (fixé à 3)
-            // On normalise l'ID et on écrase le stock enregistré avec le stock réel
-            return { 
-              ...item, 
-              id: product.id,
-              stock: product.stock, 
-              quantity: Math.min(item.quantity, product.stock) 
-            };
-          }
-          return item;
-        });
-
-        setCart(validatedCart);
+        setCart(parsedCart);
       } catch (e) {
         console.error("Failed to parse cart", e);
       }
