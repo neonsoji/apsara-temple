@@ -1,8 +1,4 @@
-/**
- * ⚠️ DEPRECATED - DO NOT USE
- * La source de vérité est désormais uniquement Supabase.
- * Utilisez @/services/products pour récupérer les données produits.
- */
+import { supabaseAdmin } from './supabaseServer';
 
 export interface Product {
     id: string;
@@ -13,13 +9,19 @@ export interface Product {
     stock: number;
     names: { fr: string; en: string; };
     descriptions: { fr: string; en: string; };
-    details?: any;
-    altText?: any;
-    images?: string[];
 }
 
-export const products: Product[] = [];
+export async function getAllProducts() {
+  const { data, error } = await supabaseAdmin
+    .from('products')
+    .select('*');
 
-export function getProductBySlug(slug: string): Product | undefined {
-  return undefined;
+  console.log('📦 [SUPABASE] ALL PRODUCTS FOUND:', data?.length || 0);
+  
+  if (error) {
+    console.error('❌ [SUPABASE] Error fetching products:', error);
+    return [];
+  }
+
+  return data || [];
 }

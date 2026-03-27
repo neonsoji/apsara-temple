@@ -1,22 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-let supabaseInstance: any = null;
-
-function getSupabase() {
-  if (supabaseInstance) return supabaseInstance;
-
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
-    // On ne crash pas ici pour laisser le build se finir, mais on log l'erreur
-    console.error('⚠️ [SUPABASE] Missing Credentials (URL or Key)');
-    return null;
-  }
-
-  supabaseInstance = createClient(supabaseUrl, supabaseKey);
-  return supabaseInstance;
-}
+import { supabaseAdmin as supabase } from '@/lib/supabaseServer';
 
 export interface DBProduct {
   id: string;
@@ -35,13 +17,11 @@ export interface DBProduct {
 }
 
 export async function getProductsByCategory(categorySlug: string): Promise<DBProduct[]> {
-  const supabase = getSupabase();
-  if (!supabase) return [];
-
   console.log(`🔍 [SUPABASE] Requête produits pour slug catégorie: ${categorySlug}`);
   
   // 1. Récupérer toutes les catégories pour trouver le meilleur match (robuste)
   const { data: allCats } = await supabase.from('categories').select('id, slug, name');
+  console.log('📦 [SUPABASE] ALL CATS IN DB:', JSON.stringify(allCats));
   
   const target = allCats?.find((c: any) => 
     c.slug.includes(categorySlug.replace('s', '')) || // pendentif -> pendentifs-talismans
@@ -53,6 +33,8 @@ export async function getProductsByCategory(categorySlug: string): Promise<DBPro
     console.error(`❌ [SUPABASE] Aucune catégorie trouvée pour : ${categorySlug}`);
     return [];
   }
+
+  console.log(`🎯 [SUPABASE] TARGET FOUND FOR ${categorySlug}:`, target.slug, target.id);
 
   // 2. Récupérer les produits liés à cet ID
   const { data, error } = await supabase
@@ -72,8 +54,6 @@ export async function getProductsByCategory(categorySlug: string): Promise<DBPro
 }
 
 export async function getProductBySlug(slug: string): Promise<DBProduct | null> {
-  const supabase = getSupabase();
-  if (!supabase) return null;
 
   const { data, error } = await supabase
     .from('products')
@@ -91,8 +71,6 @@ export async function getProductBySlug(slug: string): Promise<DBProduct | null> 
 }
 
 export async function getProducts() {
-  const supabase = getSupabase();
-  if (!supabase) return [];
 
   const { data, error } = await supabase
     .from('products')
@@ -108,8 +86,6 @@ export async function getProducts() {
 }
 
 export async function createProduct(productData: any) {
-  const supabase = getSupabase();
-  if (!supabase) throw new Error('Supabase client unavailable');
 
   // Mapping category name to UUID
   let dbSlug = productData.category;
@@ -145,8 +121,6 @@ export async function createProduct(productData: any) {
 }
 
 export async function getAllSlugs(): Promise<string[]> {
-  const supabase = getSupabase();
-  if (!supabase) return [];
 
   const { data, error } = await supabase
     .from('products')
