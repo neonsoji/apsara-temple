@@ -1,67 +1,104 @@
-import { supabase } from "../lib/supabase";
+import { createClient } from '@supabase/supabase-js';
 
-export interface Product {
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+console.log('🔌 [SUPABASE] CONNEXION :', supabaseUrl);
+console.log('🔑 [SUPABASE] SERVICE ROLE DETECTED:', supabaseKey ? 'YES (Ends with ' + supabaseKey.slice(-5) + ')' : 'NO');
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+export interface DBProduct {
   id: string;
   name: string;
+  name_en: string;
   slug: string;
   description: string;
+  description_en: string;
+  image: string;
   price: number;
-  currency: string;
+  category_id: string; // Utilisation de l'ID relationnel
   stock: number;
-  category: string;
+  reserved_stock: number;
+  low_stock_threshold: number;
   active: boolean;
-  created_at: string;
-  images?: ProductImage[];
 }
 
-export interface ProductImage {
-  id: string;
-  product_id: string;
-  url: string;
-  position: number;
+export async function getProductsByCategory(categorySlug: string): Promise<DBProduct[]> {
+  console.log(`🔍 [SUPABASE] Requête produits pour slug catégorie: ${categorySlug}`);
+  
+  // 1. Récupérer l'ID de la catégorie d'abord
+  // MAPPING FINAL RÉEL :
+  let dbSlug = categorySlug;
+  if (categorySlug === 'pendentifs' || categorySlug === 'talismans') {
+    dbSlug = 'pendentifs-talismans';
+  } else if (categorySlug === 'bracelets') {
+    dbSlug = 'richesse-prosperite';
+  }
+
+  const { data: catData, error: catError } = await supabase
+    .from('categories')
+    .select('id')
+    .eq('slug', dbSlug)
+    .single();
+
+  if (catError || !catData) {
+    console.error(`❌ [SUPABASE] Catégorie introuvable : ${dbSlug}`);
+    return [];
+  }
+
+  // 2. Récupérer les produits liés à cet ID
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('category_id', catData.id)
+    .eq('active', true)
+    .order('name');
+
+  if (error) {
+    console.error(`❌ [SUPABASE] Erreur produits pour ${categorySlug} :`, error.message);
+    return [];
+  }
+
+  console.log(`✅ [SUPABASE] ${data?.length || 0} produits trouvés pour ${categorySlug}`);
+  return data || [];
 }
 
-export const getProducts = async () => {
+export async function getProductBySlug(slug: string): Promise<DBProduct | null> {
   const { data, error } = await supabase
-    .from("products")
-    .select("*, product_images(*)")
-    .eq("active", true)
-    .order("created_at", { ascending: false });
-
-  if (error) throw error;
-  return data;
-};
-
-export const getProductBySlug = async (slug: string) => {
-  const { data, error } = await supabase
-    .from("products")
-    .select("*, product_images(*)")
-    .eq("slug", slug)
+    .from('products')
+    .select('*')
+    .eq('slug', slug)
+    .eq('active', true)
     .single();
 
-  if (error) throw error;
-  return data;
-};
+  if (error) {
+    console.error(`❌ [SUPABASE] Erreur slug ${slug} :`, error.message);
+    return null;
+  }
 
-export const createProduct = async (productData: Partial<Product>) => {
+  return data;
+}
+
+export async function getProducts() {
   const { data, error } = await supabase
-    .from("products")
-    .insert([productData])
-    .select()
-    .single();
+    .from('products')
+    .select('*')
+    .eq('active', true);
 
-  if (error) throw error;
+  if (error) {
+    console.error('SUPABASE ERROR:', error);
+    return [];
+  }
+
   return data;
-};
+}
 
-export const updateProduct = async (id: string, productData: Partial<Product>) => {
+export async function getAllSlugs(): Promise<string[]> {
   const { data, error } = await supabase
-    .from("products")
-    .update(productData)
-    .eq("id", id)
-    .select()
-    .single();
+    .from('products')
+    .select('slug');
 
-  if (error) throw error;
-  return data;
-};
+  if (error) return [];
+  return data.map(p => p.slug);
+}

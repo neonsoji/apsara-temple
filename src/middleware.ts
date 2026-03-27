@@ -5,19 +5,30 @@ import { locales } from './i18n/locales'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 1. Handle Locales only
-  // Check if there is any supported locale in the pathname
+  // 1. Admin Protection
+  // If the request is for an admin route (any locale)
+  const isAdminRoute = pathname.includes('/admin');
+  const isLoginPage = pathname.includes('/admin/login');
+
+  if (isAdminRoute && !isLoginPage) {
+    const adminSession = request.cookies.get('admin_session');
+    
+    if (!adminSession || adminSession.value !== 'authenticated') {
+      // Find current locale to redirect back to login
+      const currentLocale = locales.find(l => pathname.startsWith(`/${l}`)) || 'fr';
+      const loginUrl = new URL(`/${currentLocale}/admin/login`, request.url);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  // 2. Handle Locales
   const pathnameIsMissingLocale = locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
   if (pathnameIsMissingLocale) {
-    // We force 'fr' as default for better indexing consistency
     const locale = 'fr';
-    // Redirect directly to the final URL to avoid double-redirects (/ -> /fr is one hop)
     const targetUrl = new URL(`/${locale}${pathname === '/' ? '' : pathname}`, request.url);
-    
-    // Use 308 Permanent Redirect for better SEO and performance (avoids future hops)
     return NextResponse.redirect(targetUrl, 308);
   }
 
@@ -25,6 +36,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Matcher ignoring system files, images and api
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico|icon.svg|images|favicon-eye.png|robots.txt|sitemap.xml).*)'],
 }

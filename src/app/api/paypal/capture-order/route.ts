@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { updateProductStock, sendStockAlertEmail } from '@/lib/stock';
 
 // Instanciation déplacée dans POST pour éviter le crash de "next build" sur Vercel si la clé manque
 export async function POST(req: Request) {
@@ -172,6 +173,21 @@ export async function POST(req: Request) {
     } catch (emailError) {
       // On loggue simplement l'erreur, sans bloquer la finalisation de la commande
       console.error('❌ Erreur inattendue lors de l\'envoi de la notification :', emailError);
+    }
+    // ==========================================
+
+    // ==========================================
+    // 📦 6. GESTION DU STOCK ET ALERTES
+    // ==========================================
+    try {
+      if (cartItems && cartItems.length > 0) {
+        const alerts = await updateProductStock(cartItems);
+        if (alerts.length > 0) {
+          await sendStockAlertEmail(alerts);
+        }
+      }
+    } catch (stockError) {
+      console.error('❌ Erreur lors de la mise à jour du stock :', stockError);
     }
     // ==========================================
 

@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import Navbar from "@/components/layout/Navbar"
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEN = locale === 'en';
@@ -65,15 +67,6 @@ export default async function Home({
           label={dict.home.sections.pendentifs.label} 
           title={dict.home.sections.pendentifs.title} 
           accentTitle={dict.home.sections.pendentifs.accent} 
-          dict={dict.products}
-          locale={locale}
-        />
-
-        <ProductGrid 
-          category="talismans" 
-          label={dict.home.sections.talismans.label} 
-          title={dict.home.sections.talismans.title} 
-          accentTitle={dict.home.sections.talismans.accent}
           dict={dict.products}
           locale={locale}
         />

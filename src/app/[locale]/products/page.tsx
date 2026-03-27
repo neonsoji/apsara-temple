@@ -38,12 +38,20 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
                 <h2 className="text-xl font-bold text-gray-900 mb-1">{product.name}</h2>
                 <p className="text-sm text-gray-500 mb-4">{product.category}</p>
                 <div className="mt-auto flex items-center justify-between">
-                  <span className="text-lg font-semibold text-emerald-600">
+                  <span className="text-lg font-semibold text-gray-900">
                     {product.price} {product.currency}
                   </span>
-                  <span className="text-xs text-gray-400">
-                    {product.stock > 0 ? "In Stock" : "Out of Stock"}
-                  </span>
+                  <div className="flex flex-col items-end">
+                    {product.stock <= 0 ? (
+                      <span className="text-[10px] font-bold text-red-500 uppercase">Sold Out</span>
+                    ) : product.stock <= (product.low_stock_threshold || 5) ? (
+                      <span className="text-[10px] font-bold text-[#d4af37] animate-pulse uppercase">
+                        Plus que {product.stock} !
+                      </span>
+                    ) : (
+                      <span className="text-[10px] text-emerald-600 uppercase font-medium">In Stock</span>
+                    )}
+                  </div>
                 </div>
               </div>
             </Link>

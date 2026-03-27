@@ -1,0 +1,232 @@
+
+> apsara-temple@0.1.0 lint
+> eslint
+
+
+G:\APSARA\apsara-temple\src\app\[locale]\about\page.tsx
+  19:63   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  26:12   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  33:35   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  33:84   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  33:223  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  36:167  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  40:16   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  42:166  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+G:\APSARA\apsara-temple\src\app\[locale]\account\page.tsx
+  27:51  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  28:44  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+G:\APSARA\apsara-temple\src\app\[locale]\admin\products\new\page.tsx
+  30:9   warning  'imageUrl' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  33:13  warning  'product' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+G:\APSARA\apsara-temple\src\app\[locale]\admin\products\page.tsx
+  30:9   warning  'imageUrl' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  33:13  warning  'product' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+G:\APSARA\apsara-temple\src\app\[locale]\cart\page.tsx
+  10:56  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  11:43  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  34:23  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  76:33  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+G:\APSARA\apsara-temple\src\app\[locale]\cgu\page.tsx
+  23:46   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  24:105  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  32:52   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  32:95   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  32:106  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  32:180  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  37:17   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  37:102  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  38:80   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  43:17   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  43:197  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  55:55   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  56:28   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  63:86   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  63:98   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  63:118  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  63:134  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  68:140  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  68:208  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  78:27   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  78:140  error  Do not use an `<a>` element to navigate to `/fr/politique-confidentialite/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  78:140  error  Do not use an `<a>` element to navigate to `/fr/politique-confidentialite/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  78:140  error  Do not use an `<a>` element to navigate to `/fr/politique-confidentialite/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  83:151  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  83:178  error  Do not use an `<a>` element to navigate to `/fr/mentions-legales/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages           @next/next/no-html-link-for-pages
+  83:178  error  Do not use an `<a>` element to navigate to `/fr/mentions-legales/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages           @next/next/no-html-link-for-pages
+  83:178  error  Do not use an `<a>` element to navigate to `/fr/mentions-legales/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages           @next/next/no-html-link-for-pages
+
+G:\APSARA\apsara-temple\src\app\[locale]\cgv\page.tsx
+  32:77   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  32:188  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  43:74   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  43:198  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  44:51   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  44:106  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  54:126  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  59:156  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  64:76   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  71:32   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  71:99   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  74:63   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  75:20   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  75:39   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  75:83   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  83:299  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  88:90   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  93:128  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  93:142  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  98:154  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  99:32   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+G:\APSARA\apsara-temple\src\app\[locale]\journal\[slug]\article-content.ts
+  1:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\app\[locale]\journal\[slug]\page.tsx
+  5:8  warning  'Image' is defined but never used  @typescript-eslint/no-unused-vars
+
+G:\APSARA\apsara-temple\src\app\[locale]\livraison\page.tsx
+  32:126  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  32:156  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  48:64   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  56:21   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  56:141  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  56:189  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  61:32   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  61:99   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  62:102  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  69:40   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  70:51   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  71:104  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  72:38   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  75:65   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  85:178  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+G:\APSARA\apsara-temple\src\app\[locale]\mentions-legales\page.tsx
+  58:17   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  58:163  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  63:125  error  Do not use an `<a>` element to navigate to `/fr/politique-confidentialite/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  63:125  error  Do not use an `<a>` element to navigate to `/fr/politique-confidentialite/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  63:125  error  Do not use an `<a>` element to navigate to `/fr/politique-confidentialite/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+  63:236  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  63:247  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  63:327  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+  68:104  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                     react/no-unescaped-entities
+
+G:\APSARA\apsara-temple\src\app\[locale]\products\[slug]\page.tsx
+  143:139  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+G:\APSARA\apsara-temple\src\app\[locale]\products\page.tsx
+  31:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+G:\APSARA\apsara-temple\src\app\[locale]\search\page.tsx
+  10:58  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  11:43  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  51:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+G:\APSARA\apsara-temple\src\app\[locale]\talismans\page.tsx
+  14:9  warning  'talismans' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+G:\APSARA\apsara-temple\src\app\api\orders\route.ts
+  26:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\app\api\paypal\capture-order\route.ts
+   47:11  warning  'captureId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   86:55  error    Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  109:53  error    Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\app\api\products\[slug]\route.ts
+  15:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\app\api\products\route.ts
+  8:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\app\products\page.tsx
+  30:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+G:\APSARA\apsara-temple\src\components\checkout\CheckoutContent.tsx
+   12:9    error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   15:51   warning  'dict' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   34:6    warning  React Hook useEffect has missing dependencies: 'cart', 'locale', and 'totalPrice'. Either include them or remove the dependency array                                                                                                                                                    react-hooks/exhaustive-deps
+   36:35   error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  100:13   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  113:141  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+G:\APSARA\apsara-temple\src\components\checkout\PaypalButton.tsx
+   9:25  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  10:21  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  20:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+G:\APSARA\apsara-temple\src\components\checkout\PaypalButton.tsx:20:5
+  18 |
+  19 |   useEffect(() => {
+> 20 |     setIsMounted(true);
+     |     ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  21 |   }, []);
+  22 |
+  23 |   if (!isMounted) return (  react-hooks/set-state-in-effect
+  38:9   warning  'paypalItems' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+
+G:\APSARA\apsara-temple\src\components\home\Hero.tsx
+  7:9  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\components\home\ProductGrid.tsx
+  13:9  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\components\home\Story.tsx
+  6:9  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\components\home\UnderConstruction.tsx
+  6:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  7:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\components\layout\Footer.tsx
+  5:9  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\src\components\layout\Navbar.tsx
+   10:9   error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   31:9   warning  'handleSigilTap' is assigned a value but never used                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+   52:16  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+   61:16  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+   73:16  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+   82:16  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  122:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  134:27  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+G:\APSARA\apsara-temple\src\context\CartContext.tsx
+  34:53  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-explicit-any
+  50:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+G:\APSARA\apsara-temple\src\context\CartContext.tsx:50:9
+  48 |         });
+  49 |
+> 50 |         setCart(validatedCart);
+     |         ^^^^^^^ Avoid calling setState() directly within an effect
+  51 |       } catch (e) {
+  52 |         console.error("Failed to parse cart", e);
+  53 |       }  react-hooks/set-state-in-effect
+
+G:\APSARA\apsara-temple\src\i18n\get-dictionary.ts
+  4:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+G:\APSARA\apsara-temple\tmp_old_page.tsx
+  150:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Ô£û 133 problems (110 errors, 23 warnings)
+
