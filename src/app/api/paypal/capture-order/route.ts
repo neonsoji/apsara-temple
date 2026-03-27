@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// Client Supabase avec la SERVICE ROLE KEY (côté serveur uniquement, jamais exposé)
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
+// Instanciation déplacée dans POST pour éviter le crash de "next build" sur Vercel si la clé manque
 export async function POST(req: Request) {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || 'missing_url',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || 'missing_key'
+  );
+
   const client_id = (process.env.PAYPAL_CLIENT_ID || '').trim();
   const secret = (process.env.PAYPAL_SECRET || '').trim();
   const base = (process.env.PAYPAL_BASE_URL || 'https://api-m.sandbox.paypal.com').trim();
