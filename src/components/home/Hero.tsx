@@ -67,6 +67,7 @@ export default function Hero({ dict }: HeroProps) {
                width={500}
                height={500}
                priority
+               sizes="(max-width: 768px) 100vw, 500px"
                className="hero-talisman animated"
              />
           </div>

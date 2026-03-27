@@ -49,6 +49,7 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
           width={800} 
           height={800} 
           priority 
+          sizes="(max-width: 1024px) 100vw, 800px"
           className="main-product-image" 
         />
       </div>
@@ -70,6 +71,7 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
           width={800}
           height={800}
           priority
+          sizes="(max-width: 1024px) 100vw, 800px"
           className="main-product-image"
         />
       </div>
@@ -108,6 +110,7 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
               alt={`${alt} vignette ${i + 1}`} 
               width={100} 
               height={100} 
+              sizes="100px"
             />
           </button>
         ))}

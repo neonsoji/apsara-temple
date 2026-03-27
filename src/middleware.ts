@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { locales } from './i18n/locales'
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 1. Handle Locales only
@@ -14,9 +14,11 @@ export function proxy(request: NextRequest) {
   if (pathnameIsMissingLocale) {
     // We force 'fr' as default for better indexing consistency
     const locale = 'fr';
-    return NextResponse.redirect(
-      new URL(`/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url)
-    );
+    // Redirect directly to the final URL to avoid double-redirects (/ -> /fr is one hop)
+    const targetUrl = new URL(`/${locale}${pathname === '/' ? '' : pathname}`, request.url);
+    
+    // Use 308 Permanent Redirect for better SEO and performance (avoids future hops)
+    return NextResponse.redirect(targetUrl, 308);
   }
 
   return NextResponse.next();

@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import PaypalButton from './PaypalButton';
 import Link from 'next/link';
+import { sendGAEvent } from '@next/third-parties/google';
+import { useEffect } from 'react';
 
 interface CheckoutContentProps {
   locale: string;
@@ -14,8 +16,40 @@ export default function CheckoutContent({ locale, dict }: CheckoutContentProps) 
   const { cart, totalPrice, clearCart } = useCart();
   const [isSuccess, setIsSuccess] = useState(false);
 
+  // 1. Tracer le début du tunnel (Lead chaud)
+  useEffect(() => {
+    if (cart.length > 0) {
+      sendGAEvent({
+        event: 'begin_checkout',
+        value: totalPrice,
+        currency: 'EUR',
+        items: cart.map(item => ({
+          item_id: item.id,
+          item_name: item.names[locale as 'fr'|'en'],
+          price: parseFloat(item.price.replace(/[^0-9.]/g, '')),
+          quantity: item.quantity
+        }))
+      });
+    }
+  }, []); // Une seule fois au chargement
+
   const handleSuccess = (details: any) => {
     console.log("Payment Successful:", details);
+
+    // 2. Tracer la conversion finale (Lead transformé)
+    sendGAEvent({
+      event: 'purchase',
+      transaction_id: details.id,
+      value: totalPrice,
+      currency: 'EUR',
+      items: cart.map(item => ({
+        item_id: item.id,
+        item_name: item.names[locale as 'fr'|'en'],
+        price: parseFloat(item.price.replace(/[^0-9.]/g, '')),
+        quantity: item.quantity
+      }))
+    });
+
     setIsSuccess(true);
     clearCart();
   };

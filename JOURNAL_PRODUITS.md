@@ -126,6 +126,14 @@ Fichier `src/dictionaries/en.json` → section `products.names` :
 
 ## 🔄 Historique des sessions
 
+### 27 mars 2026 (Gestion des Commandes & Notifications)
+- ✅ **Base de Données / Supabase** : 
+  - Ajustement des tables `orders` et `order_items` pour sauvegarder l'intégralité des données du checkout PayPal (nom, adresse complète de livraison, détails des articles).
+  - Suppression de la contrainte UUID sur `product_items` pour correspondre aux identifiants du panier.
+- ✅ **Système de Notification (Resend)** : 
+  - Intégration côté serveur de l'API Resend dans `capture-order/route.ts`.
+  - Envoi sécurisé et non-bloquant d'un email transactionnel formaté HTML à l'administrateur pour chaque nouvelle commande payée.
+
 ### 26 mars 2026 (Session 2 — Audit & Production)
 - ✅ **Finalisation PayPal Live** : Basculement réussi du Sandbox vers la production réelle (Compte Fujuki).
 - ✅ **Audit de Sécurité** : Nettoyage complet des logs, scan de secrets, et sécurisation des API Routes.

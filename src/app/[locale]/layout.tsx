@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Cinzel, Playfair_Display } from "next/font/google";
 import "../globals.css";
 import { CartProvider } from "@/context/CartContext";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import Clarity from "@/components/analytics/Clarity";
+
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -70,7 +75,16 @@ export default async function RootLayout({
         <CartProvider>
           {children}
         </CartProvider>
+
+        {/* TRACKING SYSTEMS */}
+        <Analytics />
+        <SpeedInsights />
+        {process.env.NEXT_PUBLIC_GA_ID && process.env.NEXT_PUBLIC_GA_ID !== 'G-XXXXXXXXXX' && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
+        <Clarity />
       </body>
+
     </html>
   );
 }

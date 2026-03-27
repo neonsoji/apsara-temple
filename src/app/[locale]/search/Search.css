@@ -29,12 +29,16 @@
 
 .search-title {
   font-family: var(--font-cinzel), serif;
-  font-size: 3rem;
-  letter-spacing: 0.3em;
+  font-size: 2.5rem; /* Légèrement réduit pour mobile */
+  letter-spacing: 0.15em; /* Réduit pour éviter la coupure */
+  margin-right: -0.15em; /* Centre parfaitement malgré l'espacement */
   margin-bottom: 3rem;
   color: var(--ivory);
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  line-height: 1.4;
+  word-break: break-word;
 }
+
 
 .search-input-wrapper {
   position: relative;
@@ -45,28 +49,30 @@
 
 .search-input {
   width: 100%;
-  background: rgba(15, 6, 6, 0.45);
-  border: 1.5px solid rgba(64, 224, 208, 0.2);
-  padding: 1.8rem 2rem;
+  background: rgba(58, 1, 1, 0.55); /* Rouge Sang de Bœuf : Sombre et Profond */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(175, 155, 125, 0.15);
+  padding: 1.5rem 1rem;
   font-family: var(--font-cinzel), serif;
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   color: var(--ivory);
   text-align: center;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
-  backdrop-filter: blur(20px);
-  border-radius: 8px;
+  border-radius: 4px; /* Harmonie avec les cartes */
   position: relative;
   z-index: 2;
   box-shadow: 
-    inset 0 0 40px rgba(0, 0, 0, 0.6),
-    0 10px 40px rgba(0, 0, 0, 0.3);
+    inset 0 4px 6px rgba(255, 255, 255, 0.05),
+    inset 0 0 40px rgba(0, 0, 0, 0.8),
+    0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 .search-input:hover {
-  background: rgba(20, 10, 10, 0.55);
-  border-color: rgba(64, 224, 208, 0.4);
-  box-shadow: 0 0 30px rgba(64, 224, 208, 0.1);
+  background: rgba(90, 5, 5, 0.7);
+  border-color: rgba(64, 224, 208, 0.6);
+  box-shadow: 0 0 30px rgba(64, 224, 208, 0.15);
 }
 
 .search-input-wrapper::before {
@@ -74,35 +80,35 @@
   position: absolute;
   inset: 0;
   background: url('/images/bouton01.webp') center/cover no-repeat;
-  filter: brightness(0) saturate(100%) invert(70%) sepia(80%) saturate(1400%) hue-rotate(130deg) brightness(1.2);
-  opacity: 0.25; /* Plus visible dès le départ */
+  filter: brightness(0) saturate(100%) invert(70%) sepia(80%) saturate(1400%) hue-rotate(130deg) brightness(1.2); /* Teinte originale */
+  opacity: 0.20;
   z-index: 1;
   pointer-events: none;
-  border-radius: 8px;
+  border-radius: 4px;
   transition: opacity 0.6s ease, filter 0.6s ease;
   mask-image: radial-gradient(circle, black 70%, transparent 100%);
   -webkit-mask-image: radial-gradient(circle, black 70%, transparent 100%);
 }
 
 .search-input-wrapper:hover::before {
-  opacity: 0.45;
+  opacity: 0.35;
   filter: brightness(0) saturate(100%) invert(70%) sepia(80%) saturate(1800%) hue-rotate(130deg) brightness(1.4);
 }
 
 .search-input::placeholder {
-  color: rgba(253, 250, 241, 0.15);
-  font-size: 1.1rem;
-  letter-spacing: 0.2em;
+  color: rgba(253, 250, 241, 0.7); /* Beaucoup plus clair et lisible */
+  font-size: 0.95rem; /* Légèrement réduit pour tenir sur mobile */
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .search-input:focus {
   outline: none;
+  background: rgba(90, 5, 5, 0.8);
   border-color: var(--turquoise);
-  background: rgba(22, 12, 12, 0.7);
   box-shadow: 
     inset 0 0 60px rgba(64, 224, 208, 0.1),
-    0 0 50px rgba(64, 224, 208, 0.2);
+    0 0 50px rgba(64, 224, 208, 0.25);
 }
 
 .search-input:focus + .input-glow {
@@ -140,30 +146,44 @@
 
 .search-result-card {
   position: relative;
-  background: rgba(15, 8, 8, 0.6) !important;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(175, 155, 125, 0.3) !important;
+  background: rgba(58, 1, 1, 0.55) !important; /* Identique au catalogue (Rouge Sang de Bœuf) */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(175, 155, 125, 0.1) !important;
   padding: 24px;
   display: flex;
   align-items: center;
   gap: 25px;
   transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
   z-index: 10;
+  /* Biseau et ombrage profonds identiques à la grille produit */
+  box-shadow: 
+    inset 0 4px 6px rgba(255, 255, 255, 0.12),
+    inset 4px 0 6px rgba(255, 255, 255, 0.08),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.25),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.8),
+    inset 0 0 50px rgba(0, 0, 0, 0.6),
+    0 15px 40px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Retrait du motif trop chargé sur les résultats comme demandé */
+/* On masque les pseudos éléments s'il y en avait, on utilise le blend-mode direct */
 .search-result-card::before {
   display: none;
 }
 
 .search-result-card:hover {
-  transform: translateY(-5px);
-  background: rgba(22, 12, 12, 0.85) !important;
-  border-color: var(--turquoise) !important;
-  box-shadow: 0 0 40px rgba(64, 224, 208, 0.2);
+  transform: translateY(-5px) scale(1.015);
+  background: rgba(90, 5, 5, 0.7) !important; /* Effet de chaleur au survol */
+  border-color: rgba(64, 224, 208, 0.6) !important;
+  box-shadow: 
+    inset 0 6px 10px rgba(255, 255, 255, 0.22),
+    inset 6px 0 10px rgba(255, 255, 255, 0.15),
+    inset 0 0 90px rgba(0, 0, 0, 0.95),
+    0 30px 60px rgba(0, 0, 0, 0.9),
+    0 0 60px rgba(64, 224, 208, 0.25) !important;
 }
 
 .search-result-card:hover::before {
@@ -187,7 +207,9 @@
 
 .result-image-box {
   width: 100px;
+  min-width: 100px; /* Empêche l'image de s'écraser */
   height: 125px;
+  flex-shrink: 0; /* Empêche Flexbox de réduire la largeur si le texte est long */
   background: #000;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);

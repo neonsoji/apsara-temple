@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { useCart } from "@/context/CartContext";
 
 interface PaypalButtonProps {
   amount: string | number;
@@ -13,12 +14,17 @@ export default function PaypalButton({ amount, onSuccess, onError }: PaypalButto
   const [isMounted, setIsMounted] = useState(false);
   const rawClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   const clientId = rawClientId ? rawClientId.trim() : "";
+  const { cart } = useCart();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) return <div style={{ minHeight: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ivory)', opacity: 0.3 }}>Connexion au Portail...</div>;
+  if (!isMounted) return (
+    <div style={{ minHeight: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ivory)', opacity: 0.3 }}>
+      Connexion au Portail...
+    </div>
+  );
 
   if (!clientId || clientId === "XXX") {
     return (
@@ -27,6 +33,22 @@ export default function PaypalButton({ amount, onSuccess, onError }: PaypalButto
       </div>
     );
   }
+
+  // Préparer les articles du panier pour l'API PayPal
+  const paypalItems = cart.map(item => ({
+    name: item.names?.fr || item.names?.en || 'Relique',
+    quantity: item.quantity,
+    unit_price: parseFloat(item.price.replace(/[^0-9.]/g, '')).toFixed(2),
+  }));
+
+  // Préparer les métadonnées des articles pour Supabase  
+  const cartItemsForDb = cart.map(item => ({
+    id: item.id,
+    slug: item.slug,
+    name: item.names?.fr || item.names?.en || 'Relique',
+    quantity: item.quantity,
+    unit_price: parseFloat(item.price.replace(/[^0-9.]/g, '')).toFixed(2),
+  }));
 
   return (
     <div className="paypal-gate" style={{ minHeight: "150px", width: '100%' }}>
@@ -47,23 +69,24 @@ export default function PaypalButton({ amount, onSuccess, onError }: PaypalButto
           }}
           forceReRender={[amount, clientId]}
           createOrder={async () => {
-             const res = await fetch("/api/paypal/create-order", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: String(amount) }),
-             });
-             const data = await res.json();
-             if (!data.id) throw new Error("Erreur PayPal API");
-             return data.id;
+            const res = await fetch("/api/paypal/create-order", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ amount: String(amount) }),
+            });
+            const data = await res.json();
+            if (!data.id) throw new Error("Erreur PayPal API");
+            return data.id;
           }}
           onApprove={async (data) => {
-             const res = await fetch("/api/paypal/capture-order", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ orderID: data.orderID }),
-             });
-             const captureData = await res.json();
-             if (onSuccess) onSuccess(captureData);
+            const res = await fetch("/api/paypal/capture-order", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              // On envoie les articles du panier pour les sauvegarder dans Supabase
+              body: JSON.stringify({ orderID: data.orderID, cartItems: cartItemsForDb }),
+            });
+            const captureData = await res.json();
+            if (onSuccess) onSuccess(captureData);
           }}
           onError={(err) => {
             console.error("PayPal Error:", err);
