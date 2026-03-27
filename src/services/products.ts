@@ -1,12 +1,22 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+let supabaseInstance: any = null;
 
-console.log('🔌 [SUPABASE] CONNEXION :', supabaseUrl);
-console.log('🔑 [SUPABASE] SERVICE ROLE DETECTED:', supabaseKey ? 'YES (Ends with ' + supabaseKey.slice(-5) + ')' : 'NO');
+function getSupabase() {
+  if (supabaseInstance) return supabaseInstance;
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    // On ne crash pas ici pour laisser le build se finir, mais on log l'erreur
+    console.error('⚠️ [SUPABASE] Missing Credentials (URL or Key)');
+    return null;
+  }
+
+  supabaseInstance = createClient(supabaseUrl, supabaseKey);
+  return supabaseInstance;
+}
 
 export interface DBProduct {
   id: string;
@@ -25,6 +35,9 @@ export interface DBProduct {
 }
 
 export async function getProductsByCategory(categorySlug: string): Promise<DBProduct[]> {
+  const supabase = getSupabase();
+  if (!supabase) return [];
+
   console.log(`🔍 [SUPABASE] Requête produits pour slug catégorie: ${categorySlug}`);
   
   // 1. Récupérer l'ID de la catégorie d'abord
@@ -65,6 +78,9 @@ export async function getProductsByCategory(categorySlug: string): Promise<DBPro
 }
 
 export async function getProductBySlug(slug: string): Promise<DBProduct | null> {
+  const supabase = getSupabase();
+  if (!supabase) return null;
+
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -81,6 +97,9 @@ export async function getProductBySlug(slug: string): Promise<DBProduct | null> 
 }
 
 export async function getProducts() {
+  const supabase = getSupabase();
+  if (!supabase) return [];
+
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -95,6 +114,9 @@ export async function getProducts() {
 }
 
 export async function createProduct(productData: any) {
+  const supabase = getSupabase();
+  if (!supabase) throw new Error('Supabase client unavailable');
+
   // Mapping category name to UUID
   let dbSlug = productData.category;
   if (dbSlug === 'pendentifs' || dbSlug === 'talismans') {
@@ -129,10 +151,13 @@ export async function createProduct(productData: any) {
 }
 
 export async function getAllSlugs(): Promise<string[]> {
+  const supabase = getSupabase();
+  if (!supabase) return [];
+
   const { data, error } = await supabase
     .from('products')
     .select('slug');
 
   if (error) return [];
-  return data.map(p => p.slug);
+  return data.map((p: any) => p.slug);
 }
