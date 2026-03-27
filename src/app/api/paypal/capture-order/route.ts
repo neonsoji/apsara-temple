@@ -4,10 +4,15 @@ import { updateProductStock, sendStockAlertEmail } from '@/lib/stock';
 
 // Instanciation déplacée dans POST pour éviter le crash de "next build" sur Vercel si la clé manque
 export async function POST(req: Request) {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || 'missing_url',
-    process.env.SUPABASE_SERVICE_ROLE_KEY || 'missing_key'
-  );
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    console.error('❌ [SUPABASE] Missing env variables in capture-order');
+    return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 });
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
   const client_id = (process.env.PAYPAL_CLIENT_ID || '').trim();
   const secret = (process.env.PAYPAL_SECRET || '').trim();
