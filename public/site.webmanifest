@@ -3,8 +3,8 @@
   "short_name": "APSARA",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#8B0000",
-  "theme_color": "#8B0000",
+  "background_color": "#700D0A",
+  "theme_color": "#700D0A",
   "icons": [
     {
       "src": "/icons/icon-192.png",

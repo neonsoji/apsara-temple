@@ -28,15 +28,15 @@ export const metadata: Metadata = {
     canonical: "https://apsara-temple.com",
   },
   manifest: "/site.webmanifest",
-  themeColor: "#8B0000",
+  themeColor: "#700D0A",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "APSARA",
   },
   icons: {
-    icon: "/images/favicon-eye.png",
-    shortcut: "/images/favicon-eye.png",
+    icon: "/icons/icon-512.png",
+    shortcut: "/icons/icon-512.png",
     apple: "/icons/icon-192.png",
   },
   openGraph: {
