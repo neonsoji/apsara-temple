@@ -4,7 +4,7 @@ import "../globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import Clarity from "@/components/analytics/Clarity";
 
 
@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://apsara-temple.com"),
   title: "APSARA TEMPLE | Reliques Sacrées & Talismans Mystiques",
   description: "Entrez dans le sanctuaire d'APSARA TEMPLE. Découvrez des talismans sacrés, des bracelets bénis et des reliques ancestrales pour incarner votre véritable pouvoir spirituel.",
+  alternates: {
+    canonical: "https://apsara-temple.com",
+  },
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
@@ -39,7 +42,7 @@ export const metadata: Metadata = {
         url: "/images/favicon-eye.png",
         width: 512,
         height: 512,
-        alt: "APSARA TEMPLE Sacred Eye",
+        alt: "APSARA TEMPLE Sacred Eye — Sanctuaire de Reliques Sacrées",
       },
     ],
     locale: "fr_FR",
@@ -79,8 +82,23 @@ export default async function RootLayout({
         {/* TRACKING SYSTEMS */}
         <Analytics />
         <SpeedInsights />
-        {process.env.NEXT_PUBLIC_GA_ID && process.env.NEXT_PUBLIC_GA_ID !== 'G-XXXXXXXXXX' && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  anonymize_ip: true
+                });
+              `}
+            </Script>
+          </>
         )}
         <Clarity />
       </body>

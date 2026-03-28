@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Bloquer les pages admin/cockpit
+Disallow: /admin
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://apsara-temple.com/sitemap.xml

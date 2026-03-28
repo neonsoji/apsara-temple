@@ -31,10 +31,17 @@ export async function generateMetadata({
   return {
     title: `${name} | APSARA TEMPLE`,
     description: desc.substring(0, 160) + "...",
+    alternates: {
+      canonical: `https://apsara-temple.com/products/${slug}`,
+      languages: {
+        'fr': `https://apsara-temple.com/fr/products/${slug}`,
+        'en': `https://apsara-temple.com/en/products/${slug}`,
+      },
+    },
     openGraph: {
       title: `${name} | APSARA TEMPLE`,
       description: desc.substring(0, 160) + "...",
-      images: [{ url: mainImage, width: 800, height: 800, alt: name }],
+      images: [{ url: mainImage, width: 800, height: 800, alt: `${name} — APSARA TEMPLE relique sacrée` }],
     },
   };
 }
@@ -62,6 +69,7 @@ export default async function ProductPage({
   const size = locale === 'en' ? (product.size_en || product.size_fr) : (product.size_fr || 'Taille unique');
   const protection = locale === 'en' ? (product.protection_en || product.protection_fr) : (product.protection_fr || 'Protection spirituelle');
   
+  const isInStock = product.stock && product.stock > 0;
   const galleryImages = [product.image || '/placeholder.png'];
 
   return (
@@ -91,13 +99,21 @@ export default async function ProductPage({
             </div>
             
             <div className="product-actions">
+              <div className="product-shipping" style={{ marginBottom: '1.5rem', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--ivory)', opacity: 0.8, textAlign: 'center' }}>
+                {isInStock ? (
+                  <span style={{ textShadow: '0 0 15px rgba(64, 224, 208, 0.4)' }}>
+                    {locale === 'fr' ? 'Disponible immédiatement — expédition rituelle sous 48H' : 'Available immediately — ritual shipping within 48H'}
+                  </span>
+                ) : (
+                  <span>
+                    {locale === 'fr' ? 'Préparé à la demande — expédition rituelle sous 10 à 20 jours' : 'Made to order — ritual shipping within 10 to 20 days'}
+                  </span>
+                )}
+              </div>
               <AddToCartButton 
                 product={product as any} 
                 label={locale === 'fr' ? "S'UNIR À CETTE RELIQUE" : "JOIN WITH THIS RELIC"} 
               />
-              <div style={{ marginTop: '1.5rem', fontSize: '0.65rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--ivory)', opacity: 0.35, textAlign: 'center' }}>
-                {locale === 'fr' ? 'EXPÉDITION RITUELLE SOUS 48H' : 'RITUAL SHIPPING WITHIN 48H'}
-              </div>
             </div>
             
             <div className="quick-specs" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', borderTop: '1px solid rgba(253, 250, 241, 0.1)', paddingTop: '2rem' }}>

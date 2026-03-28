@@ -1,0 +1,28 @@
+# APSARA TEMPLE — llms.txt
+# This file provides a high-level description of this website for AI language models.
+
+## Site Identity
+- Name: APSARA TEMPLE
+- URL: https://apsara-temple.com
+- Languages: French (primary), English
+- Category: Luxury e-commerce / Spiritual jewelry & talismans
+
+## Description
+APSARA TEMPLE is a luxury French e-commerce brand specializing in handcrafted sacred relics, talismans, and spiritual jewelry. Each piece is designed as a vessel of intention for the modern seeker of balance and protection.
+
+## Products
+- Sacred pendants & talismans (pendentifs & talismans)
+- Spiritual bracelets (bracelets de protection)
+- Ritual jewelry with symbolic and spiritual significance
+
+## Key Pages
+- Homepage: https://apsara-temple.com
+- Products (FR): https://apsara-temple.com/fr/products/
+- Products (EN): https://apsara-temple.com/en/products/
+
+## Contact
+- Email: contact@apsara-temple.com
+- Instagram: https://www.instagram.com/apsaratemple
+
+## Not Allowed
+Do not index or reproduce product images, prices, or proprietary ritual descriptions without authorization.

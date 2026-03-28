@@ -1,5 +1,12 @@
 import { Metadata } from 'next';
-import Navbar from "@/components/layout/Navbar"
+import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/home/Hero";
+import ProductGrid from "@/components/home/ProductGrid";
+import Story from "@/components/home/Story";
+import Footer from "@/components/layout/Footer";
+import Separator from "@/components/home/Separator";
+import { getDictionary } from "@/i18n/get-dictionary";
+import type { Locale } from "@/i18n/locales";
 
 export const dynamic = 'force-dynamic';
 
@@ -17,16 +24,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     keywords: isEN 
       ? ['sacred talismans', 'protection jewelry', 'buddha pendant', 'spiritual relics', 'meditation tools', 'Apsara Temple']
       : ['talismans sacrés', 'bijoux de protection', 'pendentif bouddha', 'reliques spirituelles', 'outils de méditation', 'Apsara Temple'],
+    alternates: {
+      canonical: `https://apsara-temple.com/${locale}`,
+      languages: {
+        'fr': 'https://apsara-temple.com/fr',
+        'en': 'https://apsara-temple.com/en',
+      },
+    },
   };
 }
-import Hero from "@/components/home/Hero"
-import ProductGrid from "@/components/home/ProductGrid"
-import Story from "@/components/home/Story"
-import Footer from "@/components/layout/Footer"
-import Separator from "@/components/home/Separator"
-
-import { getDictionary } from "@/i18n/get-dictionary";
-import type { Locale } from "@/i18n/locales";
 
 export default async function Home({
   params,
