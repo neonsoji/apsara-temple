@@ -14,6 +14,12 @@ export interface DBProduct {
   reserved_stock: number;
   low_stock_threshold: number;
   active: boolean;
+  material_fr?: string;
+  material_en?: string;
+  size_fr?: string;
+  size_en?: string;
+  protection_fr?: string;
+  protection_en?: string;
 }
 
 export async function getProductsByCategory(categorySlug: string): Promise<DBProduct[]> {
