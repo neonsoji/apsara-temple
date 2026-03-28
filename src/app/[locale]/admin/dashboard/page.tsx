@@ -231,8 +231,33 @@ export default async function DashboardPage() {
             </div>
           </div>
         </section>
-
       </div>
+
+      {/* Analytics Section */}
+      <section className="mt-12 pt-12 border-t border-[#222]">
+        <SectionTitle title="🌐 Suivi & Analytics" />
+        <div className="flex flex-wrap gap-6 mt-4">
+          <a 
+            href="https://analytics.google.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sacred !m-0 !min-w-[240px]"
+          >
+            <span className="btn-label">Google Analytics</span>
+            <div className="btn-aura"></div>
+          </a>
+          <a 
+            href="https://clarity.microsoft.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sacred !m-0 !min-w-[240px]"
+          >
+            <span className="btn-label">Microsoft Clarity</span>
+            <div className="btn-aura"></div>
+          </a>
+        </div>
+      </section>
+
     </div>
   );
 }
