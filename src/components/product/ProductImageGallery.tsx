@@ -45,7 +45,7 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
         <div className="image-aura" />
         <Image 
           src={images[0]} 
-          alt={alt} 
+          alt={`${alt} – talisman spirituel APSARA TEMPLE`} 
           width={800} 
           height={800} 
           priority 
@@ -67,7 +67,7 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
       >
         <Image
           src={images[current]}
-          alt={`${alt} — ${current + 1}`}
+          alt={`${alt} – talisman spirituel APSARA TEMPLE — ${current + 1}`}
           width={800}
           height={800}
           priority
@@ -107,10 +107,11 @@ export default function ProductImageGallery({ images, alt }: ProductImageGallery
           >
             <Image 
               src={src} 
-              alt={`${alt} vignette ${i + 1}`} 
+              alt={`${alt} – talisman spirituel APSARA TEMPLE vignette ${i + 1}`} 
               width={100} 
               height={100} 
               sizes="100px"
+              loading="lazy"
             />
           </button>
         ))}
