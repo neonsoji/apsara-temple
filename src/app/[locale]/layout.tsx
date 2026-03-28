@@ -28,10 +28,18 @@ export const metadata: Metadata = {
     canonical: "https://apsara-temple.com",
   },
   manifest: "/site.webmanifest",
+  themeColor: "#8B0000",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "APSARA",
+  },
   icons: {
     icon: "/images/favicon-eye.svg",
     shortcut: "/images/favicon-eye.svg",
-    apple: "/icons/icon-192.png",
+    apple: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
   },
   openGraph: {
     title: "APSARA TEMPLE | Reliques Sacrées & Talismans Mystiques",
