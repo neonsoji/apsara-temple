@@ -27,10 +27,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://apsara-temple.com",
   },
+  manifest: "/site.webmanifest",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    icon: "/images/favicon-eye.svg",
+    shortcut: "/images/favicon-eye.svg",
+    apple: "/icons/icon-192.png",
   },
   openGraph: {
     title: "APSARA TEMPLE | Reliques Sacrées & Talismans Mystiques",
