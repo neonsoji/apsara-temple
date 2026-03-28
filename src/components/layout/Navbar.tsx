@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import Image from 'next/image';
 import './Navbar.css';
 
 interface NavbarProps {
@@ -119,9 +120,12 @@ export default function Navbar({ locale, dict }: NavbarProps) {
           <div className="navbar-logo-absolute">
             <Link href={`/${locale}`} onClick={closeMenu}>
               <div className="nav-logo-glow"></div>
-              <img 
+              <Image 
                 src="/images/logo01.svg" 
-                alt="APSARA TEMPLE" 
+                alt="APSARA TEMPLE — Sanctuaire de Reliques Sacrées" 
+                width={180}
+                height={40}
+                priority
                 className="nav-logo-img"
               />
             </Link>

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
+import Image from 'next/image';
 import './Search.css';
 import { Product } from '@/lib/products';
 
@@ -52,7 +53,14 @@ export default function SearchClient({ locale, products }: SearchClientProps) {
             >
               <div className="btn-aura"></div>
               <div className="result-image-box">
-                <img src={product.image} alt={product.names[locale as 'fr'|'en']} />
+                <Image 
+                  src={product.image} 
+                  alt={`${product.names[locale as 'fr'|'en']} — talisman protection APSARA TEMPLE`} 
+                  width={400}
+                  height={400}
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
               <div className="result-info">
                 <h3>{product.names[locale as 'fr'|'en']}</h3>
