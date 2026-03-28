@@ -35,11 +35,9 @@ export const metadata: Metadata = {
     title: "APSARA",
   },
   icons: {
-    icon: "/images/favicon-eye.svg",
-    shortcut: "/images/favicon-eye.svg",
-    apple: [
-      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-    ],
+    icon: "/images/favicon-eye.png",
+    shortcut: "/images/favicon-eye.png",
+    apple: "/icons/icon-192.png",
   },
   openGraph: {
     title: "APSARA TEMPLE | Reliques Sacrées & Talismans Mystiques",

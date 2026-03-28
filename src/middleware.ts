@@ -12,8 +12,9 @@ export function middleware(request: NextRequest) {
 
   if (isAdminRoute && !isLoginPage) {
     const adminSession = request.cookies.get('admin_session');
+    const expectedToken = process.env.ADMIN_SESSION_TOKEN || 'secure_internal_token_99';
     
-    if (!adminSession || adminSession.value !== 'authenticated') {
+    if (!adminSession || adminSession.value !== expectedToken) {
       // Find current locale to redirect back to login
       const currentLocale = locales.find(l => pathname.startsWith(`/${l}`)) || 'fr';
       const loginUrl = new URL(`/${currentLocale}/admin/login`, request.url);

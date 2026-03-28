@@ -14,8 +14,9 @@ export async function POST(req: Request) {
       // In a real app, use a proper session/JWT
       // Here we use a simple static token for simplicity as requested, 
       // but you can enhance this with a signed value or a UUID stored in Supabase.
+      const sessionToken = process.env.ADMIN_SESSION_TOKEN || 'secure_internal_token_99';
       const cookieStore = await cookies();
-      cookieStore.set('admin_session', 'authenticated', {
+      cookieStore.set('admin_session', sessionToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
