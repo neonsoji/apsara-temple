@@ -74,6 +74,10 @@ export default async function RootLayout({
   
   return (
     <html lang={locale}>
+      <head>
+        <link rel="preload" href="/images/apsara-hero-bg.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/talisman.webp" as="image" type="image/webp" />
+      </head>
       <body
         className={`${cinzel.variable} ${playfair.variable} antialiased`}
       >
